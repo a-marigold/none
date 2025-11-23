@@ -15,5 +15,5 @@ export function useRegisterHotkey({ name, key, callback }: Hotkey) {
         return () => {
             unregisterHotkey(name);
         };
-    }, []);
+    }, [name, key, callback]);
 }

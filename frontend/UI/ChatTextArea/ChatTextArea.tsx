@@ -3,7 +3,7 @@
 import { useState, useRef } from 'react';
 import type { TextareaHTMLAttributes, RefObject } from 'react';
 
-import { useHotkeyStore } from '@/store/HotkeyStore';
+import { useRegisterHotkey } from '@/hooks/useRegisterHotkey';
 
 import { resizeTextarea } from '@/utils/ResizeTextarea';
 
@@ -15,7 +15,7 @@ interface ChatTextAreaProps
     extends TextareaHTMLAttributes<HTMLTextAreaElement> {
     containerRef?: RefObject<HTMLDivElement | null>;
 
-    state?: string;
+    state: string;
     ariaLabel: string;
 
     badge?: {
@@ -47,7 +47,17 @@ export default function ChatTextArea({
 
     const [isBounded, setIsBounded] = useState(false);
 
-    const registerHotkey = useHotkeyStore((state) => state.registerHotkey);
+    useRegisterHotkey({
+        name: 'sendMessage',
+        key: 'Enter',
+        callback: (event) => {
+            if (!event?.shiftKey && state) {
+                sendFunction();
+            }
+        },
+    });
+
+    const isEmpty = !state.trim();
 
     return (
         <div
@@ -75,12 +85,7 @@ export default function ChatTextArea({
                         setIsBounded(true);
                     }
                 }}
-                onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                        // sendFunction();
-                        console.log(event.key);
-                    }
-                }}
+                onKeyDown={(event) => {}}
             />
 
             <div className={textStyles['tools-block']}>
@@ -99,7 +104,7 @@ export default function ChatTextArea({
                 )}
 
                 <div className={textStyles['buttons-group']}>
-                    <LabelledElement
+                    {/* <LabelledElement
                         title='Enable the microphone'
                         position='top'
                     >
@@ -115,13 +120,16 @@ export default function ChatTextArea({
                                 <use href='#microphone-icon' />
                             </svg>
                         </button>
-                    </LabelledElement>
+                    </LabelledElement> */}
 
-                    <LabelledElement title='Send message' position='top'>
+                    <LabelledElement
+                        title={isEmpty ? 'Message is empty' : 'Send message'}
+                        position='top'
+                    >
                         <button
                             className={textStyles['send-button']}
                             color='var(--dark-foreground-color)'
-                            disabled={!state?.length}
+                            disabled={isEmpty}
                             aria-label='Send message'
                             onClick={sendFunction}
                         >

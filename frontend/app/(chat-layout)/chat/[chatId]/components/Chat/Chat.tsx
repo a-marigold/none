@@ -29,7 +29,7 @@ export default function Chat() {
     const redirectedMessage = useMiniChatStore((state) => state.message);
 
     function handleAddMessage() {
-        if (userName && chatPublicId) {
+        if (userName && chatPublicId && message.trim().length) {
             const newMessage: Message = {
                 createdAt: Date.now(),
                 chatId: chatPublicId,
@@ -40,6 +40,8 @@ export default function Chat() {
             addMessage(chatPublicId, newMessage);
 
             stream.send('newChatMessage', newMessage);
+
+            setMessage('');
         }
     }
 

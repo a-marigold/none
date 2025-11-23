@@ -1,0 +1,1 @@
+export { useRegisterHotkey } from './useRegisterHotkey';
