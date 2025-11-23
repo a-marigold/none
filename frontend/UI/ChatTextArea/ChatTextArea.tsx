@@ -1,11 +1,9 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import type {
-    TextareaHTMLAttributes,
-    ButtonHTMLAttributes,
-    RefObject,
-} from 'react';
+import type { TextareaHTMLAttributes, RefObject } from 'react';
+
+import { useHotkeyStore } from '@/store/HotkeyStore';
 
 import { resizeTextarea } from '@/utils/ResizeTextarea';
 
@@ -24,10 +22,11 @@ interface ChatTextAreaProps
         text: string;
 
         bgColor: string;
+
         fontColor: string;
     };
 
-    sendFunction: ButtonHTMLAttributes<HTMLButtonElement>['onClick'];
+    sendFunction: () => void;
 }
 export default function ChatTextArea({
     containerRef,
@@ -47,6 +46,8 @@ export default function ChatTextArea({
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
     const [isBounded, setIsBounded] = useState(false);
+
+    const registerHotkey = useHotkeyStore((state) => state.registerHotkey);
 
     return (
         <div
@@ -72,6 +73,12 @@ export default function ChatTextArea({
 
                     if (event.target.scrollHeight >= 319) {
                         setIsBounded(true);
+                    }
+                }}
+                onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                        // sendFunction();
+                        console.log(event.key);
                     }
                 }}
             />
