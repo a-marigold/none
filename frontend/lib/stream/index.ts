@@ -1,1 +1,1 @@
-export { stream } from './stream';
+export { stream } from './Stream';
