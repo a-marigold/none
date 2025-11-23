@@ -9,7 +9,7 @@ import { ApiError } from '@none/shared';
 
 import type { RegisterData, CookieName, User } from '@none/shared';
 
-import { nullToUndefined } from '@/utils/preparePrismaData';
+import { preparePrismaData } from '@/utils/preparePrismaData';
 
 import { REFRESH_TOKEN_MAX_AGE } from '@/constants/authCookieMaxAge';
 
@@ -70,7 +70,7 @@ export async function checkUserExistence(
         throw new ApiError('User with this user name not found', 404);
     }
 
-    return nullToUndefined(user);
+    return preparePrismaData(user);
 }
 
 export function generateAuthCookie(

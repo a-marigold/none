@@ -1,1 +1,1 @@
-export { preparePrismaData as nullToUndefined } from './preparePrismaData';
+export { preparePrismaData } from './preparePrismaData';

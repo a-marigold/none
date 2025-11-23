@@ -2,6 +2,9 @@ import type WebSocket from 'ws';
 
 import { validateStreamMessage, baseError } from '@/routes/stream';
 
+// !
+import { createBaseError } from '@/routes/stream';
+
 import type { StreamType, StreamMessage } from '@none/shared';
 
 interface Listener {
@@ -18,7 +21,9 @@ class StreamEmitter {
                 const parseData = JSON.parse(data.toString());
 
                 if (!validateStreamMessage(parseData)) {
-                    return connection.send(baseError);
+                    return connection.send(
+                        createBaseError('stream message error')
+                    );
                 }
 
                 this.#listeners.forEach((listener) => {
@@ -27,7 +32,7 @@ class StreamEmitter {
                     }
                 });
             } catch {
-                return connection.send(baseError);
+                return connection.send(createBaseError('json error'));
             }
         });
     }

@@ -113,7 +113,6 @@ export async function me(
     try {
         const { userName, fullName, email, avatar } = await checkUserExistence(
             request.server.prisma,
-
             request.user.userName
         );
 
@@ -123,6 +122,8 @@ export async function me(
             email: email || undefined,
             avatar: avatar || undefined,
         };
+
+        console.log(prepareUser);
 
         return reply.code(200).send(prepareUser);
     } catch (error) {
