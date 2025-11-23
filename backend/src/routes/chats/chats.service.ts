@@ -1,6 +1,6 @@
 import type { PrismaClient } from '@/generated/prisma/client/client';
 
-import { nullToUndefined } from '@/utils/NullToUndefined/nullToUndefined';
+import { preparePrismaData } from '@/utils/preparePrismaData/preparePrismaData';
 
 import type { Chat } from '@none/shared';
 
@@ -28,7 +28,7 @@ export async function getChatsByUserName(
         },
     });
 
-    return nullToUndefined(user?.chats);
+    return preparePrismaData(user?.chats);
 }
 
 export async function createChatWithMembers(
@@ -56,5 +56,5 @@ export async function createChatWithMembers(
         },
     });
 
-    return nullToUndefined(newChat);
+    return preparePrismaData(newChat);
 }

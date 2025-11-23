@@ -30,7 +30,7 @@ export function useSendFunction() {
         if (findChatWithMember?.publicId && userName) {
             setRedirectedChat(findChatWithMember.publicId);
 
-            router.push(findChatWithMember.publicId);
+            router.push(`/chat/${findChatWithMember.publicId}`);
         } else if (!findChatWithMember && userName) {
             const prepareChat: Chat = {
                 ...chat,

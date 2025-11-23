@@ -29,6 +29,5 @@ export function cleanString(symbol: string, string: string) {
         words[words.length - 1] = '';
         return words.filter(Boolean).join('');
     }
-
     return string;
 }

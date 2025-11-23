@@ -22,6 +22,7 @@ export default function Chat() {
     const setMessage = useMiniChatStore((state) => state.setMessage);
 
     const receiver = useMiniChatStore((state) => state.receiver);
+
     const setReceiver = useMiniChatStore((state) => state.setReceiver);
 
     const openModal = useModalStore((state) => state.openModal);

@@ -22,30 +22,24 @@ type BadgeModalProps = Pick<
 >;
 
 export default function BadgeModal({ ...dropDownProps }: BadgeModalProps) {
-    const chats = useChatStore(useShallow((state) => state.chats));
+    const chatNames = useChatStore((state) => state.chatNames);
 
     const receiver = useMiniChatStore((state) => state.receiver);
     const setReceiver = useMiniChatStore((state) => state.setReceiver);
 
     const filteredChatNames = useMemo(
         () =>
-            Object.values(chats)
-                .map(({ name, publicId }) => ({
-                    name,
-                    publicId,
-                }))
+            chatNames.filter((chat) =>
+                !receiver
+                    ? true
+                    : chat.name
+                          .split(' ')
+                          .join('')
 
-                .filter((chat) =>
-                    !receiver
-                        ? true
-                        : chat.name
-                              .split(' ')
-                              .join('')
-
-                              .toLocaleLowerCase()
-                              .includes(receiver.toLowerCase())
-                ),
-        [chats, receiver]
+                          .toLocaleLowerCase()
+                          .includes(receiver.toLowerCase())
+            ),
+        [chatNames, receiver]
     );
 
     const closeModal = useModalStore((state) => state.closeModal);

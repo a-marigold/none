@@ -9,7 +9,7 @@ import { ApiError } from '@none/shared';
 
 import type { RegisterData, CookieName, User } from '@none/shared';
 
-import { nullToUndefined } from '@/utils/NullToUndefined';
+import { nullToUndefined } from '@/utils/preparePrismaData';
 
 import { REFRESH_TOKEN_MAX_AGE } from '@/constants/authCookieMaxAge';
 
