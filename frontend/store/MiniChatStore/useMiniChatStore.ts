@@ -1,6 +1,9 @@
 import { create } from 'zustand';
 
 interface MiniChatStore {
+    redirectedChat: string;
+    setRedirectedChat: (chatPublicId: string) => void;
+
     message: string;
     setMessage: (newMessage: string) => void;
 
@@ -10,7 +13,10 @@ interface MiniChatStore {
 
 export const useMiniChatStore = create<MiniChatStore>()((set) => ({
     message: '',
+    redirectedChat: '',
     receiver: '',
+
+    setRedirectedChat: (chatPublicId) => set({ redirectedChat: chatPublicId }),
 
     setMessage: (newMessage) => set({ message: newMessage }),
 

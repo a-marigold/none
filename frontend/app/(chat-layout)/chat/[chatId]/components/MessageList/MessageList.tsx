@@ -34,7 +34,7 @@ export default function MessageList() {
     return (
         <div className={messageStyles['message-list']}>
             {chatMessages?.map((message) =>
-                message.sender === userName || message.sender === 'hello' ? ( // TODO: temporarily ! ! !
+                message.sender === userName ? (
                     <MessageMine key={message.id}>{message.data}</MessageMine>
                 ) : (
                     <MessageOther key={message.id}>{message.data}</MessageOther>

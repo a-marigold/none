@@ -27,7 +27,7 @@ interface ChatTextAreaProps
         fontColor: string;
     };
 
-    sendFunction?: ButtonHTMLAttributes<HTMLButtonElement>['onClick']; // TODO: that is optional temporarily
+    sendFunction: ButtonHTMLAttributes<HTMLButtonElement>['onClick'];
 }
 export default function ChatTextArea({
     containerRef,

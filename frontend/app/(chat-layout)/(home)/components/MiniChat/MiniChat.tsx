@@ -75,8 +75,6 @@ export default function Chat() {
                         sendFunction({
                             name: 'New Chat',
 
-                            members: [{ userName }, { userName: receiver }],
-
                             messageList: [],
                         });
                     }

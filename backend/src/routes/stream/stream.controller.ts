@@ -34,8 +34,14 @@ streamEmitter.on('newChatMessage', (data, send) => {
 
     const streamMessage = createStreamMessage<Message>('newChatMessage', {
         ...data,
-        sender: '__TEMPORARY__', // TODO: temporarily
+        sender: '__TEMPORARY_USER__', // TODO: temporarily
     });
 
     return send(streamMessage);
+});
+
+streamEmitter.on('searchUsers', (data, send) => {
+    if (!validateSearchQuery(data)) {
+        return send(baseError);
+    }
 });

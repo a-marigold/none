@@ -41,6 +41,7 @@ export function validateSearchQuery(data: object) {
 export function createBaseError(message: string) {
     const errorMessage: StreamMessage<StreamErrorData> = {
         type: 'error',
+
         data: {
             message,
         },
@@ -48,6 +49,8 @@ export function createBaseError(message: string) {
 
     return JSON.stringify(errorMessage);
 }
+
+export function searchManyUsers(query: string) {}
 
 /**
  * @param {string} message - a message that will be passed in errorMessage.data.message. That is optional.

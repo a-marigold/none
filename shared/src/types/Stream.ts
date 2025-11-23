@@ -17,6 +17,8 @@ const StreamTypeSchema = zenum([
     'error',
 
     'initial',
+
+    'searchUsers',
 ]);
 
 export const StreamMessageSchema = object({
