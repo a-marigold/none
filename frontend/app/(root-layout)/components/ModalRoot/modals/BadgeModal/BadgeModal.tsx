@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useCallback } from 'react';
-import { useShallow } from 'zustand/shallow';
 import type { MouseEvent } from 'react';
 
 import { useModalStore } from '@/store/ModalStore';

@@ -49,7 +49,7 @@ export default function Chat() {
         if (chatPublicId === redirectedChat) {
             setMessage(cleanString('@', redirectedMessage));
         }
-    }, [redirectedChat]);
+    }, [redirectedChat, chatPublicId, redirectedMessage]);
 
     return (
         <>

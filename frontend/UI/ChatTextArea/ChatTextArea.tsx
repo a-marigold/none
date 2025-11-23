@@ -85,7 +85,6 @@ export default function ChatTextArea({
                         setIsBounded(true);
                     }
                 }}
-                onKeyDown={(event) => {}}
             />
 
             <div className={textStyles['tools-block']}>
@@ -123,7 +122,9 @@ export default function ChatTextArea({
                     </LabelledElement> */}
 
                     <LabelledElement
-                        title={isEmpty ? 'Message is empty' : 'Send message'}
+                        title={
+                            isEmpty ? 'The message is empty' : 'Send message'
+                        }
                         position='top'
                     >
                         <button

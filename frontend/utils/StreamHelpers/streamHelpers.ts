@@ -1,12 +1,11 @@
 import type { ZodType } from 'zod';
 
-import { StreamMessageSchema } from '@none/shared';
+import {
+    StreamMessageSchema,
+    StreamErrorDataSchema,
+    MessageSchema,
+} from '@none/shared';
 import type { StreamMessage } from '@none/shared';
-
-import { MessageSchema } from '@none/shared';
-
-import { StreamErrorDataSchema } from '@none/shared';
-import type { StreamErrorData } from '@none/shared';
 
 export function validateStreamMessage(
     message: object
