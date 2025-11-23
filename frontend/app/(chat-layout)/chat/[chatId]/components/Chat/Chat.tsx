@@ -12,9 +12,9 @@ import type { Message } from '@none/shared';
 
 import { cleanString } from '@/utils/CleanString/cleanString';
 
-import MessageList from '../MessageList';
+import MessageList from './components/MessageList';
 import ChatTextArea from '@/UI/ChatTextArea';
-import chatStyles from '../../Chat.module.scss';
+import chatStyles from './Chat.module.scss';
 
 export default function Chat() {
     const [message, setMessage] = useState('');

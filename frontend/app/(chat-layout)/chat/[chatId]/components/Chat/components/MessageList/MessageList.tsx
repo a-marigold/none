@@ -31,6 +31,8 @@ export default function MessageList() {
         });
     }, []);
 
+    console.log(chatMessages);
+
     return (
         <div className={messageStyles['message-list']}>
             {chatMessages?.map((message) =>

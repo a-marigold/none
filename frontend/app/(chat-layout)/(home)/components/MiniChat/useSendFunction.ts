@@ -40,9 +40,9 @@ export function useSendFunction() {
             try {
                 const newChat = await createChat(prepareChat);
 
-                addChat(newChat);
-
                 if (newChat.publicId) {
+                    addChat(newChat.publicId, newChat);
+
                     setRedirectedChat(newChat.publicId);
 
                     router.push(`/chat/${newChat.publicId}`);
