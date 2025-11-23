@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 import { getUserData, refreshAccessToken } from '@/lib/api/AuthApiClient';
 
@@ -19,13 +19,27 @@ export default function AuthRoot() {
         refetchInterval: 20 * 60 * 1000,
     });
 
-    const { isError: isRefreshError } = useQuery({
-        queryKey: ['refresh'],
-        queryFn: refreshAccessToken,
+    const { mutate: handleRefresh } = useMutation({
+        mutationFn: refreshAccessToken,
         retry: false,
-        refetchOnWindowFocus: true,
-        refetchInterval: 11 * 60 * 1000,
     });
+
+    useEffect(() => {
+        const refreshInterval = setInterval(() => {
+            handleRefresh();
+        }, 11 * 60 * 1000);
+
+        function refreshOnFocus() {
+            handleRefresh();
+        }
+
+        window.addEventListener('focus', refreshOnFocus);
+
+        return () => {
+            clearInterval(refreshInterval);
+            window.removeEventListener('focus', refreshOnFocus);
+        };
+    }, []);
 
     useEffect(() => {
         if (userData) {

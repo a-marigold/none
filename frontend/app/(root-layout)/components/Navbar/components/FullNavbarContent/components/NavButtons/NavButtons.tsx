@@ -19,6 +19,7 @@ export default function NavButtons() {
     const openNewChatHotkey = hotkeys.find(
         (hotkey) => hotkey.name === 'openNewChat'
     );
+
     const searchHotkey = hotkeys.find((hotkey) => hotkey.name === 'search');
 
     return (
@@ -28,6 +29,7 @@ export default function NavButtons() {
                 title='New chat'
                 subtitle={openNewChatHotkey?.key || 'Ctrl + Alt + N'}
                 aria-label='Open new chat'
+                prefetch
                 isActive={false}
                 icon={
                     <svg width={20} height={20} color='var(--font-color)'>

@@ -54,6 +54,8 @@ export async function refreshAccessToken() {
     });
 
     await handleApiError(response);
+
+    return {};
 }
 
 export async function loginWithUserName(userName: string, password: string) {

@@ -62,9 +62,7 @@ export default function Chat() {
 
                     const badgeText = findBySymbol(event.target.value, '@');
 
-                    if (badgeText) {
-                        setReceiver(badgeText.split('@')[1].trim());
-                    }
+                    setReceiver(badgeText?.split('@')[1].trim() || '');
                 }}
                 badge={{
                     text: receiver ? `@${receiver}` : '',
