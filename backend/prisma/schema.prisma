@@ -29,6 +29,8 @@ model User {
   email String? @unique
   password String
 
+  public Boolean
+
   chats Chat[] @relation("ChatList")
 
   avatar String? 
