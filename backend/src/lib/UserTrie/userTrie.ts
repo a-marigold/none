@@ -1,6 +1,4 @@
-import type { SafeUser } from '@none/shared';
-
-type SearchUser = Pick<SafeUser, 'userName' | 'fullName' | 'avatar'>;
+import type { SearchUser } from '@none/shared';
 
 class UserTrieNode {
     children: Record<string, UserTrieNode>;
@@ -52,7 +50,7 @@ export class UserTrie {
     }
 
     #collectUsers(node: UserTrieNode, prefix: string): SearchUser[] {
-        let users: SearchUser[] = [];
+        const users: SearchUser[] = [];
 
         if (node.isWord && node.user) {
             users.push(node.user);

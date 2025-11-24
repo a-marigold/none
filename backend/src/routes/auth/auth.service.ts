@@ -7,7 +7,7 @@ import type { CookieSerializeOptions } from '@fastify/cookie';
 
 import { ApiError } from '@none/shared';
 
-import type { RegisterData, CookieName, User } from '@none/shared';
+import type { RegisterData, CookieName, User, SearchUser } from '@none/shared';
 
 import { preparePrismaData } from '@/utils/preparePrismaData';
 
@@ -48,6 +48,21 @@ export async function saveUserInDB(
     });
 
     return newUser;
+}
+
+export async function findPublicUsers(
+    prisma: PrismaClient
+): Promise<SearchUser[]> {
+    const publicUsers = await prisma.user.findMany({
+        where: { public: true },
+        select: {
+            userName: true,
+            fullName: true,
+            avatar: true,
+        },
+    });
+
+    return preparePrismaData(publicUsers);
 }
 
 export function generateAuthTokens(

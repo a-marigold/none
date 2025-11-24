@@ -2,8 +2,8 @@ import { buildApp } from './app';
 
 const PORT = Number(process.env.PORT) || 1000;
 
-async function start() {
-    const app = await buildApp();
+function start() {
+    const app = buildApp();
 
     try {
         app.listen({ port: PORT, host: '0.0.0.0' });

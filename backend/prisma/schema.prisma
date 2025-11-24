@@ -29,7 +29,7 @@ model User {
   email String? @unique
   password String
 
-  public Boolean
+  public Boolean @default(false)
 
   chats Chat[] @relation("ChatList")
 

@@ -1,37 +1,18 @@
-import type { FastifyInstance } from 'fastify';
 import fastifyPlugin from 'fastify-plugin';
 
 import { UserTrie } from '@/lib/UserTrie/userTrie';
-import { preparePrismaData } from '@/utils/preparePrismaData';
+
+import { saveUsersInTrie } from '@/utils/saveUsersInTrie';
 
 export default fastifyPlugin(async (app) => {
     const userTrie = new UserTrie();
 
-    const users = await app.prisma.user.findMany({
-        where: {
-            public: true,
-        },
-        select: { userName: true, fullName: true, avatar: true },
-    });
-
-    const prepareUsers = preparePrismaData(users);
-
-    prepareUsers.forEach((user) => {
-        userTrie.insert(user.userName, user);
-    });
+    await saveUsersInTrie(app.prisma, userTrie);
 
     app.decorate('userTrie', userTrie);
 
-    const updateInterval = setInterval(async () => {
-        const users = await app.prisma.user.findMany({
-            where: { public: true },
-        });
-
-        const prepareUsers = preparePrismaData(users);
-
-        prepareUsers.forEach((user) => {
-            userTrie.insert(user.userName, user);
-        });
+    const updateInterval = setInterval(() => {
+        saveUsersInTrie(app.prisma, userTrie);
     }, 12 * 60 * 1000);
 
     app.addHook('onClose', async () => {

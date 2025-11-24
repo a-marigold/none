@@ -20,7 +20,7 @@ import { Cookie } from '@none/shared';
 
 import { routes } from './routes';
 
-export async function buildApp() {
+export function buildApp() {
     const app = Fastify({
         logger: process.env.PRODUCTION === 'false',
     }).withTypeProvider<ZodTypeProvider>();
@@ -48,8 +48,6 @@ export async function buildApp() {
     app.register(authPlugin);
 
     app.register(userTriePlugin);
-
-    await app.ready();
 
     app.register(routes);
 
