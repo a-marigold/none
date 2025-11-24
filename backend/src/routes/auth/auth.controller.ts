@@ -108,20 +108,16 @@ export async function register(
 
 export async function me(
     request: FastifyRequest,
+
     reply: FastifyReply<{ Reply: ApiResponse | SafeUser }>
 ) {
     try {
-        const { userName, fullName, email, avatar } = await checkUserExistence(
+        const user = await checkUserExistence(
             request.server.prisma,
             request.user.userName
         );
 
-        const prepareUser: SafeUser = {
-            userName,
-            fullName,
-            email: email || undefined,
-            avatar: avatar || undefined,
-        };
+        const prepareUser: SafeUser = user;
 
         console.log(prepareUser);
 

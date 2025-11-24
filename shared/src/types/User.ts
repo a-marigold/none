@@ -5,7 +5,7 @@ export const UserSchema = object({
     userName: string(),
     avatar: string().optional(),
 
-    public: boolean().optional(),
+    isPublic: boolean().optional(),
 
     email: string().optional(),
     password: string(),

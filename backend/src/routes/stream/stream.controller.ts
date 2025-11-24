@@ -40,8 +40,12 @@ streamEmitter.on('newChatMessage', ({ data, send }) => {
     return send(streamMessage);
 });
 
-streamEmitter.on('searchUsers', ({ data, send }) => {
+streamEmitter.on('searchUsers', ({ data, send, request }) => {
     if (!validateSearchQuery(data)) {
         return send(baseError);
     }
+
+    const users = request.server.userTrie.searchByPrefix(data.query);
+
+    // send();
 });

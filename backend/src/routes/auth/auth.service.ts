@@ -54,7 +54,7 @@ export async function findPublicUsers(
     prisma: PrismaClient
 ): Promise<SearchUser[]> {
     const publicUsers = await prisma.user.findMany({
-        where: { public: true },
+        where: { isPublic: true },
         select: {
             userName: true,
             fullName: true,
