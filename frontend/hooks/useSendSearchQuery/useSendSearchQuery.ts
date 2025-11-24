@@ -31,6 +31,7 @@ import type { SearchQuery, SearchUser } from '@none/shared';
 
 export function useSendSearchQuery(queryState: string) {
     const [users, setUsers] = useState<SearchUser[]>([]);
+
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -45,6 +46,10 @@ export function useSendSearchQuery(queryState: string) {
 
             setUsers(data);
         });
+
+        return () => {
+            setUsers([]);
+        };
     }, []);
 
     return { users, error };

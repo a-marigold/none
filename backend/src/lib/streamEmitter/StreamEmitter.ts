@@ -40,8 +40,11 @@ class StreamEmitter {
                         });
                     }
                 });
-            } catch {
-                return connection.send(createBaseError('json error'));
+            } catch (error) {
+                return connection.send(
+                    createBaseError(`Error: ${error}  'json error';
+                        Received data: ${data}`)
+                );
             }
         });
     }
