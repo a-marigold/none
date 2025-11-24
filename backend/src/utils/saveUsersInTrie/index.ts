@@ -1,0 +1,1 @@
+export { saveUsersInTrie } from './saveUsersInTrie';
