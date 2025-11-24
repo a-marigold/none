@@ -1,9 +1,11 @@
-import { object, string, infer as zinfer } from 'zod';
+import { boolean, object, string, infer as zinfer } from 'zod';
 
 export const UserSchema = object({
     fullName: string(),
     userName: string(),
     avatar: string().optional(),
+
+    public: boolean().optional(),
 
     email: string().optional(),
     password: string(),
