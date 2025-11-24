@@ -14,12 +14,13 @@ import fastifyWebsocket from '@fastify/websocket';
 import redisPlugin from './plugins/redis';
 import prismaPlugin from './plugins/prisma';
 import authPlugin from './plugins/auth';
+import userTriePlugin from './plugins/userTrie';
 
 import { Cookie } from '@none/shared';
 
 import { routes } from './routes';
 
-export function buildApp() {
+export async function buildApp() {
     const app = Fastify({
         logger: process.env.PRODUCTION === 'false',
     }).withTypeProvider<ZodTypeProvider>();
@@ -45,6 +46,10 @@ export function buildApp() {
     app.register(redisPlugin);
 
     app.register(authPlugin);
+
+    app.register(userTriePlugin);
+
+    await app.ready();
 
     app.register(routes);
 
