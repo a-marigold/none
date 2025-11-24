@@ -1,3 +1,4 @@
+import type { FastifyRequest } from 'fastify';
 import type WebSocket from 'ws';
 
 import { validateStreamMessage, baseError } from '@/routes/stream';
@@ -9,13 +10,17 @@ import type { StreamType, StreamMessage } from '@none/shared';
 
 interface Listener {
     type: StreamType;
-    callback: (data: StreamMessage['data'], send: WebSocket['send']) => void;
+    callback: (connection: {
+        data: StreamMessage['data'];
+        send: WebSocket['send'];
+        request: FastifyRequest;
+    }) => void;
 }
 
 class StreamEmitter {
     #listeners: Listener[] = [];
 
-    initialize(connection: WebSocket) {
+    initialize(connection: WebSocket, request: FastifyRequest) {
         connection.on('message', (data) => {
             try {
                 const parseData = JSON.parse(data.toString());
@@ -28,7 +33,11 @@ class StreamEmitter {
 
                 this.#listeners.forEach((listener) => {
                     if (listener.type === parseData.type) {
-                        listener.callback(parseData.data, connection.send);
+                        listener.callback({
+                            data: parseData.data,
+                            send: connection.send,
+                            request,
+                        });
                     }
                 });
             } catch {

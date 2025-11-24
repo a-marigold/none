@@ -16,7 +16,7 @@ import {
 import type { Message } from '@none/shared';
 
 export async function stream(connection: WebSocket, request: FastifyRequest) {
-    streamEmitter.initialize(connection);
+    streamEmitter.initialize(connection, request);
 
     connection.on('message', (data) => {
         const parseData = JSON.parse(data.toString());
@@ -27,7 +27,7 @@ export async function stream(connection: WebSocket, request: FastifyRequest) {
     });
 }
 
-streamEmitter.on('newChatMessage', (data, send) => {
+streamEmitter.on('newChatMessage', ({ data, send }) => {
     if (!validateChatMessage(data)) {
         return send(createBaseError('Invalid chat message struct'));
     }
@@ -40,7 +40,7 @@ streamEmitter.on('newChatMessage', (data, send) => {
     return send(streamMessage);
 });
 
-streamEmitter.on('searchUsers', (data, send) => {
+streamEmitter.on('searchUsers', ({ data, send }) => {
     if (!validateSearchQuery(data)) {
         return send(baseError);
     }
