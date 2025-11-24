@@ -14,11 +14,10 @@ export interface DropDownModalProps {
     relativeElement: HTMLElement;
 
     topChildren: ReactNode;
-
     bottomChildren?: ReactNode;
+    childrenDirection?: 'vertical' | 'horizontal';
 
     zIndex?: number;
-    maxWidth?: number;
 
     posY?: ModalPosY;
     posX?: ModalPosX;
@@ -33,11 +32,10 @@ export default function DropDownModal({
     relativeElement,
 
     topChildren,
-
     bottomChildren,
+    childrenDirection = 'vertical',
 
     zIndex = 1000,
-    maxWidth = 200,
 
     posY = 'top',
     posX = 'center',
@@ -92,11 +90,10 @@ export default function DropDownModal({
             <div
                 role='menu'
                 ref={modalRef}
-                className={modalStyles['drop-down-modal']}
+                className={`${modalStyles['drop-down-modal']} ${modalStyles[childrenDirection]}`}
                 onClick={(event) => {
                     event.stopPropagation();
                 }}
-                style={{ maxWidth }}
             >
                 {topChildren}
 

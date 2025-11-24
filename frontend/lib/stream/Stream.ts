@@ -28,7 +28,7 @@ class Stream {
         this.#socket.close();
     }
 
-    send(type: StreamMessage['type'], data: object) {
+    send<T extends object>(type: StreamMessage['type'], data: T) {
         if (!this.#socket) return;
 
         const prepareData: StreamMessage = { type, data };

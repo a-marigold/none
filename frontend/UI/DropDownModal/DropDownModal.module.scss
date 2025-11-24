@@ -17,20 +17,30 @@
 
     transform: translate(0, 0);
 
-    @include flex-column;
+    display: flex;
     gap: 0.25em;
 
     width: 100%;
+    max-width: max-content;
 
     background-color: var(--light-modal-bg);
 
     border-radius: 16px;
     padding: 0.375em;
     box-sizing: border-box;
+
+    &.vertical {
+        flex-direction: column;
+        max-width: 200px;
+    }
+    &.horizontal {
+        max-width: max-content;
+    }
 }
 
 .divider-block {
     padding: 0 0.75em;
+
     box-sizing: border-box;
 }
 
@@ -38,5 +48,12 @@
     background-color: var(--border-color);
 
     width: 100%;
+
     height: 1px;
+}
+
+@media (max-width: 600px) {
+    .drop-down-modal.horizontal {
+        max-width: 80%;
+    }
 }

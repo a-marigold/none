@@ -13,7 +13,7 @@ import {
     baseError,
 } from './stream.service';
 
-import type { Message } from '@none/shared';
+import type { Message, SearchUser } from '@none/shared';
 
 export async function stream(connection: WebSocket, request: FastifyRequest) {
     streamEmitter.initialize(connection, request);
@@ -47,5 +47,10 @@ streamEmitter.on('searchUsers', ({ data, send, request }) => {
 
     const users = request.server.userTrie.searchByPrefix(data.query);
 
-    // send();
+    const streamMessage = createStreamMessage<SearchUser[]>(
+        'searchUsers',
+        users
+    );
+
+    return send(streamMessage);
 });
