@@ -5,12 +5,14 @@ import { validateStreamMessage, baseError } from '@/routes/stream';
 
 import type { StreamType, StreamMessage } from '@none/shared';
 
+type ServerContext = Pick<FastifyRequest['server'], 'prisma' | 'userTrie'>;
+
 interface Listener {
     type: StreamType;
     callback: (connection: {
         data: StreamMessage['data'];
         send: WebSocket['send'];
-        request: FastifyRequest;
+        server: ServerContext;
     }) => void;
 }
 
@@ -18,6 +20,11 @@ class StreamEmitter {
     #listeners: Listener[] = [];
 
     initialize(connection: WebSocket, request: FastifyRequest) {
+        const serverContext: ServerContext = {
+            prisma: request.server.prisma,
+            userTrie: request.server.userTrie,
+        };
+
         connection.on('message', (data) => {
             try {
                 const parseData = JSON.parse(data.toString());
@@ -31,7 +38,7 @@ class StreamEmitter {
                         listener.callback({
                             data: parseData.data,
                             send: connection.send.bind(connection),
-                            request,
+                            server: serverContext,
                         });
                     }
                 });

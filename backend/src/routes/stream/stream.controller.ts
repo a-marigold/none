@@ -40,12 +40,12 @@ streamEmitter.on('newChatMessage', ({ data, send }) => {
     return send(streamMessage);
 });
 
-streamEmitter.on('searchUsersQuery', ({ data, send, request }) => {
+streamEmitter.on('searchUsersQuery', ({ data, send, server }) => {
     if (!validateSearchQuery(data)) {
         return send(baseError);
     }
 
-    const users = request.server.userTrie.searchByPrefix(data.query);
+    const users = server.userTrie.searchByPrefix(data.query);
 
     const streamMessage = createStreamMessage<SearchUser[]>(
         'searchUsersResponse',
