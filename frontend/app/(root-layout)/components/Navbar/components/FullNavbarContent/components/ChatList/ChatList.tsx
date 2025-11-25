@@ -1,19 +1,23 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
+
+import { useChatStack } from '@/hooks/useChatStack';
 
 import { useChatStore } from '@/store/ChatStore';
 
-import { getChats } from '@/lib/api/ChatApiClient';
+import { getChats, getChatMessages } from '@/lib/api/ChatApiClient';
 
-import PrimaryLink from '@/UI/PrimaryLink';
+import MemoPrimaryLink from '@/UI/PrimaryLink/memo';
 
 import navStyles from './ChatList.module.scss';
 
 export default function ChatList() {
     const setChats = useChatStore((state) => state.setChats);
     const setChatNames = useChatStore((state) => state.setChatNames);
+
+    const chatStack = useChatStack();
 
     useEffect(() => {
         async function handleGetChats() {
@@ -40,7 +44,17 @@ export default function ChatList() {
     const [showChatList, setShowChatList] = useState(true);
 
     const pathname = usePathname();
+
     const currentChatId = pathname.split('/').filter(Boolean).at(-1);
+
+    const chatLinkHandler = useCallback(async () => {
+        const chatPublicId = '__PUBLIC_ID__'; //!
+        if (!chatStack.stack.find((chat) => chat === chatPublicId)) {
+            const messages = await getChatMessages(chatPublicId);
+
+            chatStack.appendChat(chatPublicId, messages);
+        }
+    }, [chatStack.appendChat]);
 
     return (
         <div
@@ -73,7 +87,7 @@ export default function ChatList() {
                             key={chat.publicId}
                             className={navStyles['chat-link']}
                         >
-                            <PrimaryLink
+                            <MemoPrimaryLink
                                 replace
                                 shallow
                                 prefetch={false}
@@ -81,6 +95,7 @@ export default function ChatList() {
                                 href={`/chat/${chat.publicId}`}
                                 isActive={currentChatId === chat.publicId}
                                 aria-label={`Open ${chat.name} chat`}
+                                onClick={() => {}}
                             />
                         </li>
                     ))}

@@ -35,11 +35,11 @@ export function useSendSearchQuery(queryState: string) {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        stream.send<SearchQuery>('searchUsers', { query: queryState });
+        stream.send<SearchQuery>('searchUsersQuery', { query: queryState });
     }, [queryState]);
 
     useEffect(() => {
-        stream.onmessage('searchUsers', (data) => {
+        stream.onmessage('searchUsersResponse', (data) => {
             if (!validateStreamData(data, SearchUserListSchema)) {
                 return setError('Server has sent invalid data');
             }

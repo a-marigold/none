@@ -9,6 +9,7 @@ type ServerContext = Pick<FastifyRequest['server'], 'prisma' | 'userTrie'>;
 
 interface Listener {
     type: StreamType;
+
     callback: (connection: {
         data: StreamMessage['data'];
         send: WebSocket['send'];

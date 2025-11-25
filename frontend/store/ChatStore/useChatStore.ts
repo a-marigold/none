@@ -7,13 +7,20 @@ type ChatNames = Pick<Chat, 'publicId' | 'name' | 'members'>[];
 interface ChatStore {
     chats: Record<string, Chat>;
 
+    chatNames: ChatNames;
+
+    chatStack: string[];
+
     setChats: (newChats: Chat[]) => void;
 
     addChat: (publicId: string, newChat: Chat) => void;
 
-    addMessage: (chatId: string, message: Message) => void;
+    addMessage: (chatPublicId: string, message: Message) => void;
 
-    chatNames: ChatNames;
+    setChatMessages: (chatPublicId: string, newMessageList: Message[]) => void;
+
+    addChatToStack: (chatPublicId: string) => void;
+    deleteChatFromStack: (chatPublicId: string) => void;
 
     setChatNames: (newChat: ChatNames) => void;
 }
@@ -22,6 +29,8 @@ export const useChatStore = create<ChatStore>()((set) => ({
     chats: {},
 
     chatNames: [],
+
+    chatStack: [],
 
     setChats: (newChats) =>
         set({
@@ -33,17 +42,36 @@ export const useChatStore = create<ChatStore>()((set) => ({
     addChat: (publicId, newChat) =>
         set((state) => ({ chats: { ...state.chats, [publicId]: newChat } })),
 
-    addMessage: (chatId, message) =>
+    addMessage: (chatPublicId, message) =>
         set((state) => ({
             chats: {
                 ...state.chats,
 
-                [chatId]: {
-                    ...state.chats[chatId],
+                [chatPublicId]: {
+                    ...state.chats[chatPublicId],
                     messageList: [
-                        ...(state.chats[chatId]?.messageList || []),
+                        ...(state.chats[chatPublicId]?.messageList || []),
                         message,
                     ],
+                },
+            },
+        })),
+
+    addChatToStack: (chatPublicId) =>
+        set((state) => ({ chatStack: [...state.chatStack, chatPublicId] })),
+    deleteChatFromStack: (chatPublicId) =>
+        set((state) => ({
+            chatStack: state.chatStack.filter((chat) => chat !== chatPublicId),
+        })),
+
+    setChatMessages: (chatPublicId, newMessageList) =>
+        set((state) => ({
+            chats: {
+                ...state.chats,
+                [chatPublicId]: {
+                    ...state.chats[chatPublicId],
+
+                    messageList: newMessageList,
                 },
             },
         })),

@@ -30,5 +30,5 @@ export function useChatStack() {
         setChatMessages(chatStack[0], []);
     }
 
-    return { appendChat };
+    return { stack: chatStack, appendChat };
 }
