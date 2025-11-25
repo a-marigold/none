@@ -96,7 +96,8 @@ export default function BadgeModal({ ...dropDownProps }: BadgeModalProps) {
                     ) : (
                         <div className={modalStyles['empty-list']}>
                             <p className={modalStyles['empty-text']}>
-                                {error ?? 'User with this user name not found'}
+                                {error ??
+                                    'User with this user name not found abc'}
                             </p>
                         </div>
                     )}

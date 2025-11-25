@@ -11,7 +11,7 @@ export default function StreamRoot() {
         stream.open(`${apiOrigin}/stream`);
 
         stream.onerror((error) => {
-            alert(error.message);
+            console.log(error.message);
         });
         return () => {
             stream.close();

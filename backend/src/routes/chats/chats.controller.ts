@@ -71,8 +71,10 @@ export async function createChat(
         if (error instanceof ApiError) {
             return reply
                 .code(error.code)
+
                 .send({ code: error.code, message: error.message });
         }
+
         return reply
             .code(500)
             .send({ code: 500, message: 'Internal server error' });

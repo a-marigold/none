@@ -1,15 +1,8 @@
-import {
-    object,
-    record,
-    string,
-    any,
-    enum as zenum,
-    literal,
-    infer as zinfer,
-} from 'zod';
+import { object, record, string, any, literal, infer as zinfer } from 'zod';
 
-const StreamTypeSchema = zenum([
+const StreamTypeSchema = literal([
     'newChatMessage',
+
     'editMessage',
 
     'deleteMessage',
@@ -18,13 +11,16 @@ const StreamTypeSchema = zenum([
 
     'initial',
 
-    'searchUsers',
+    'searchUsersQuery',
+    'searchUsersResponse',
 ]);
+
+export const StreamDataSchema = record(string(), any());
 
 export const StreamMessageSchema = object({
     type: StreamTypeSchema,
 
-    data: record(string(), any()),
+    data: StreamDataSchema,
 });
 
 export const StreamErrorDataSchema = object({
