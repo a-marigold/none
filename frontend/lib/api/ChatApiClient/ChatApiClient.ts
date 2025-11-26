@@ -37,9 +37,15 @@ export async function createChat(chat: Chat) {
     return data;
 }
 
-export async function getChatMessages(chatPublicId: string) {
+export async function getChatMessages(
+    chatPublicId: string,
+    cursor?: number,
+    limit: number = 32
+) {
     const response = await fetch(
-        `${apiOrigin}/chats/${chatPublicId}/messages`,
+        `${apiOrigin}/chats/${chatPublicId}/messages?${
+            cursor ? `cursor=${cursor}` : ''
+        }&limit=${limit}`,
 
         {
             credentials: 'include',

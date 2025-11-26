@@ -63,19 +63,21 @@ export async function getMessagesByChatPublicId(
     prisma: PrismaClient,
     userName: string,
     chatPublicId: string,
-    limit: number,
-    cursor: number
+    cursor: number | null,
+    limit: number
 ): Promise<Message[]> {
     const messages = await prisma.message.findMany({
         where: {
             chat: { members: { some: { userName } }, publicId: chatPublicId },
         },
-        orderBy: { id: 'asc' },
+        orderBy: { id: 'desc' },
         take: limit,
-        cursor: {
-            id: cursor,
-        },
-        skip: 1,
+        cursor: cursor
+            ? {
+                  id: cursor,
+              }
+            : undefined,
+        skip: cursor ? 1 : undefined,
     });
     return preparePrismaData(messages);
 }

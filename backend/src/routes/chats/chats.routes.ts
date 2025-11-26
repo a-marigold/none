@@ -47,7 +47,11 @@ export async function chatRoutes(app: FastifyInstance) {
         schema: {
             params: object({ publicId: string() }),
 
-            querystring: object({ cursor: string() }),
+            querystring: object({
+                cursor: string().optional(),
+                limit: string(),
+            }),
+
             response: {
                 200: array(MessageSchema),
             },

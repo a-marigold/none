@@ -88,11 +88,12 @@ export async function createChat(
 export async function getChatMessages(
     request: FastifyRequest<{
         Params: { publicId: string };
-        Querystring: { cursor: number };
+        Querystring: { cursor: string | undefined; limit: string };
     }>,
     reply: FastifyReply<{ Reply: Message[] | ApiResponse }>
 ) {
-    const cursor = request.query.cursor;
+    const cursor = request.query.cursor ? Number(request.query.cursor) : null;
+    const limit = Number(request.query.limit);
     const chatPublicId = request.params.publicId;
 
     const userName = request.user.userName;
@@ -113,8 +114,8 @@ export async function getChatMessages(
         request.server.prisma,
         userName,
         chatPublicId,
-        32,
-        cursor
+        cursor,
+        limit
     );
 
     return reply.code(200).send(messages);
