@@ -114,12 +114,11 @@ export async function me(
     try {
         const user = await checkUserExistence(
             request.server.prisma,
+
             request.user.userName
         );
 
         const prepareUser: SafeUser = user;
-
-        console.log(prepareUser);
 
         return reply.code(200).send(prepareUser);
     } catch (error) {

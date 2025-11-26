@@ -58,6 +58,7 @@ export const viewport: Viewport = {
     maximumScale: 1,
     userScalable: false,
 };
+export const runtime = 'nodejs';
 
 export default async function RootLayout({
     children,

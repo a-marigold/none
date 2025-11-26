@@ -17,6 +17,7 @@ export function useSendFunction() {
         (state) => state.setRedirectedChat
     );
 
+    const authorized = useAuthStore((state) => state.authorized);
     const userName = useAuthStore((state) => state.user?.userName);
     const receiver = useMiniChatStore((state) => state.receiver);
 
@@ -27,11 +28,11 @@ export function useSendFunction() {
             chatName.members.find((member) => member.userName === receiver)
         );
 
-        if (findChatWithMember?.publicId && userName) {
+        if (findChatWithMember?.publicId && authorized) {
             setRedirectedChat(findChatWithMember.publicId);
 
             router.push(`/chat/${findChatWithMember.publicId}`);
-        } else if (!findChatWithMember && userName) {
+        } else if (!findChatWithMember && authorized && userName) {
             const prepareChat: Chat = {
                 ...chat,
                 members: [{ userName }, { userName: receiver }],
@@ -50,7 +51,7 @@ export function useSendFunction() {
             } catch (error) {
                 alert(error); // TODO: temporarily
             }
-        } else if (!userName && !findChatWithMember) {
+        } else if (!authorized) {
             // TODO: logic for unauthorized users
         }
     };

@@ -16,13 +16,14 @@ export function useChatStack() {
     const setChatMessages = useChatStore((state) => state.setChatMessages);
 
     function appendChat(chatPublicId: string, chatMessages: Message[]) {
-        if (chatStack.find((chat) => chat === chatPublicId)) return;
+        if (has(chatPublicId)) return;
 
         if (chatStack.length === 3) {
             _deleteFirstChat();
         }
 
         addChatToStack(chatPublicId);
+        setChatMessages(chatPublicId, chatMessages);
     }
 
     function has(chatPublicId: string) {

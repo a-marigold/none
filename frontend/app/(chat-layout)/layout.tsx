@@ -13,13 +13,11 @@ export default function ChatLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const userName = useAuthStore((state) => state.user?.userName);
+    const authorized = useAuthStore((state) => state.authorized);
 
     return (
         <>
-            {userName && <Navbar />}
-
-            {/* } */}
+            {authorized && <Navbar />}
 
             <ModalRoot />
 

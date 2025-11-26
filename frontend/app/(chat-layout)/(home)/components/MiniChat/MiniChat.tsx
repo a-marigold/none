@@ -47,8 +47,6 @@ export default function Chat() {
 
     const textareaRef = useRef<HTMLDivElement>(null);
 
-    const userName = useAuthStore((state) => state.user?.userName);
-
     const sendFunction = useSendFunction();
 
     return (
@@ -70,13 +68,11 @@ export default function Chat() {
                     fontColor: currentBadgeColors.fontColor,
                 }}
                 sendFunction={() => {
-                    if (userName) {
-                        sendFunction({
-                            name: 'New Chat',
+                    sendFunction({
+                        name: 'New Chat',
 
-                            messageList: [],
-                        });
-                    }
+                        messageList: [],
+                    });
                 }}
             />
         </>

@@ -26,6 +26,7 @@ export default function Chat() {
     const chatPublicId = usePathname().split('/').filter(Boolean).at(-1);
 
     const redirectedChat = useMiniChatStore((state) => state.redirectedChat);
+
     const redirectedMessage = useMiniChatStore((state) => state.message);
 
     function handleAddMessage() {
@@ -34,6 +35,7 @@ export default function Chat() {
                 createdAt: Date.now(),
                 chatId: chatPublicId,
                 sender: userName,
+
                 data: message,
             };
 

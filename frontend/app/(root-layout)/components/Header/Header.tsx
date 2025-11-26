@@ -9,7 +9,7 @@ import AuthButtons from './components/AuthButtons';
 import headerStyles from './Header.module.scss';
 
 export default function Header() {
-    const userName = useAuthStore((state) => state.user?.userName);
+    const authorized = useAuthStore((state) => state.authorized);
 
     const setShowNavbar = useSettingsStore((state) => state.setShowNavbar);
 
@@ -25,7 +25,7 @@ export default function Header() {
                 </svg>
             </button>
 
-            {!userName && <AuthButtons />}
+            {authorized === false && <AuthButtons />}
         </header>
     );
 }

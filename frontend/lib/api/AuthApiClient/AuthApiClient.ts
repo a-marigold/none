@@ -3,6 +3,7 @@ import { apiOrigin } from '@/utils/GetApiOrigin';
 import { handleApiError } from '@/utils/HandleApiError';
 
 import type { RegisterData } from '@none/shared';
+
 import type { SafeUser } from '@none/shared';
 
 export async function checkUser(userName: string) {
@@ -33,7 +34,7 @@ export async function register(userData: RegisterData) {
     await handleApiError(response);
 }
 
-export async function getUserData() {
+export async function clientGetUserData() {
     const response = await fetch(`${apiOrigin}/auth/me`, {
         method: 'GET',
 
