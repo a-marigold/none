@@ -25,10 +25,14 @@ export function useChatStack() {
         addChatToStack(chatPublicId);
     }
 
+    function has(chatPublicId: string) {
+        return !!chatStack.find((publicId) => publicId === chatPublicId);
+    }
+
     function _deleteFirstChat() {
         deleteChatFromStack(chatStack[0]);
         setChatMessages(chatStack[0], []);
     }
 
-    return { stack: chatStack, appendChat };
+    return { stack: chatStack, appendChat, has };
 }

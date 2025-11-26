@@ -1,11 +1,13 @@
-import type { ReactNode } from 'react';
+import type { ReactNode, AnchorHTMLAttributes } from 'react';
 import type { LinkProps } from 'next/link';
 
 import Link from 'next/link';
 
 import linkStyles from './PrimaryLink.module.scss';
 
-interface PrimaryLinkProps extends LinkProps {
+interface PrimaryLinkProps
+    extends LinkProps,
+        AnchorHTMLAttributes<HTMLAnchorElement> {
     title: string;
     subtitle?: string;
     href: string;
