@@ -1,14 +1,19 @@
 import { create } from 'zustand';
 
-import type { User } from '@none/shared';
+import type { ClientUser } from '@/types/ClientUser';
 
 interface AuthStore {
-    user: Partial<User> | null;
-    setUser: (userData: Partial<User> | null) => void;
+    user: ClientUser | null;
+    setUser: (userData: ClientUser | null) => void;
+
+    authorized: boolean | null;
+    setAuthorized: (value: boolean | null) => void;
 }
 
 export const useAuthStore = create<AuthStore>()((set) => ({
     user: null,
+
+    authorized: null,
 
     setUser: (userData) =>
         set((state) => {
@@ -24,4 +29,6 @@ export const useAuthStore = create<AuthStore>()((set) => ({
                 user: state.user ? { ...state.user, ...userData } : userData,
             };
         }),
+
+    setAuthorized: (value) => set({ authorized: value }),
 }));
