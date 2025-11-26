@@ -1,10 +1,14 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import { ApiError } from '@none/shared';
-import type { ApiResponse, Chat } from '@none/shared';
+import type { ApiResponse, Chat, Message } from '@none/shared';
 
 import { checkUserExistence } from '../auth';
-import { getChatsByUserName, createChatWithMembers } from './chats.service';
+import {
+    getChatsByUserName,
+    createChatWithMembers,
+    getMessagesByChatPublicId,
+} from './chats.service';
 
 export async function getUserChats(
     request: FastifyRequest,
@@ -79,4 +83,39 @@ export async function createChat(
             .code(500)
             .send({ code: 500, message: 'Internal server error' });
     }
+}
+
+export async function getChatMessages(
+    request: FastifyRequest<{
+        Params: { publicId: string };
+        Querystring: { cursor: number };
+    }>,
+    reply: FastifyReply<{ Reply: Message[] | ApiResponse }>
+) {
+    const cursor = request.query.cursor;
+    const chatPublicId = request.params.publicId;
+
+    const userName = request.user.userName;
+
+    try {
+        await checkUserExistence(request.server.prisma, userName);
+    } catch (error) {
+        if (error instanceof ApiError && error.code === 404) {
+            return reply.code(404).send({ code: 404, message: error.message });
+        } else {
+            return reply
+                .code(500)
+                .send({ code: 500, message: 'Internal server error' });
+        }
+    }
+
+    const messages = await getMessagesByChatPublicId(
+        request.server.prisma,
+        userName,
+        chatPublicId,
+        32,
+        cursor
+    );
+
+    return reply.code(200).send(messages);
 }

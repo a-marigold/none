@@ -2,7 +2,7 @@ import type { PrismaClient } from '@/generated/prisma/client/client';
 
 import { preparePrismaData } from '@/utils/preparePrismaData/preparePrismaData';
 
-import type { Chat } from '@none/shared';
+import type { Chat, Message } from '@none/shared';
 
 export async function getChatsByUserName(
     prisma: PrismaClient,
@@ -57,4 +57,25 @@ export async function createChatWithMembers(
     });
 
     return preparePrismaData(newChat);
+}
+
+export async function getMessagesByChatPublicId(
+    prisma: PrismaClient,
+    userName: string,
+    chatPublicId: string,
+    limit: number,
+    cursor: number
+): Promise<Message[]> {
+    const messages = await prisma.message.findMany({
+        where: {
+            chat: { members: { some: { userName } }, publicId: chatPublicId },
+        },
+        orderBy: { id: 'asc' },
+        take: limit,
+        cursor: {
+            id: cursor,
+        },
+        skip: 1,
+    });
+    return preparePrismaData(messages);
 }
