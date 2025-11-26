@@ -48,6 +48,7 @@ class Stream {
                 const parseData = JSON.parse(event.data);
 
                 if (!validateStreamMessage(parseData)) {
+                    console.log(parseData);
                     throw new Error('Server has sent an invalid message.'); // TODO: add separated error constructor
                 }
 
@@ -56,7 +57,7 @@ class Stream {
                 }
             } catch (error) {
                 if (error instanceof Error) {
-                    alert(error.message); // TODO: Temporarily
+                    console.log(error.message + ' mess'); // TODO: Temporarily
                 }
             }
         });

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { stream } from '@/lib/stream';
 import { validateStreamData } from '@/utils/StreamHelpers';
 
-import { SearchUserListSchema } from '@none/shared';
+import { SearchUserDataSchema } from '@none/shared';
 import type { SearchQuery, SearchUser } from '@none/shared';
 
 /**
@@ -40,11 +40,11 @@ export function useSendSearchQuery(queryState: string) {
 
     useEffect(() => {
         stream.onmessage('searchUsersResponse', (data) => {
-            if (!validateStreamData(data, SearchUserListSchema)) {
+            if (!validateStreamData(data, SearchUserDataSchema)) {
                 return setError('Server has sent invalid data');
             }
 
-            setUsers(data);
+            setUsers(data.users);
         });
 
         return () => {

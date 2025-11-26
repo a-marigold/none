@@ -9,8 +9,10 @@ export const SearchUserSchema = SafeUserSchema.pick({
     fullName: true,
     avatar: true,
 });
-export const SearchUserListSchema = array(SearchUserSchema);
+export const SearchUserDataSchema = object({ users: array(SearchUserSchema) });
 
 export type SearchQuery = zInfer<typeof SearchQuerySchema>;
 
 export type SearchUser = zInfer<typeof SearchUserSchema>;
+
+export type SearchUserData = zInfer<typeof SearchUserDataSchema>;
