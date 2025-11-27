@@ -13,12 +13,9 @@ import { getChats, getChatMessages } from '@/lib/api/ChatApiClient';
 import MemoPrimaryLink from '@/UI/PrimaryLink/memo';
 
 import navStyles from './ChatList.module.scss';
-
 export default function ChatList() {
     const setChats = useChatStore((state) => state.setChats);
     const setChatNames = useChatStore((state) => state.setChatNames);
-
-    const chatStack = useChatStack();
 
     useEffect(() => {
         async function handleGetChats() {
@@ -29,6 +26,7 @@ export default function ChatList() {
                 setChatNames(
                     Object.values(chats).map(({ name, publicId, members }) => ({
                         name,
+
                         publicId,
 
                         members,
@@ -49,19 +47,21 @@ export default function ChatList() {
 
     const currentChatId = pathname.split('/').filter(Boolean).at(-1);
 
+    const { has, appendChat } = useChatStack();
+
     const chatLinkHandler = useCallback(
         async (event: MouseEvent<HTMLAnchorElement>) => {
             const chatPublicId = event.currentTarget.dataset.chatPublicId;
 
             if (!chatPublicId) return;
 
-            if (!chatStack.has(chatPublicId)) {
+            if (!has(chatPublicId)) {
                 const messages = await getChatMessages(chatPublicId);
 
-                chatStack.appendChat(chatPublicId, messages);
+                appendChat(chatPublicId, messages);
             }
         },
-        [chatStack.appendChat]
+        [has, appendChat]
     );
 
     return (

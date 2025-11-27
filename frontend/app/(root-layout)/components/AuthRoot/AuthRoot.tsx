@@ -8,8 +8,6 @@ import { clientGetUserData, refreshAccessToken } from '@/lib/api/AuthApiClient';
 
 import { useAuthStore } from '@/store/AuthStore';
 
-import type { ClientUser } from '@/types/ClientUser';
-
 export default function AuthRoot() {
     const setUser = useAuthStore((state) => state.setUser);
 
