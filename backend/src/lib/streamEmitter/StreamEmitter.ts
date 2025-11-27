@@ -1,9 +1,21 @@
 import type { FastifyRequest } from 'fastify';
 import type WebSocket from 'ws';
+import type { JWT, FastifyJWT } from '@fastify/jwt';
 
-import { validateStreamMessage, baseError } from '@/routes/stream';
+import {
+    validateStreamMessage,
+    baseError,
+    createStreamMessage,
+} from '@/routes/stream';
 
-import type { StreamType, StreamMessage } from '@none/shared';
+import type { Cookies } from '@none/shared';
+
+import type {
+    StreamType,
+    StreamMessage,
+    SafeUser,
+    AuthorizeResponse,
+} from '@none/shared';
 
 type ServerContext = Pick<FastifyRequest['server'], 'prisma' | 'userTrie'>;
 
@@ -17,10 +29,69 @@ interface Listener {
     }) => void;
 }
 
+type StreamUser = Pick<SafeUser, 'userName'> & {
+    incognito: boolean;
+    connection: WebSocket;
+};
+
 class StreamEmitter {
     #listeners: Listener[] = [];
 
-    initialize(connection: WebSocket, request: FastifyRequest) {
+    users: Map<string, StreamUser> = new Map();
+
+    #authorizeUser(
+        connection: WebSocket,
+        jwt: JWT,
+        accessToken: string | undefined
+    ): void {
+        const authorizeIncognito = () => {
+            const userName = crypto.randomUUID();
+
+            const connectionId = crypto.randomUUID();
+
+            this.users.set(connectionId, {
+                userName,
+                incognito: true,
+                connection,
+            });
+
+            const streamMessage = createStreamMessage<AuthorizeResponse>(
+                'authorizeResponse',
+                { connectionId, incognito: true }
+            );
+
+            return connection.send(streamMessage);
+        };
+
+        if (!accessToken) {
+            return authorizeIncognito();
+        }
+
+        try {
+            const user: FastifyJWT['payload'] = jwt.verify(accessToken);
+            const connectionId = crypto.randomUUID();
+
+            const streamMessage = createStreamMessage<AuthorizeResponse>(
+                'authorizeResponse',
+
+                { connectionId, incognito: false }
+            );
+
+            return connection.send(streamMessage);
+        } catch {
+            return authorizeIncognito();
+        }
+    }
+
+    initialize(connection: WebSocket, request: FastifyRequest): void {
+        const cookies = request.cookies as Cookies;
+
+        const accessToken = cookies.accessToken;
+
+        this.#authorizeUser(connection, request.server.jwt, accessToken);
+
+        request.server.jwt.verify;
+
         const serverContext: ServerContext = {
             prisma: request.server.prisma,
             userTrie: request.server.userTrie,
@@ -49,7 +120,7 @@ class StreamEmitter {
         });
     }
 
-    on(type: Listener['type'], callback: Listener['callback']) {
+    on(type: Listener['type'], callback: Listener['callback']): void {
         this.#listeners.push({ type, callback });
     }
 }
