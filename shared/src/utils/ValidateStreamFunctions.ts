@@ -1,6 +1,10 @@
-import { StreamMessageSchema, StreamSchemasMap } from '../types/Stream';
+import { StreamMessageSchema, StreamSchemasMap } from '../types/Stream/index';
 
-import type { StreamMessage, StreamType, StreamMap } from '../types/Stream';
+import type {
+    StreamMessage,
+    StreamType,
+    StreamMap,
+} from '../types/Stream/index';
 
 export function validateStreamMessage(
     message: unknown

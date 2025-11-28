@@ -4,6 +4,8 @@
         "module": "ESNext",
         "declaration": true,
         "declarationMap": true,
+        "emitDeclarationOnly": false,
+
         "outDir": ".dist",
 
         "skipLibCheck": true,
@@ -12,5 +14,7 @@
 
         "esModuleInterop": true
     },
-    "include": ["src"]
+    "include": ["src"],
+
+    "exclude": [".dist"]
 }
