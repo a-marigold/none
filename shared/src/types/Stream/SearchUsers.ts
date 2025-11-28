@@ -2,7 +2,7 @@ import { array, object, string, infer as zInfer } from 'zod';
 
 import { SafeUserSchema } from '../User';
 
-export const SearchQuerySchema = object({ query: string() });
+export const SearchUsersQuerySchema = object({ query: string() });
 
 export const SearchUserSchema = SafeUserSchema.pick({
     userName: true,
@@ -11,7 +11,7 @@ export const SearchUserSchema = SafeUserSchema.pick({
 });
 export const SearchUserDataSchema = object({ users: array(SearchUserSchema) });
 
-export type SearchQuery = zInfer<typeof SearchQuerySchema>;
+export type SearchUsersQuery = zInfer<typeof SearchUsersQuerySchema>;
 
 export type SearchUser = zInfer<typeof SearchUserSchema>;
 

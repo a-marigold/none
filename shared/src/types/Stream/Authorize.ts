@@ -2,11 +2,11 @@ import { boolean, object, string, infer as zInfer } from 'zod';
 
 //
 
-const AuthorizeQuerySchema = object({
+export const AuthorizeQuerySchema = object({
     message: string(),
 });
 
-const AuthorizeResponseSchema = object({
+export const AuthorizeResponseSchema = object({
     connectionId: string(),
 
     incognito: boolean(),
