@@ -1,25 +1,63 @@
-import {
-    validateStreamError,
-    validateStreamMessage,
-} from '@/utils/StreamHelpers';
+import { validateStreamMessage, validateStreamData } from '@none/shared';
 
-import type { StreamMessage, StreamErrorData } from '@none/shared';
+import type {
+    StreamMessage,
+    StreamErrorData,
+    StreamType,
+    StreamMap,
+} from '@none/shared';
+
+interface Listener<T extends StreamType> {
+    type: T;
+    callback: (data: StreamMap[T]) => void;
+}
 
 class Stream {
     #socket: WebSocket | null = null;
+
+    #listeners: Listener<StreamType>[] = [];
+
+    #listenMessage(event: MessageEvent) {
+        try {
+            const incomingMessage = JSON.parse(event.data);
+
+            if (!validateStreamMessage(incomingMessage)) {
+                throw new Error('Server has sent an invalid message');
+            }
+
+            this.#listeners.forEach((listener) => {
+                if (
+                    listener.type === incomingMessage.type &&
+                    validateStreamData(listener.type, incomingMessage.data)
+                ) {
+                    listener.callback(incomingMessage.data);
+                }
+            });
+        } catch (error) {
+            if (error instanceof Error) {
+                console.log('__SERVER_STREAM_ERROR__:  ', error.message);
+            }
+        }
+    }
 
     open(url: string) {
         this.#socket = new WebSocket(url);
 
         this.#socket.onopen = () => {
             const initialMessage: StreamMessage = {
-                type: 'initial',
+                type: 'authorizeQuery',
 
-                data: { message: 'initial' },
+                data: { message: 'authorize' },
             };
 
             this.#socket?.send(JSON.stringify(initialMessage));
         };
+
+        this.#socket.addEventListener('message', this.#listenMessage);
+
+        this.#socket.addEventListener('close', () => {
+            this.#socket?.removeEventListener('message', this.#listenMessage);
+        });
     }
 
     close() {
@@ -28,7 +66,7 @@ class Stream {
         this.#socket.close();
     }
 
-    send<T extends object>(type: StreamMessage['type'], data: T) {
+    send<T extends StreamType>(type: T, data: StreamMap[T]) {
         if (!this.#socket) return;
 
         const prepareData: StreamMessage = { type, data };
@@ -36,31 +74,14 @@ class Stream {
         this.#socket.send(JSON.stringify(prepareData));
     }
 
-    onmessage(
-        type: StreamMessage['type'],
+    onmessage<T extends StreamType>(
+        type: T,
 
-        callback: (data: StreamMessage['data']) => void
+        callback: (data: StreamMap[T]) => void
     ) {
         if (!this.#socket) return;
 
-        this.#socket.addEventListener('message', (event) => {
-            try {
-                const parseData = JSON.parse(event.data);
-
-                if (!validateStreamMessage(parseData)) {
-                    console.log(parseData);
-                    throw new Error('Server has sent an invalid message.'); // TODO: add separated error constructor
-                }
-
-                if (type === parseData.type) {
-                    callback(parseData.data);
-                }
-            } catch (error) {
-                if (error instanceof Error) {
-                    console.log(error.message + ' mess'); // TODO: Temporarily
-                }
-            }
-        });
+        this.#listeners.push({ type, callback });
     }
 
     onerror(callback: (data: StreamErrorData) => void) {
@@ -68,7 +89,7 @@ class Stream {
 
         this.onmessage('error', (data) => {
             try {
-                if (!validateStreamError(data)) {
+                if (!validateStreamData('error', data)) {
                     throw new Error('Unexpceted server error');
                 }
 
@@ -80,5 +101,4 @@ class Stream {
         });
     }
 }
-
 export const stream = new Stream();
