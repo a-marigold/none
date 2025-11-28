@@ -31,6 +31,8 @@ class Stream {
                     listener.type === incomingMessage.type &&
                     validateStreamData(listener.type, incomingMessage.data)
                 ) {
+                    // @ts-expect-error — TS cannot infer this due to runtime narrowing
+
                     listener.callback(incomingMessage.data);
                 }
             });

@@ -70,8 +70,8 @@ class StreamEmitter {
             this.#connections.set(connectionId, {
                 userName: user.userName,
 
-                send: connection.send.bind(connection),
                 incognito: false,
+                send: connection.send.bind(connection),
             });
 
             const streamMessage = createStreamMessage('authorizeResponse', {
