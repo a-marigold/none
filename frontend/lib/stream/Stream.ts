@@ -7,10 +7,13 @@ import type {
     StreamMap,
 } from '@none/shared';
 
+type ListenerCallback<T extends StreamType> = (data: StreamMap[T]) => void;
+
 type Listener<T extends StreamType = StreamType> = {
     [K in T]: {
         type: K;
-        callback: (data: StreamMap[K]) => void;
+
+        callback: ListenerCallback<K>;
     };
 }[T];
 class Stream {
@@ -31,7 +34,7 @@ class Stream {
                     listener.type === incomingMessage.type &&
                     validateStreamData(listener.type, incomingMessage.data)
                 ) {
-                    // @ts-expect-error — TS cannot infer this due to runtime narrowing
+                    // @ts-expect-error - TS cannot infer this due to runtime narrowing
 
                     listener.callback(incomingMessage.data);
                 }
@@ -80,10 +83,11 @@ class Stream {
     onmessage<T extends StreamType>(
         type: T,
 
-        callback: (data: StreamMap[T]) => void
+        callback: ListenerCallback<T>
     ) {
         if (!this.#socket) return;
 
+        // @ts-expect-error - TS cannot infer callback type
         this.#listeners.push({ type, callback });
     }
 
