@@ -5,7 +5,7 @@ import { UserSchema } from './User';
 export const MessageSchema = object({
     id: number().optional(),
     sender: string(),
-    chatId: uuid(),
+    chatPublicId: uuid(),
 
     data: string(),
 

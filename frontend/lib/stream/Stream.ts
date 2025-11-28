@@ -7,15 +7,16 @@ import type {
     StreamMap,
 } from '@none/shared';
 
-interface Listener<T extends StreamType> {
-    type: T;
-    callback: (data: StreamMap[T]) => void;
-}
-
+type Listener<T extends StreamType = StreamType> = {
+    [K in T]: {
+        type: K;
+        callback: (data: StreamMap[K]) => void;
+    };
+}[T];
 class Stream {
     #socket: WebSocket | null = null;
 
-    #listeners: Listener<StreamType>[] = [];
+    #listeners: Listener[] = [];
 
     #listenMessage(event: MessageEvent) {
         try {
@@ -53,10 +54,16 @@ class Stream {
             this.#socket?.send(JSON.stringify(initialMessage));
         };
 
-        this.#socket.addEventListener('message', this.#listenMessage);
+        this.#socket.addEventListener(
+            'message',
+            this.#listenMessage.bind(this)
+        );
 
         this.#socket.addEventListener('close', () => {
-            this.#socket?.removeEventListener('message', this.#listenMessage);
+            this.#socket?.removeEventListener(
+                'message',
+                this.#listenMessage.bind(this)
+            );
         });
     }
 

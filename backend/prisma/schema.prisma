@@ -61,8 +61,8 @@ model Message {
   
   data String
 
-  chatId String 
-  chat Chat @relation(fields: [chatId], references: [publicId])
+  chatPublicId String 
+  chat Chat @relation(fields: [chatPublicId], references: [publicId])
 
   createdAt BigInt
 }

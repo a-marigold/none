@@ -50,7 +50,7 @@ export const useChatStore = create<ChatStore>()((set) => ({
                 [chatPublicId]: {
                     ...state.chats[chatPublicId],
                     messageList: [
-                        ...(state.chats[chatPublicId]?.messageList || []),
+                        ...state.chats[chatPublicId].messageList,
                         message,
                     ],
                 },
