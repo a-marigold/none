@@ -18,7 +18,7 @@ class Stream {
 
     #listeners: Listener[] = [];
 
-    #listenMessage(event: MessageEvent) {
+    #listenMessage = (event: MessageEvent) => {
         try {
             const incomingMessage = JSON.parse(event.data);
 
@@ -39,7 +39,7 @@ class Stream {
                 console.log('__SERVER_STREAM_ERROR__:  ', error.message);
             }
         }
-    }
+    };
 
     open(url: string) {
         this.#socket = new WebSocket(url);
@@ -54,16 +54,10 @@ class Stream {
             this.#socket?.send(JSON.stringify(initialMessage));
         };
 
-        this.#socket.addEventListener(
-            'message',
-            this.#listenMessage.bind(this)
-        );
+        this.#socket.addEventListener('message', this.#listenMessage);
 
         this.#socket.addEventListener('close', () => {
-            this.#socket?.removeEventListener(
-                'message',
-                this.#listenMessage.bind(this)
-            );
+            this.#socket?.removeEventListener('message', this.#listenMessage);
         });
     }
 

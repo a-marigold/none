@@ -11,17 +11,20 @@ import {
 } from './stream.service';
 
 import { validateStreamData } from '@none/shared';
+import { addMessageToChat } from '../chats/chats.service';
 
 export async function stream(connection: WebSocket, request: FastifyRequest) {
     streamEmitter.initialize(connection, request);
 }
 
-streamEmitter.on('newChatMessage', ({ data, send, server }) => {
+streamEmitter.on('newChatMessage', async ({ data, send, server }) => {
     if (!validateStreamData('newChatMessage', data)) {
         return send(
             createBaseError({ message: 'Invalid chat message struct' })
         );
     }
+
+    const newMessage = await addMessageToChat(server.prisma, data);
 
     const streamMessage = createStreamMessage('newChatMessage', {
         ...data,

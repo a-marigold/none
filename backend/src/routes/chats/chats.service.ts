@@ -81,3 +81,12 @@ export async function getMessagesByChatPublicId(
     });
     return preparePrismaData(messages);
 }
+
+export async function addMessageToChat(
+    prisma: PrismaClient,
+    message: Message
+): Promise<Message> {
+    const newMessage = await prisma.message.create({ data: message });
+
+    return preparePrismaData(newMessage);
+}

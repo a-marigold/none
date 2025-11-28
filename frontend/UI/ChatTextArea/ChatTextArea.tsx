@@ -78,7 +78,7 @@ export default function ChatTextArea({
                     ${isBounded ? textStyles['bounded'] : ''}`}
                 value={state}
                 onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
+                    if (event.key === 'Enter' && !event.shiftKey) {
                         event.preventDefault();
                     }
                 }}

@@ -33,7 +33,7 @@ export default function Chat() {
         if (userName && chatPublicId && message.trim().length) {
             const newMessage: Message = {
                 createdAt: Date.now(),
-                chatId: chatPublicId,
+                chatPublicId,
                 sender: userName,
 
                 data: message,
