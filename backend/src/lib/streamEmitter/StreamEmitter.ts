@@ -3,6 +3,7 @@ import type WebSocket from 'ws';
 import type { JWT, FastifyJWT } from '@fastify/jwt';
 
 import { validateStreamMessage } from '@none/shared';
+
 import type { StreamType, StreamMessage, SafeUser } from '@none/shared';
 
 import { baseError, createStreamMessage } from '@/routes/stream';
@@ -11,7 +12,8 @@ import type { Cookies } from '@none/shared';
 
 type StreamUser = Pick<SafeUser, 'userName'> & {
     incognito: boolean;
-    connection: WebSocket;
+
+    send: WebSocket['send'];
 };
 type ServerContext =
     | Pick<FastifyRequest['server'], 'prisma' | 'userTrie'> & {
@@ -46,7 +48,7 @@ class StreamEmitter {
             this.#connections.set(connectionId, {
                 userName,
                 incognito: true,
-                connection,
+                send: connection.send.bind(connection),
             });
 
             const streamMessage = createStreamMessage('authorizeResponse', {
@@ -68,7 +70,7 @@ class StreamEmitter {
             this.#connections.set(connectionId, {
                 userName: user.userName,
 
-                connection: connection,
+                send: connection.send.bind(connection),
                 incognito: false,
             });
 

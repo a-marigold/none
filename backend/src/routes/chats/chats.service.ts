@@ -85,8 +85,19 @@ export async function getMessagesByChatPublicId(
 export async function addMessageToChat(
     prisma: PrismaClient,
     message: Message
-): Promise<Message> {
-    const newMessage = await prisma.message.create({ data: message });
+): Promise<{
+    message: Message;
+    members: { userName: string }[];
+}> {
+    const newMessage = await prisma.message.create({
+        data: message,
+        include: {
+            chat: { select: { members: { select: { userName: true } } } },
+        },
+    });
 
-    return preparePrismaData(newMessage);
+    return {
+        message: preparePrismaData(newMessage),
+        members: newMessage.chat.members,
+    };
 }

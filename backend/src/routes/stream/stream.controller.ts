@@ -24,14 +24,18 @@ streamEmitter.on('newChatMessage', async ({ data, send, server }) => {
         );
     }
 
-    const newMessage = await addMessageToChat(server.prisma, data);
+    const saveMessage = await addMessageToChat(server.prisma, data);
 
-    const streamMessage = createStreamMessage('newChatMessage', {
-        ...data,
-        sender: '__TEMPORARY_USER__', // TODO: temporarily
+    const streamMessage = createStreamMessage(
+        'newChatMessage',
+        saveMessage.message
+    );
+
+    server.connections.forEach((connection) => {
+        if (saveMessage.members.includes({ userName: connection.userName })) {
+            connection.send(streamMessage);
+        }
     });
-
-    return send(streamMessage);
 });
 
 streamEmitter.on('searchUsersQuery', ({ data, send, server }) => {
