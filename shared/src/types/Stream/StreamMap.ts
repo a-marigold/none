@@ -1,6 +1,7 @@
+import { unknown } from 'zod';
 import type { ZodType } from 'zod';
 
-import { StreamErrorDataSchema, StreamDataSchema } from './Stream';
+import { StreamErrorDataSchema } from './Stream';
 import { MessageSchema } from '../Chat';
 import { SearchUsersQuerySchema, SearchUserDataSchema } from './SearchUsers';
 import { AuthorizeQuerySchema, AuthorizeResponseSchema } from './Authorize';
@@ -29,8 +30,8 @@ export type StreamType = keyof StreamMap;
 
 export const StreamSchemasMap: Record<StreamType, ZodType> = {
     newChatMessage: MessageSchema,
-    editMessage: StreamDataSchema,
-    deleteMessage: StreamDataSchema,
+    editMessage: unknown(),
+    deleteMessage: unknown(),
 
     error: StreamErrorDataSchema,
 

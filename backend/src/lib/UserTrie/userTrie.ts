@@ -40,9 +40,8 @@ export class UserTrie {
         let node = this.#root;
 
         for (const char of prefix) {
-            if (!node.children[char]) {
-                return [];
-            }
+            if (!node.children[char]) return [];
+
             node = node.children[char];
         }
 

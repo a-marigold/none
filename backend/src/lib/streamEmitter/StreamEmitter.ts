@@ -2,22 +2,21 @@ import type { FastifyRequest } from 'fastify';
 import type WebSocket from 'ws';
 import type { JWT, FastifyJWT } from '@fastify/jwt';
 
-import {
-    validateStreamMessage,
-    baseError,
-    createStreamMessage,
-} from '@/routes/stream';
+import { validateStreamMessage } from '@none/shared';
+import type { StreamType, StreamMessage, SafeUser } from '@none/shared';
+
+import { baseError, createStreamMessage } from '@/routes/stream';
 
 import type { Cookies } from '@none/shared';
 
-import type {
-    StreamType,
-    StreamMessage,
-    SafeUser,
-    AuthorizeResponse,
-} from '@none/shared';
-
-type ServerContext = Pick<FastifyRequest['server'], 'prisma' | 'userTrie'>;
+type StreamUser = Pick<SafeUser, 'userName'> & {
+    incognito: boolean;
+    connection: WebSocket;
+};
+type ServerContext =
+    | Pick<FastifyRequest['server'], 'prisma' | 'userTrie'> & {
+          connections: Map<string, StreamUser>;
+      };
 
 interface Listener {
     type: StreamType;
@@ -29,15 +28,10 @@ interface Listener {
     }) => void;
 }
 
-type StreamUser = Pick<SafeUser, 'userName'> & {
-    incognito: boolean;
-    connection: WebSocket;
-};
-
 class StreamEmitter {
     #listeners: Listener[] = [];
 
-    users: Map<string, StreamUser> = new Map();
+    #connections: Map<string, StreamUser> = new Map();
 
     #authorizeUser(
         connection: WebSocket,
@@ -49,16 +43,16 @@ class StreamEmitter {
 
             const connectionId = crypto.randomUUID();
 
-            this.users.set(connectionId, {
+            this.#connections.set(connectionId, {
                 userName,
                 incognito: true,
                 connection,
             });
 
-            const streamMessage = createStreamMessage<AuthorizeResponse>(
-                'authorizeResponse',
-                { connectionId, incognito: true }
-            );
+            const streamMessage = createStreamMessage('authorizeResponse', {
+                connectionId,
+                incognito: true,
+            });
 
             return connection.send(streamMessage);
         };
@@ -71,11 +65,17 @@ class StreamEmitter {
             const user: FastifyJWT['payload'] = jwt.verify(accessToken);
             const connectionId = crypto.randomUUID();
 
-            const streamMessage = createStreamMessage<AuthorizeResponse>(
-                'authorizeResponse',
+            this.#connections.set(connectionId, {
+                userName: user.userName,
 
-                { connectionId, incognito: false }
-            );
+                connection: connection,
+                incognito: false,
+            });
+
+            const streamMessage = createStreamMessage('authorizeResponse', {
+                connectionId,
+                incognito: false,
+            });
 
             return connection.send(streamMessage);
         } catch {
@@ -85,16 +85,15 @@ class StreamEmitter {
 
     initialize(connection: WebSocket, request: FastifyRequest): void {
         const cookies = request.cookies as Cookies;
-
         const accessToken = cookies.accessToken;
 
         this.#authorizeUser(connection, request.server.jwt, accessToken);
 
-        request.server.jwt.verify;
-
         const serverContext: ServerContext = {
             prisma: request.server.prisma,
             userTrie: request.server.userTrie,
+
+            connections: this.#connections,
         };
 
         connection.on('message', (data) => {
@@ -114,7 +113,7 @@ class StreamEmitter {
                         });
                     }
                 });
-            } catch (error) {
+            } catch {
                 return connection.send(baseError);
             }
         });

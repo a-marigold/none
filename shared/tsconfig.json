@@ -5,13 +5,12 @@
         "declaration": true,
         "declarationMap": true,
         "outDir": ".dist",
-        "skipLibCheck": true,
-        "moduleResolution": "Node",
-        "esModuleInterop": true,
 
-        "paths": {
-            "@/*": ["./src/*"]
-        }
+        "skipLibCheck": true,
+
+        "moduleResolution": "Node",
+
+        "esModuleInterop": true
     },
     "include": ["src"]
 }
