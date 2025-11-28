@@ -13,5 +13,4 @@ export const AuthorizeResponseSchema = object({
 });
 
 export type AuthorizeQuery = zInfer<typeof AuthorizeQuerySchema>;
-
 export type AuthorizeResponse = zInfer<typeof AuthorizeResponseSchema>;

@@ -16,6 +16,7 @@ interface ChatTextAreaProps
     containerRef?: RefObject<HTMLDivElement | null>;
 
     state: string;
+
     ariaLabel: string;
 
     badge?: {
@@ -76,6 +77,11 @@ export default function ChatTextArea({
                 className={`${textStyles['chat-input']}
                     ${isBounded ? textStyles['bounded'] : ''}`}
                 value={state}
+                onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                        event.preventDefault();
+                    }
+                }}
                 onChange={(event) => {
                     attributes.onChange?.(event);
 

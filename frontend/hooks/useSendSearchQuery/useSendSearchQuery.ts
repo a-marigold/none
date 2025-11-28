@@ -3,10 +3,8 @@
 import { useState, useEffect } from 'react';
 
 import { stream } from '@/lib/stream';
-import { validateStreamData } from '@/utils/StreamHelpers';
 
-import { SearchUserDataSchema } from '@none/shared';
-import type { SearchQuery, SearchUser } from '@none/shared';
+import type { SearchUser } from '@none/shared';
 
 /**
  * Creates a subscribe on state and sends queryState on websocket 'searchUsers' every state change.
@@ -32,18 +30,12 @@ import type { SearchQuery, SearchUser } from '@none/shared';
 export function useSendSearchQuery(queryState: string) {
     const [users, setUsers] = useState<SearchUser[]>([]);
 
-    const [error, setError] = useState<string | null>(null);
-
     useEffect(() => {
-        stream.send<SearchQuery>('searchUsersQuery', { query: queryState });
+        stream.send('searchUsersQuery', { query: queryState });
     }, [queryState]);
 
     useEffect(() => {
         stream.onmessage('searchUsersResponse', (data) => {
-            if (!validateStreamData(data, SearchUserDataSchema)) {
-                return setError('Server has sent invalid data');
-            }
-
             setUsers(data.users);
         });
 
@@ -52,5 +44,5 @@ export function useSendSearchQuery(queryState: string) {
         };
     }, []);
 
-    return { users, error };
+    return { users };
 }

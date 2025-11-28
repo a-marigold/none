@@ -39,8 +39,6 @@ export default function Chat() {
                 data: message,
             };
 
-            addMessage(chatPublicId, newMessage);
-
             stream.send('newChatMessage', newMessage);
 
             setMessage('');

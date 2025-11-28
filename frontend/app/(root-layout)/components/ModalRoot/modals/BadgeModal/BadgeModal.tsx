@@ -51,7 +51,7 @@ export default function BadgeModal({ ...dropDownProps }: BadgeModalProps) {
         [setReceiver, closeModal]
     );
 
-    const { users, error } = useSendSearchQuery(receiver);
+    const { users } = useSendSearchQuery(receiver);
 
     return (
         <DropDownModal
@@ -96,8 +96,7 @@ export default function BadgeModal({ ...dropDownProps }: BadgeModalProps) {
                     ) : (
                         <div className={modalStyles['empty-list']}>
                             <p className={modalStyles['empty-text']}>
-                                {error ??
-                                    'User with this user name not found abc'}
+                                User with this user name not found
                             </p>
                         </div>
                     )}

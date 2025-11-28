@@ -24,7 +24,7 @@ export function useChatStack() {
 
     const has = useCallback(
         (chatPublicId: string) => {
-            return !!chatStack.find((publicId) => publicId === chatPublicId);
+            return chatStack.includes(chatPublicId);
         },
         [chatStack]
     );

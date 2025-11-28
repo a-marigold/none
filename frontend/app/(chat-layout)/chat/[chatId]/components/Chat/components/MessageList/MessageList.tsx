@@ -7,7 +7,6 @@ import { useAuthStore } from '@/store/AuthStore';
 import { useChatStore } from '@/store/ChatStore';
 
 import { stream } from '@/lib/stream';
-import { validateChatMessage } from '@/utils/StreamHelpers';
 
 import { MessageMine, MessageOther } from './components';
 
@@ -25,7 +24,7 @@ export default function MessageList() {
 
     useEffect(() => {
         stream.onmessage('newChatMessage', (data) => {
-            if (validateChatMessage(data) && chatId) {
+            if (chatId) {
                 addMessage(chatId, data);
             }
         });
