@@ -22,6 +22,7 @@ export default function MessageList() {
     const chatMessages = useChatStore(
         (state) => state.messageMap[chatPublicId || '']
     );
+
     const addMessage = useChatStore((state) => state.addMessage);
 
     const { has, appendChat } = useChatStack();

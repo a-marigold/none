@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import type { Chat, ChatName, Message } from '@none/shared';
-
+// TODO: delete chats state. it is excess memory
 type ChatNames = Pick<ChatName, 'publicId' | 'name' | 'members'>[];
 
 interface ChatStore {
