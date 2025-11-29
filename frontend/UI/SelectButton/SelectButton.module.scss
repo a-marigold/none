@@ -1,0 +1,26 @@
+@use '@/styles/mixins.scss' as *;
+
+.select-button {
+    @include flex-center;
+    gap: 0.25em;
+
+    height: 36px;
+
+    background-color: transparent;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 0 0.75em;
+    box-sizing: border-box;
+
+    font-size: 1rem;
+
+    &:hover {
+        background-color: var(--light-hover-bg-color);
+    }
+}
+
+.title {
+    font-size: var(--m-font-size);
+}
