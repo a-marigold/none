@@ -21,8 +21,8 @@ export type SettingProps = {
 };
 
 const Setting = ({ title, description, buttonOptions }: SettingProps) => {
-    const openMainModal = useModalStore((state) => state.openMainModal);
-    const closeMainModal = useModalStore((state) => state.closeMainModal);
+    const openSubModal = useModalStore((state) => state.openSubModal);
+    const closeSubModal = useModalStore((state) => state.closeSubModal);
 
     return (
         <li className={settingStyles['setting']}>
@@ -32,11 +32,12 @@ const Setting = ({ title, description, buttonOptions }: SettingProps) => {
                 <SelectButton
                     title={buttonOptions.title}
                     onClick={(event) =>
-                        openMainModal(
+                        openSubModal(
                             <DropDownModal
                                 relativeElement={event.currentTarget}
                                 topChildren={buttonOptions.dropDownChildren}
-                                onClose={closeMainModal}
+                                onClose={closeSubModal}
+                                posY='bottom'
                             />
                         )
                     }

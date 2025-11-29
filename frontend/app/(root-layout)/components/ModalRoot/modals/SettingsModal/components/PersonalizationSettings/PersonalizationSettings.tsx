@@ -8,18 +8,18 @@ import SettingsList from '../SettingList';
 import type { SettingProps } from '../SettingList';
 
 export default function PersonalizationSettings() {
-    const personalizationSettingList: SettingProps[] = [
-        {
-            title: 'Theme',
-            buttonOptions: useMemo(
-                () => ({
+    const personalizationSettingList: SettingProps[] = useMemo(
+        () => [
+            {
+                title: 'Theme',
+                buttonOptions: {
                     title: '__CURRENT_THEME__',
                     dropDownChildren: 'hello',
-                }),
-                []
-            ),
-        },
-    ];
+                },
+            },
+        ],
+        []
+    );
 
     return (
         <div className={settingStyles['personalization-setting-content']}>
