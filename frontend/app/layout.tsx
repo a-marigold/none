@@ -6,6 +6,8 @@ import Provider from './provider';
 import StreamRoot from './(root-layout)/components/StreamRoot';
 import AuthRoot from './(root-layout)/components/AuthRoot';
 import HotkeyRunner from '@root-components/HotkeyRunner';
+import ThemeRoot from './(root-layout)/components/ThemeRoot/ThemeRoot';
+
 import SvgSprites from '@/UI/SvgSprites';
 
 import './globals.scss';
@@ -56,6 +58,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
     initialScale: 1,
     maximumScale: 1,
+
     userScalable: false,
 };
 export const runtime = 'nodejs';
@@ -73,6 +76,8 @@ export default async function RootLayout({
             <body>
                 <Provider>
                     <AuthRoot />
+
+                    <ThemeRoot />
 
                     <StreamRoot />
 

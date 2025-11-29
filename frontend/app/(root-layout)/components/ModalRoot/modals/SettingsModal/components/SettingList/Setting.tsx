@@ -1,7 +1,8 @@
 import { memo } from 'react';
-import type { ReactNode } from 'react';
 
 import { useModalStore } from '@/store/ModalStore';
+
+import PrimaryButton, { type PrimaryButtonProps } from '@/UI/PrimaryButton';
 
 import DropDownModal from '@/UI/DropDownModal';
 import SelectButton from '@/UI/SelectButton';
@@ -16,7 +17,7 @@ export type SettingProps = {
     buttonOptions: {
         title: string;
 
-        dropDownChildren: ReactNode;
+        childrenPropList: PrimaryButtonProps[];
     };
 };
 
@@ -35,7 +36,15 @@ const Setting = ({ title, description, buttonOptions }: SettingProps) => {
                         openSubModal(
                             <DropDownModal
                                 relativeElement={event.currentTarget}
-                                topChildren={buttonOptions.dropDownChildren}
+                                topChildren={
+                                    <>
+                                        {buttonOptions.childrenPropList.map(
+                                            (props) => (
+                                                <PrimaryButton {...props} />
+                                            )
+                                        )}
+                                    </>
+                                }
                                 onClose={closeSubModal}
                                 posY='bottom'
                             />

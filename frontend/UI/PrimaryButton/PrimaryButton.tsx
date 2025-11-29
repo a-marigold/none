@@ -2,7 +2,8 @@ import type { ReactNode, ButtonHTMLAttributes } from 'react';
 
 import buttonStyles from './PrimaryButton.module.scss';
 
-interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PrimaryButtonProps
+    extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string;
     subtitle?: string;
 
