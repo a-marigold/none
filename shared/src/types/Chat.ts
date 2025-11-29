@@ -30,8 +30,12 @@ export const ChatSchema = object({
     messageList: array(MessageSchema),
 });
 
+export const ChatNameSchema = ChatSchema.omit({ messageList: true });
+
 export const ChatListSchema = array(ChatSchema);
 
 export type Chat = zinfer<typeof ChatSchema>;
+
+export type ChatName = zinfer<typeof ChatNameSchema>;
 
 export type Message = zinfer<typeof MessageSchema>;

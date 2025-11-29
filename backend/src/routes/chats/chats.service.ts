@@ -2,13 +2,13 @@ import type { PrismaClient } from '@/generated/prisma/client/client';
 
 import { preparePrismaData } from '@/utils/preparePrismaData/preparePrismaData';
 
-import type { Chat, Message } from '@none/shared';
+import type { Chat, ChatName, Message } from '@none/shared';
 
 export async function getChatsByUserName(
     prisma: PrismaClient,
 
     userName: string
-): Promise<Chat[] | undefined> {
+): Promise<ChatName[] | undefined> {
     const user = await prisma.user.findUnique({
         where: { userName },
 
@@ -22,7 +22,6 @@ export async function getChatsByUserName(
                             avatar: true,
                         },
                     },
-                    messageList: true,
                 },
             },
         },

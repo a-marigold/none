@@ -1,7 +1,7 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import { ApiError } from '@none/shared';
-import type { ApiResponse, Chat, Message } from '@none/shared';
+import type { ApiResponse, Chat, ChatName, Message } from '@none/shared';
 
 import { checkUserExistence } from '../auth';
 import {
@@ -10,9 +10,9 @@ import {
     getMessagesByChatPublicId,
 } from './chats.service';
 
-export async function getUserChats(
+export async function getUserChatNames(
     request: FastifyRequest,
-    reply: FastifyReply<{ Reply: ApiResponse | Chat[] }>
+    reply: FastifyReply<{ Reply: ApiResponse | ChatName[] }>
 ) {
     const userName = request.user.userName;
 

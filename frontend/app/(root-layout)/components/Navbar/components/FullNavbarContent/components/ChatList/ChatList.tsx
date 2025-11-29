@@ -32,6 +32,7 @@ export default function ChatList() {
                         members,
                     }))
                 );
+                console.log(chats);
             } catch {
                 setChats([]);
             }

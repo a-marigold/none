@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import type { Chat, Message } from '@none/shared';
+import type { Chat, ChatName, Message } from '@none/shared';
 
 type ChatNames = Pick<Chat, 'publicId' | 'name' | 'members'>[];
 
@@ -11,7 +11,7 @@ interface ChatStore {
 
     chatStack: string[];
 
-    setChats: (newChats: Chat[]) => void;
+    setChats: (newChats: ChatName[]) => void;
 
     addChat: (publicId: string, newChat: Chat) => void;
 
@@ -35,7 +35,10 @@ export const useChatStore = create<ChatStore>()((set) => ({
     setChats: (newChats) =>
         set({
             chats: Object.fromEntries(
-                newChats.map((chat) => [chat.publicId, chat])
+                newChats.map((chat) => [
+                    chat.publicId,
+                    { ...chat, messageList: [] },
+                ])
             ),
         }),
 

@@ -3,12 +3,16 @@ import type { FastifyInstance, RouteHandlerMethod } from 'fastify';
 import {
     ApiResponseSchema,
     ChatSchema,
-    ChatListSchema,
     MessageSchema,
+    ChatNameSchema,
 } from '@none/shared';
 import { array, object, string } from 'zod';
 
-import { createChat, getUserChats, getChatMessages } from './chats.controller';
+import {
+    createChat,
+    getUserChatNames,
+    getChatMessages,
+} from './chats.controller';
 
 export async function chatRoutes(app: FastifyInstance) {
     app.addHook('onRequest', app.auth);
@@ -18,13 +22,13 @@ export async function chatRoutes(app: FastifyInstance) {
         url: '/chats',
         schema: {
             response: {
-                200: ChatListSchema,
+                200: array(ChatNameSchema),
                 404: ApiResponseSchema,
                 500: ApiResponseSchema,
             },
         },
 
-        handler: getUserChats as RouteHandlerMethod,
+        handler: getUserChatNames as RouteHandlerMethod,
     });
 
     app.route({

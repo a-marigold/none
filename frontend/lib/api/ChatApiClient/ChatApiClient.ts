@@ -2,7 +2,7 @@ import { apiOrigin } from '@/utils/GetApiOrigin';
 
 import { handleApiError } from '@/utils/HandleApiError';
 
-import type { Chat, Message } from '@none/shared';
+import type { Chat, ChatName, Message } from '@none/shared';
 
 export async function getChats() {
     const response = await fetch(`${apiOrigin}/chats`, {
@@ -13,7 +13,7 @@ export async function getChats() {
 
     await handleApiError(response);
 
-    const data: Chat[] = await response.json();
+    const data: ChatName[] = await response.json();
 
     return data;
 }
