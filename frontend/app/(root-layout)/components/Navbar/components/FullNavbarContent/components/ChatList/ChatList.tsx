@@ -1,20 +1,18 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import type { MouseEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-
-import { useChatStack } from '@/hooks/useChatStack';
 
 import { useChatStore } from '@/store/ChatStore';
 
-import { getChats, getChatMessages } from '@/lib/api/ChatApiClient';
+import { getChats } from '@/lib/api/ChatApiClient';
 
 import MemoPrimaryLink from '@/UI/PrimaryLink/memo';
 
 import navStyles from './ChatList.module.scss';
 export default function ChatList() {
     const setChats = useChatStore((state) => state.setChats);
+
     const setChatNames = useChatStore((state) => state.setChatNames);
 
     useEffect(() => {
@@ -47,23 +45,6 @@ export default function ChatList() {
     const pathname = usePathname();
 
     const currentChatId = pathname.split('/').filter(Boolean).at(-1);
-
-    const { has, appendChat } = useChatStack();
-
-    const chatLinkHandler = useCallback(
-        async (event: MouseEvent<HTMLAnchorElement>) => {
-            const chatPublicId = event.currentTarget.dataset.chatPublicId;
-
-            if (!chatPublicId) return;
-
-            if (!has(chatPublicId)) {
-                const messages = await getChatMessages(chatPublicId);
-
-                appendChat(chatPublicId, messages);
-            }
-        },
-        [has, appendChat]
-    );
 
     return (
         <div
@@ -105,7 +86,6 @@ export default function ChatList() {
                                 isActive={currentChatId === chat.publicId}
                                 aria-label={`Open ${chat.name} chat`}
                                 data-chat-public-id={chat.publicId}
-                                onClick={chatLinkHandler}
                             />
                         </li>
                     ))}

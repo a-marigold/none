@@ -40,7 +40,7 @@ export async function createChat(chat: Chat) {
 export async function getChatMessages(
     chatPublicId: string,
     cursor?: number,
-    limit: number = 32
+    limit: number = 16
 ) {
     const response = await fetch(
         `${apiOrigin}/chats/${chatPublicId}/messages?${
