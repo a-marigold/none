@@ -20,7 +20,7 @@ export default function MessageList() {
     const userName = useAuthStore((state) => state.user?.userName);
 
     const chatMessages = useChatStore(
-        (state) => state.chats[chatPublicId || '']?.messageList
+        (state) => state.messageMap[chatPublicId || '']
     );
     const addMessage = useChatStore((state) => state.addMessage);
 

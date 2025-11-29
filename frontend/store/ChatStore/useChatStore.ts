@@ -5,14 +5,14 @@ import type { Chat, ChatName, Message } from '@none/shared';
 type ChatNames = Pick<ChatName, 'publicId' | 'name' | 'members'>[];
 
 interface ChatStore {
-    chats: Record<string, Chat>;
+    chats: Record<string, ChatName>;
+    messageMap: Record<string, Chat['messageList']>;
 
     chatNames: ChatNames;
 
     chatStack: string[];
 
     setChats: (newChats: ChatName[]) => void;
-
     addChat: (publicId: string, newChat: Chat) => void;
 
     addMessage: (chatPublicId: string, message: Message) => void;
@@ -28,6 +28,8 @@ interface ChatStore {
 export const useChatStore = create<ChatStore>()((set) => ({
     chats: {},
 
+    messageMap: {},
+
     chatNames: [],
 
     chatStack: [],
@@ -35,10 +37,7 @@ export const useChatStore = create<ChatStore>()((set) => ({
     setChats: (newChats) =>
         set({
             chats: Object.fromEntries(
-                newChats.map((chat) => [
-                    chat.publicId,
-                    { ...chat, messageList: [] },
-                ])
+                newChats.map((chat) => [chat.publicId, chat])
             ),
         }),
 
@@ -47,16 +46,9 @@ export const useChatStore = create<ChatStore>()((set) => ({
 
     addMessage: (chatPublicId, message) =>
         set((state) => ({
-            chats: {
-                ...state.chats,
-
-                [chatPublicId]: {
-                    ...state.chats[chatPublicId],
-                    messageList: [
-                        ...state.chats[chatPublicId].messageList,
-                        message,
-                    ],
-                },
+            messageMap: {
+                ...state.messageMap,
+                [chatPublicId]: [...state.messageMap[chatPublicId], message],
             },
         })),
 
@@ -69,13 +61,9 @@ export const useChatStore = create<ChatStore>()((set) => ({
 
     setChatMessages: (chatPublicId, newMessageList) =>
         set((state) => ({
-            chats: {
-                ...state.chats,
-                [chatPublicId]: {
-                    ...state.chats[chatPublicId],
-
-                    messageList: newMessageList,
-                },
+            messageMap: {
+                ...state.messageMap,
+                [chatPublicId]: newMessageList,
             },
         })),
 
