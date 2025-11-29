@@ -59,11 +59,12 @@ export default function ChatList() {
                 <svg
                     width={12}
                     height={12}
-                    className={`${navStyles['arrow-icon']} ${
-                        !showChatList && navStyles['active']
+                    color='var(--secondary-font-color)'
+                    className={`${navStyles['accordion-icon']} ${
+                        showChatList ? navStyles['active'] : ''
                     }`}
                 >
-                    <use href='#arrow-icon' />
+                    <use href='#accordion-icon' />
                 </svg>
             </div>
 

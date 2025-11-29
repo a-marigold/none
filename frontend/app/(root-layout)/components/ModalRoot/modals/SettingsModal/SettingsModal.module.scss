@@ -63,11 +63,14 @@
 }
 
 .content-head {
-    border-bottom: 1px var(--border-color) solid;
+    @include flex-y-center;
 
-    padding: 0.75em 0;
-    box-sizing: border-box;
+    height: 100%;
+    max-height: 53px;
+
+    border-bottom: 1px var(--border-color) solid;
 }
+
 .content-title {
     @include text-wo-margin(1.125rem);
     line-height: 1.5rem;

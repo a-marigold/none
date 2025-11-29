@@ -1,3 +1,3 @@
-export type { Setting } from './SettingList';
+export type { SettingProps } from './Setting';
 
 export { default } from './SettingList';

@@ -13,7 +13,7 @@ import ModalBackdrop from '@/UI/ModalBackdrop';
 import PrimaryButton from '@/UI/PrimaryButton';
 import LabelledElement from '@/UI/LabelledElement';
 
-import GeneralSettings from './components/GeneralSettings/GeneralSettings';
+import GeneralSettings from './components/PersonalizationSettings/PersonalizationSettings';
 
 import settingStyles from './SettingsModal.module.scss';
 

@@ -11,10 +11,11 @@
     border: none;
     border-radius: 8px;
 
-    padding: 0 0.75em;
+    padding: 0 0.75rem;
+
     box-sizing: border-box;
 
-    font-size: 1rem;
+    cursor: pointer;
 
     &:hover {
         background-color: var(--light-hover-bg-color);
@@ -23,4 +24,5 @@
 
 .title {
     font-size: var(--m-font-size);
+    color: var(--font-color);
 }

@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main, feature/chat-logic ]
+    branches: [ main, feature/settings ]
 
 jobs:
   frontendCI:

@@ -8,7 +8,7 @@
 
     user-select: none;
 
-    &:hover .arrow-icon {
+    &:hover .accordion-icon {
         display: block;
     }
 }
@@ -24,12 +24,13 @@
     color: var(--secondary-font-color);
 }
 
-.arrow-icon {
-    display: none;
-}
-.arrow-icon.active {
+.accordion-icon {
     display: block;
     transform: rotate(-90deg);
+}
+.accordion-icon.active {
+    display: none;
+    transform: rotate(0);
 }
 
 .chat-list {
