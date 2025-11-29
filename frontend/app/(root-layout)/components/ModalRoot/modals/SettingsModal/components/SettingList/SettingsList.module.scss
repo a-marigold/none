@@ -1,0 +1,40 @@
+@use '@/styles/mixins.scss' as *;
+
+.setting-list {
+    margin: 0;
+
+    padding: 0;
+
+    @include flex-column;
+
+    list-style: none;
+}
+
+.setting {
+    @include flex-column;
+
+    justify-content: center;
+
+    min-height: 60px;
+
+    border-top: 1px var(--item-border-color) solid;
+    border-bottom: 1px var(--item-border-color) solid;
+
+    padding: 0.5em 0;
+    box-sizing: border-box;
+}
+
+.setting-head {
+    @include flex-y-center;
+    justify-content: space-between;
+}
+.setting-title {
+    font-size: var(--m-font-size);
+}
+.setting-description {
+    padding: 0.25rem 3rem 0.25rem 0;
+    box-sizing: border-box;
+
+    @include text-wo-margin(0.75rem);
+    color: var(--secondary-font-color);
+}
