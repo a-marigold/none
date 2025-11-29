@@ -56,9 +56,9 @@ export default function LoginForm() {
         }
     }
 
-    const closeModal = useModalStore((state) => state.closeModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
     useEffect(() => {
-        closeModal(); // Needed for close AuthModal that is already opened
+        closeMainModal(); // Needed for close AuthModal that is already opened
     }, []);
 
     return (

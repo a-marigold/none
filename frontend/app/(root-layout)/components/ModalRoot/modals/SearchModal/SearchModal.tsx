@@ -11,14 +11,14 @@ import LabelledElement from '@/UI/LabelledElement';
 
 import searchStyles from './SearchModal.module.scss';
 
-export default function SearchModal({ closeModal }: BasicModalProps) {
+export default function SearchModal({ closeMainModal }: BasicModalProps) {
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
-    const closeModalHotkey = hotkeys.find(
-        (hotkey) => hotkey.name === 'closeModal'
+    const closeMainModalHotkey = hotkeys.find(
+        (hotkey) => hotkey.name === 'closeMainModal'
     )?.key;
 
     return (
-        <ModalBackdrop onClose={closeModal} backdropType='empty'>
+        <ModalBackdrop onClose={closeMainModal} backdropType='empty'>
             <div
                 role='dialog'
                 aria-modal='true'
@@ -34,13 +34,13 @@ export default function SearchModal({ closeModal }: BasicModalProps) {
 
                     <LabelledElement
                         title='Close the search window'
-                        subtitle={closeModalHotkey}
+                        subtitle={closeMainModalHotkey}
                         position='left'
                     >
                         <button
                             className={searchStyles['close-button']}
-                            onClick={closeModal}
-                            aria-label={`Close the search window ${closeModalHotkey}`}
+                            onClick={closeMainModal}
+                            aria-label={`Close the search window ${closeMainModalHotkey}`}
                         >
                             <svg
                                 className={searchStyles['cross-icon']}
@@ -63,7 +63,7 @@ export default function SearchModal({ closeModal }: BasicModalProps) {
                                 <use href='#chat-icon' />
                             </svg>
                         }
-                        onClick={closeModal}
+                        onClick={closeMainModal}
                     />
 
                     <div className={searchStyles['chat-list']}></div>

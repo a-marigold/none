@@ -25,12 +25,12 @@ export default function Chat() {
 
     const setReceiver = useMiniChatStore((state) => state.setReceiver);
 
-    const openModal = useModalStore((state) => state.openModal);
-    const closeModal = useModalStore((state) => state.closeModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
     useEffect(() => {
         if (receiver && textareaRef.current) {
-            openModal(
+            openMainModal(
                 <BadgeModal
                     relativeElement={textareaRef.current}
                     posY='bottom'
@@ -39,7 +39,7 @@ export default function Chat() {
                 />
             );
         } else {
-            closeModal();
+            closeMainModal();
         }
     }, [receiver]);
 

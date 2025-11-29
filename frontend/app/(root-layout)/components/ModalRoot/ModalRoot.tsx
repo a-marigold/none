@@ -10,19 +10,26 @@ import {
 } from '@/utils/LockElementScroll';
 
 export default function ModalRoot() {
-    const currentModal = useModalStore((state) => state.currentModal);
+    const mainModal = useModalStore((state) => state.mainModal);
+
+    const subModal = useModalStore((state) => state.subModal);
 
     useEffect(() => {
-        if (currentModal) {
+        if (mainModal) {
             lockElementScroll(document.body);
         }
 
         return () => {
             unlockElementScroll(document.body);
         };
-    }, [currentModal]);
+    }, [mainModal]);
 
-    if (!currentModal) return null;
+    if (!mainModal) return null;
 
-    return currentModal;
+    return (
+        <>
+            {mainModal}
+            {subModal}
+        </>
+    );
 }

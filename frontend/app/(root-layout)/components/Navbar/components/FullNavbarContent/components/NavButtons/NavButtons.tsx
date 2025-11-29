@@ -11,9 +11,9 @@ import PrimaryButton from '@/UI/PrimaryButton';
 import navStyles from './NavButtons.module.scss';
 
 export default function NavButtons() {
-    const closeModal = useModalStore((state) => state.closeModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
-    const openModal = useModalStore((state) => state.openModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
 
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
     const openNewChatHotkey = hotkeys.find(
@@ -48,7 +48,9 @@ export default function NavButtons() {
                     </svg>
                 }
                 onClick={() =>
-                    openModal(<SearchModal closeModal={closeModal} />)
+                    openMainModal(
+                        <SearchModal closeMainModal={closeMainModal} />
+                    )
                 }
             />
         </div>

@@ -24,11 +24,11 @@ export type ProfileModalProps = Pick<
     BasicModalProps;
 
 export default function ProfileModal({
-    closeModal,
+    closeMainModal,
 
     ...dropDownProps
 }: ProfileModalProps) {
-    const openModal = useModalStore((state) => state.openModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
 
     const userName = useAuthStore((state) => state.user?.userName);
 
@@ -38,7 +38,7 @@ export default function ProfileModal({
     return (
         <DropDownModal
             {...dropDownProps}
-            onClose={closeModal}
+            onClose={closeMainModal}
             topChildren={
                 <>
                     <LabelledElement
@@ -73,8 +73,10 @@ export default function ProfileModal({
                         aria-label='Open settings window'
                         role='menuitem'
                         onClick={() => {
-                            openModal(
-                                <SettingsModal closeModal={closeModal} />
+                            openMainModal(
+                                <SettingsModal
+                                    closeMainModal={closeMainModal}
+                                />
                             );
                         }}
                         icon={

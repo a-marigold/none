@@ -5,16 +5,24 @@ import { create } from 'zustand';
 import type { ReactNode } from 'react';
 
 export interface ModalStore {
-    currentModal: ReactNode | null;
+    mainModal: ReactNode | null;
+    subModal: ReactNode | null;
 
-    openModal: (modalComponent: ReactNode) => void;
+    openMainModal: (modalComponent: ReactNode) => void;
 
-    closeModal: () => void;
+    closeMainModal: () => void;
+
+    openSubModal: (modalComponent: ReactNode) => void;
+    closeSubModal: () => void;
 }
 
 export const useModalStore = create<ModalStore>()((set) => ({
-    currentModal: null,
+    mainModal: null,
+    subModal: null,
 
-    openModal: (modalComponent) => set({ currentModal: modalComponent }),
-    closeModal: () => set({ currentModal: null }),
+    openMainModal: (modalComponent) => set({ mainModal: modalComponent }),
+    closeMainModal: () => set({ mainModal: null }),
+
+    openSubModal: (modalComponent) => set({ subModal: modalComponent }),
+    closeSubModal: () => set({ subModal: null }),
 }));

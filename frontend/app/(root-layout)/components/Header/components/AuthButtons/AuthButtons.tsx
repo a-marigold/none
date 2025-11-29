@@ -35,8 +35,8 @@ const authButtonList: {
 ];
 
 export default function AuthButtons() {
-    const openModal = useModalStore((state) => state.openModal);
-    const closeModal = useModalStore((state) => state.closeModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
     return (
         <div role='group' className={headerStyles['auth-button-group']}>
@@ -48,7 +48,9 @@ export default function AuthButtons() {
                     size={button.size}
                     aria-label={button.ariaLabel}
                     onClick={() =>
-                        openModal(<AuthModal closeModal={closeModal} />)
+                        openMainModal(
+                            <AuthModal closeMainModal={closeMainModal} />
+                        )
                     }
                 />
             ))}

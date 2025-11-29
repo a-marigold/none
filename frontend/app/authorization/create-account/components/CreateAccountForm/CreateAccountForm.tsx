@@ -71,11 +71,11 @@ export default function CreateAccountForm() {
         }
     }
 
-    const closeModal = useModalStore((state) => state.closeModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
     useEffect(() => {
         router.prefetch('/authorization/about-you');
 
-        closeModal(); // Needed for close AuthModal that is already opened
+        closeMainModal(); // Needed for close AuthModal that is already opened
     }, [router]);
 
     return (

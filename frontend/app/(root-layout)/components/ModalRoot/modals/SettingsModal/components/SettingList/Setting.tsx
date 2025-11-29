@@ -20,9 +20,9 @@ export type SettingProps = {
     };
 };
 
-const Setting = memo(({ title, description, buttonOptions }: SettingProps) => {
-    const openModal = useModalStore((state) => state.openModal);
-    const closeModal = useModalStore((state) => state.closeModal);
+const Setting = ({ title, description, buttonOptions }: SettingProps) => {
+    const openMainModal = useModalStore((state) => state.openMainModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
     return (
         <li className={settingStyles['setting']}>
@@ -32,11 +32,11 @@ const Setting = memo(({ title, description, buttonOptions }: SettingProps) => {
                 <SelectButton
                     title={buttonOptions.title}
                     onClick={(event) =>
-                        openModal(
+                        openMainModal(
                             <DropDownModal
                                 relativeElement={event.currentTarget}
                                 topChildren={buttonOptions.dropDownChildren}
-                                onClose={closeModal}
+                                onClose={closeMainModal}
                             />
                         )
                     }
@@ -50,6 +50,6 @@ const Setting = memo(({ title, description, buttonOptions }: SettingProps) => {
             )}
         </li>
     );
-});
+};
 
-export default Setting;
+export default memo(Setting);

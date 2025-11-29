@@ -42,13 +42,13 @@ export default function BadgeModal({ ...dropDownProps }: BadgeModalProps) {
         [chatNames, receiver]
     );
 
-    const closeModal = useModalStore((state) => state.closeModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
     const buttonHandler = useCallback(
         (event: MouseEvent<HTMLButtonElement>) => {
             setReceiver(event.currentTarget.dataset.chatName || '');
-            closeModal();
+            closeMainModal();
         },
-        [setReceiver, closeModal]
+        [setReceiver, closeMainModal]
     );
 
     const { users } = useSendSearchQuery(receiver);
@@ -102,7 +102,7 @@ export default function BadgeModal({ ...dropDownProps }: BadgeModalProps) {
                     )}
                 </div>
             }
-            onClose={closeModal}
+            onClose={closeMainModal}
         />
     );
 }

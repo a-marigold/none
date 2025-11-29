@@ -12,9 +12,9 @@ import LabelledElement from '@/UI/LabelledElement';
 import cutnavStyles from '../CutNavbarContent.module.scss';
 
 export default function CutNavButtons() {
-    const openModal = useModalStore((state) => state.openModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
 
-    const closeModal = useModalStore((state) => state.closeModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
     const openNewChatHotkey = hotkeys.find(
@@ -54,7 +54,9 @@ export default function CutNavButtons() {
                         searchHotkey?.key || 'Ctrl + Shift + K'
                     }`}
                     onClick={() =>
-                        openModal(<SearchModal closeModal={closeModal} />)
+                        openMainModal(
+                            <SearchModal closeMainModal={closeMainModal} />
+                        )
                     }
                 >
                     <svg width={20} height={20} color='var(--font-color)'>

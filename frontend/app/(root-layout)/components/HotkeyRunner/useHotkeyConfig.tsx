@@ -10,8 +10,8 @@ import SearchModal from '@modals/SearchModal';
 import SettingsModal from '@modals/SettingsModal';
 
 export function useHotkeyConfig() {
-    const openModal = useModalStore((state) => state.openModal);
-    const closeModal = useModalStore((state) => state.closeModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
     const router = useRouter();
 
@@ -20,14 +20,16 @@ export function useHotkeyConfig() {
             name: 'search',
             key: 'Ctrl + Shift + K',
             callback: () => {
-                openModal(<SearchModal closeModal={closeModal} />);
+                openMainModal(<SearchModal closeMainModal={closeMainModal} />);
             },
         },
         {
             name: 'settings',
             key: 'Ctrl + Shift + S',
             callback: () => {
-                openModal(<SettingsModal closeModal={closeModal} />);
+                openMainModal(
+                    <SettingsModal closeMainModal={closeMainModal} />
+                );
             },
         },
         {
@@ -38,9 +40,9 @@ export function useHotkeyConfig() {
             },
         },
         {
-            name: 'closeModal',
+            name: 'closeMainModal',
             key: 'Escape',
-            callback: closeModal,
+            callback: closeMainModal,
         },
     ];
 

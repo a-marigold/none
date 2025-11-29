@@ -10,8 +10,8 @@ import Image from 'next/image';
 import navStyles from './ProfileBlock.module.scss';
 
 export default function ProfileBlock() {
-    const openModal = useModalStore((state) => state.openModal);
-    const closeModal = useModalStore((state) => state.closeModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
     const userName = useAuthStore((state) => state.user?.userName);
 
@@ -21,10 +21,10 @@ export default function ProfileBlock() {
                 className={navStyles['profile-button']}
                 aria-label='Open profile'
                 onClick={(event) => {
-                    openModal(
+                    openMainModal(
                         <ProfileModal
                             relativeElement={event.currentTarget}
-                            closeModal={closeModal}
+                            closeMainModal={closeMainModal}
                         />
                     );
                 }}

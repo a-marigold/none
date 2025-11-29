@@ -1,7 +1,7 @@
 type HotkeyName =
     | 'search'
     | 'settings'
-    | 'closeModal'
+    | 'closeMainModal'
     | 'openNewChat'
     | 'sendMessage';
 

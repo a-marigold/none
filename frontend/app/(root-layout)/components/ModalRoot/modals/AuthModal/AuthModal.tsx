@@ -15,7 +15,7 @@ import SecondaryButton from '@/UI/SecondaryButton';
 
 import authStyles from './AuthModal.module.scss';
 
-export default function AuthModal({ closeModal }: BasicModalProps) {
+export default function AuthModal({ closeMainModal }: BasicModalProps) {
     const router = useRouter();
     useEffect(() => {
         router.prefetch('/authorization/log-in');
@@ -37,7 +37,7 @@ export default function AuthModal({ closeModal }: BasicModalProps) {
                 <div className={authStyles['head']}>
                     <button
                         className={authStyles['close-button']}
-                        onClick={closeModal}
+                        onClick={closeMainModal}
                     >
                         <svg width={20} height={20} color='var(--font-color)'>
                             <use href='#cross-icon' />

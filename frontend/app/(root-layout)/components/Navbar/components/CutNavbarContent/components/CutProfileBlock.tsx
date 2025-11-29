@@ -11,9 +11,9 @@ import LabelledElement from '@/UI/LabelledElement';
 import cutnavStyles from '../CutNavbarContent.module.scss';
 
 export default function CutProfileBlock() {
-    const openModal = useModalStore((state) => state.openModal);
+    const openMainModal = useModalStore((state) => state.openMainModal);
 
-    const closeModal = useModalStore((state) => state.closeModal);
+    const closeMainModal = useModalStore((state) => state.closeMainModal);
 
     return (
         <div className={cutnavStyles['profile-block']}>
@@ -22,11 +22,11 @@ export default function CutProfileBlock() {
                     className={`${cutnavStyles['nav-button']} ${cutnavStyles['profile-button']}`}
                     aria-label='Open profile'
                     onClick={(event) =>
-                        openModal(
+                        openMainModal(
                             <ProfileModal
                                 relativeElement={event.currentTarget}
                                 posX='left'
-                                closeModal={closeModal}
+                                closeMainModal={closeMainModal}
                             />
                         )
                     }

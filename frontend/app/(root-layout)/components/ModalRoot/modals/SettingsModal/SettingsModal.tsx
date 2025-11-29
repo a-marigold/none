@@ -45,17 +45,17 @@ const settingButtonList: {
     },
 ];
 
-export default function SettingsModal({ closeModal }: BasicModalProps) {
+export default function SettingsModal({ closeMainModal }: BasicModalProps) {
     const [currentTab, setCurrentTab] = useState<SettingTab>('General');
 
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
 
-    const closeModalHotkey = hotkeys.find(
-        (hotkey) => hotkey.name === 'closeModal'
+    const closeMainModalHotkey = hotkeys.find(
+        (hotkey) => hotkey.name === 'closeMainModal'
     );
 
     return (
-        <ModalBackdrop onClose={closeModal} backdropType='blur'>
+        <ModalBackdrop onClose={closeMainModal} backdropType='blur'>
             <div
                 role='dialog'
                 aria-modal='true'
@@ -66,12 +66,12 @@ export default function SettingsModal({ closeModal }: BasicModalProps) {
                     <LabelledElement
                         title='Close the settings window'
                         position='right'
-                        subtitle={closeModalHotkey?.key}
+                        subtitle={closeMainModalHotkey?.key}
                     >
                         <button
                             className={settingStyles['close-button']}
-                            aria-label={`Close the settings window ${closeModalHotkey?.key}`}
-                            onClick={closeModal}
+                            aria-label={`Close the settings window ${closeMainModalHotkey?.key}`}
+                            onClick={closeMainModal}
                         >
                             <svg
                                 width={20}
