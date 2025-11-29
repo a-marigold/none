@@ -14,6 +14,7 @@ export interface ModalStore {
 
 export const useModalStore = create<ModalStore>()((set) => ({
     currentModal: null,
+
     openModal: (modalComponent) => set({ currentModal: modalComponent }),
     closeModal: () => set({ currentModal: null }),
 }));

@@ -14,7 +14,7 @@ export default function SettingsList({ settingList }: SettingsListProps) {
                     key={index}
                     title={setting.title}
                     description={setting.description}
-                    actionChild={setting.actionChild}
+                    buttonOptions={setting.buttonOptions}
                 />
             ))}
         </ul>

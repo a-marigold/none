@@ -1,24 +1,46 @@
+import { memo } from 'react';
 import type { ReactNode } from 'react';
+
+import { useModalStore } from '@/store/ModalStore';
+
+import DropDownModal from '@/UI/DropDownModal';
+import SelectButton from '@/UI/SelectButton';
 
 import settingStyles from './SettingsList.module.scss';
 
 export type SettingProps = {
     title: string;
+
     description?: string;
 
-    actionChild: ReactNode;
+    buttonOptions: {
+        title: string;
+
+        dropDownChildren: ReactNode;
+    };
 };
-export default function Setting({
-    title,
-    description,
-    actionChild,
-}: SettingProps) {
+
+const Setting = memo(({ title, description, buttonOptions }: SettingProps) => {
+    const openModal = useModalStore((state) => state.openModal);
+    const closeModal = useModalStore((state) => state.closeModal);
+
     return (
         <li className={settingStyles['setting']}>
             <div className={settingStyles['setting-head']}>
                 <span className={settingStyles['setting-title']}>{title}</span>
 
-                {actionChild}
+                <SelectButton
+                    title={buttonOptions.title}
+                    onClick={(event) =>
+                        openModal(
+                            <DropDownModal
+                                relativeElement={event.currentTarget}
+                                topChildren={buttonOptions.dropDownChildren}
+                                onClose={closeModal}
+                            />
+                        )
+                    }
+                />
             </div>
 
             {description && (
@@ -28,4 +50,6 @@ export default function Setting({
             )}
         </li>
     );
-}
+});
+
+export default Setting;

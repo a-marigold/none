@@ -1,21 +1,27 @@
 'use client';
 
-import { useAuthStore } from '@/store/AuthStore';
+import { useMemo } from 'react';
+
+import { useModalStore } from '@/store/ModalStore';
 
 import settingStyles from './PersonalizationSettings.module.scss';
 
 import SettingsList from '../SettingList';
 import type { SettingProps } from '../SettingList';
 
-import SelectButton from '@/UI/SelectButton';
-
 export default function PersonalizationSettings() {
-    const user = useAuthStore((state) => state.user);
+    const openModal = useModalStore((state) => state.openModal);
 
     const personalizationSettingList: SettingProps[] = [
         {
             title: 'Theme',
-            actionChild: <SelectButton title='__current_theme__' />,
+            buttonOptions: useMemo(
+                () => ({
+                    title: '__CURRENT_THEME__',
+                    dropDownChildren: 'penis?',
+                }),
+                []
+            ),
         },
     ];
 
