@@ -69,7 +69,7 @@ export async function getMessagesByChatPublicId(
         where: {
             chat: { members: { some: { userName } }, publicId: chatPublicId },
         },
-        orderBy: { id: 'desc' },
+        orderBy: { id: 'asc' },
         take: limit,
         cursor: cursor
             ? {
