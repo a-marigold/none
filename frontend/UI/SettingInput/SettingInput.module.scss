@@ -1,0 +1,42 @@
+@use '@/styles/mixins.scss' as *;
+
+.input-block {
+    @include flex-column;
+
+    gap: 0.25rem;
+
+    width: 100%;
+
+    border: 1px var(--border-color) solid;
+
+    border-radius: 6px;
+
+    padding: 0.5rem 0.75rem;
+
+    box-sizing: border-box;
+
+    &:focus-visible {
+        outline: 1px var(--font-color) solid;
+    }
+}
+
+.title {
+    font-size: 0.75rem;
+    color: white;
+}
+
+.input {
+    background-color: transparent;
+
+    border: none;
+    outline: none;
+
+    padding: 0;
+
+    color: var(--font-color);
+    font-size: var(--m-font-size);
+
+    &:placeholder-shown {
+        color: var(--secondary-font-color);
+    }
+}
