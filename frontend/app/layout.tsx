@@ -29,11 +29,7 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://none-m.vercel.app'),
 
     icons: {
-        icon: [
-            { url: '/favicon.ico', sizes: 'any' },
-            { url: '/icon0.svg', sizes: 'any' },
-            { url: '/icon1.png', sizes: 'any' },
-        ],
+        icon: [{ url: '/icon0.svg', sizes: 'any' }],
         apple: '/apple-icon.png',
     },
 
@@ -61,7 +57,6 @@ export const viewport: Viewport = {
 
     userScalable: false,
 };
-export const runtime = 'nodejs';
 
 export default async function RootLayout({
     children,
