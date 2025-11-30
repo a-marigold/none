@@ -1,3 +1,7 @@
-import type { Theme } from '@/types/Theme';
+import type { ThemeMap } from '@/types/Theme';
 
-export const themeList: Theme[] = ['None Dark', 'None Light', 'ChatGPT'];
+export const themeMap: ThemeMap = {
+    'None Dark': 'none-dark',
+    'None Light': 'none-light',
+    ChatGPT: 'chatgpt',
+};

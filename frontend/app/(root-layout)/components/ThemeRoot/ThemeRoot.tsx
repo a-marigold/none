@@ -4,16 +4,16 @@ import { useEffect } from 'react';
 
 import { useSettingsStore } from '@/store/SettingsStore';
 
-import { themeList } from '@/constants/themeList';
+import { themeMap } from '@/constants/themeList';
 
 export default function ThemeRoot() {
-    const theme = useSettingsStore((state) => state.theme);
+    const currentTheme = useSettingsStore((state) => state.currentTheme);
 
     useEffect(() => {
-        document.body.classList.remove(...themeList);
+        document.body.classList.remove(...Object.values(themeMap));
 
-        document.body.classList.add(theme);
-    }, [theme]);
+        document.body.classList.add(themeMap[currentTheme]);
+    }, [currentTheme]);
 
     return null;
 }

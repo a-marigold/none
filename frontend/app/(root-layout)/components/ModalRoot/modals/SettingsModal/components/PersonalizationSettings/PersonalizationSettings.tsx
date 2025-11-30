@@ -1,25 +1,13 @@
 'use client';
 
-import { useMemo } from 'react';
+import { usePersonalizationSettingList } from './usePersonalizationSettingList';
+
+import SettingsList from '../SettingList';
 
 import settingStyles from './PersonalizationSettings.module.scss';
 
-import SettingsList from '../SettingList';
-import type { SettingProps } from '../SettingList';
-
 export default function PersonalizationSettings() {
-    const personalizationSettingList: SettingProps[] = useMemo(
-        () => [
-            {
-                title: 'Theme',
-                buttonOptions: {
-                    title: '__CURRENT_THEME__',
-                    dropDownChildren: 'hello',
-                },
-            },
-        ],
-        []
-    );
+    const personalizationSettingList = usePersonalizationSettingList();
 
     return (
         <div className={settingStyles['personalization-setting-content']}>
