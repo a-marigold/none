@@ -73,3 +73,26 @@ export async function loginWithUserName(userName: string, password: string) {
 
     await handleApiError(response);
 }
+
+export async function partlyUpdateAccount(
+    userData:
+        | Pick<SafeUser, 'userName' | 'fullName'>
+        | Pick<SafeUser, 'userName'>
+        | Pick<SafeUser, 'fullName'>
+) {
+    const prepareData = JSON.stringify(userData);
+
+    const response = await fetch(`${apiOrigin}/auth/update`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+
+        body: prepareData,
+    });
+
+    await handleApiError(response);
+
+    return await response.json();
+}
