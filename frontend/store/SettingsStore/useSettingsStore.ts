@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 import type { ThemeName } from '@/types/Theme';
 
@@ -10,12 +11,20 @@ interface SettingsStore {
     setCurrentTheme: (theme: ThemeName) => void;
 }
 
-export const useSettingsStore = create<SettingsStore>()((set) => ({
-    showNavbar: false,
+export const useSettingsStore = create<SettingsStore>()(
+    persist(
+        (set) => ({
+            showNavbar: false,
 
-    setShowNavbar: (value) => set({ showNavbar: value }),
+            setShowNavbar: (value) => set({ showNavbar: value }),
 
-    currentTheme: 'ChatGPT',
+            currentTheme: 'ChatGPT',
 
-    setCurrentTheme: (theme) => set({ currentTheme: theme }),
-}));
+            setCurrentTheme: (theme) => set({ currentTheme: theme }),
+        }),
+        {
+            name: 'settings-store',
+            partialize: (state) => ({ currentTheme: state.currentTheme }),
+        }
+    )
+);

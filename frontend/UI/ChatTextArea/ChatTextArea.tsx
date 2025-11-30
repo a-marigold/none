@@ -52,7 +52,13 @@ export default function ChatTextArea({
         name: 'sendMessage',
         key: 'Enter',
         callback: (event) => {
-            if (!event?.shiftKey && state) {
+            if (!textAreaRef.current) return;
+
+            if (
+                !event?.shiftKey &&
+                state &&
+                textAreaRef.current === document.activeElement
+            ) {
                 sendFunction();
             }
         },
