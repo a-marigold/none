@@ -39,8 +39,11 @@ const Setting = ({ title, description, buttonOptions }: SettingProps) => {
                                 topChildren={
                                     <>
                                         {buttonOptions.childrenPropList.map(
-                                            (props) => (
-                                                <PrimaryButton {...props} />
+                                            (props, index) => (
+                                                <PrimaryButton
+                                                    key={index}
+                                                    {...props}
+                                                />
                                             )
                                         )}
                                     </>
