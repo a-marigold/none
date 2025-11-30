@@ -10,14 +10,17 @@ import type { ThemeName } from '@/types/Theme';
 
 export function usePersonalizationSettingList() {
     const currentTheme = useSettingsStore((state) => state.currentTheme);
+
     const setCurrentTheme = useSettingsStore((state) => state.setCurrentTheme);
 
     return useMemo<SettingProps[]>(
         () => [
             {
                 title: 'Color scheme',
+                description: 'Beta',
                 buttonOptions: {
                     title: currentTheme,
+                    'aria-label': 'Open theme selection modal',
                     childrenPropList: Object.keys(
                         themeMap
                     ).map<PrimaryButtonProps>((theme) => ({

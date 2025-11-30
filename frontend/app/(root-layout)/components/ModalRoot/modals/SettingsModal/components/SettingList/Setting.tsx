@@ -16,6 +16,7 @@ export type SettingProps = {
 
     buttonOptions: {
         title: string;
+        'aria-label': string;
 
         childrenPropList: PrimaryButtonProps[];
     };
@@ -32,6 +33,7 @@ const Setting = ({ title, description, buttonOptions }: SettingProps) => {
 
                 <SelectButton
                     title={buttonOptions.title}
+                    aria-label={buttonOptions['aria-label']}
                     onClick={(event) =>
                         openSubModal(
                             <DropDownModal

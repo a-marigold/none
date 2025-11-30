@@ -13,7 +13,8 @@ import ModalBackdrop from '@/UI/ModalBackdrop';
 import PrimaryButton from '@/UI/PrimaryButton';
 import LabelledElement from '@/UI/LabelledElement';
 
-import GeneralSettings from './components/PersonalizationSettings/PersonalizationSettings';
+import GeneralSettings from './components/PersonalizationSettings';
+import AccountSettings from './components/AccountSettings';
 
 import settingStyles from './SettingsModal.module.scss';
 
@@ -41,7 +42,7 @@ const settingButtonList: {
                 <use href='#profile-icon' />
             </svg>
         ),
-        settingContent: <div>Hello</div>,
+        settingContent: <AccountSettings />,
     },
 ];
 

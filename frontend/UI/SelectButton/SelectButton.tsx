@@ -4,6 +4,7 @@ import buttonStyles from './SelectButton.module.scss';
 
 interface SelectButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string;
+    'aria-label': string;
 }
 
 export default function SelectButton({

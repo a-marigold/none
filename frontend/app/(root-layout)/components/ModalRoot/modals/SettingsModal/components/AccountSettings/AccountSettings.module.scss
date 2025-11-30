@@ -1,0 +1,9 @@
+@use '@/styles/mixins.scss' as *;
+
+.account-settings {
+    @include flex-column;
+    gap: 1.5em;
+}
+
+.image-block {
+}
