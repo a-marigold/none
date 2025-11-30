@@ -132,6 +132,92 @@ body.none-dark {
     --m-font-size: 0.825rem;
 }
 
+body.none-light {
+    /* BACKGROUNDS */
+    --background-color: #ffffff;
+    --tretiary-background-color: #f5f5f5;
+    --foreground-color: #fafafa;
+    --dark-foreground-color: #f0f0f0;
+
+    /* TEXT */
+    --font-color: #000000;
+    --secondary-font-color: #444444;
+
+    /* HOVER */
+    --hover-bg-color: #e5e5e5;
+    --light-hover-bg-color: #eeeeee;
+    --dim-hover-bg-color: #dcdcdc;
+
+    /* SCROLLBAR */
+    --scrollbar-hover-bg-color: #7a7a7a;
+
+    /* ACTIVE STATES */
+    --active-bg-color: #0000000f;
+    --active-btn-bg: #f0f0f0;
+    --active-btn-dim-bg: #e7e7e7;
+
+    /* ACCESS */
+    --access-bg-color: #000000;
+    --access-font-color: #ffffff;
+
+    /* BORDERS */
+    --border-color: #0000001a;
+    --secondary-border-color: #00000026;
+    --light-border-color: #00000012;
+    --dim-secondary-border-color: #e0e0e0;
+    --item-border-color: #d4d4d4;
+
+    /* INPUTS */
+    --input-bg-color: #f4f4f4;
+    --input-box-shadow-color: #0000001c;
+
+    /* ICONS */
+    --icon-color: #2e2e2e;
+
+    /* ERROR */
+    --error-color: #d32f2f;
+
+    /* ACCENT */
+    --outline-color: #3d7eff;
+
+    /* MODAL WINDOWS */
+    --modal-bg-color: #ffffff;
+    --light-modal-bg: #fafafa;
+    --modal-fg-color: #f5f5f5;
+
+    --modal-backdrop-bg: #00000040;
+    --modal-box-shadow-color: #00000033;
+
+    /* CHAT */
+    --message-mine-bg-color: #fafafa;
+
+    --chat-max-width: 700px;
+    --chat-x-padding: 1em;
+
+    /* badge colors (for ChatTextArea UI component) */
+    --badge-purple-bg: #9f5cff18;
+    --badge-purple-font-color: #7c3aed;
+
+    --badge-green-bg: #34d39918;
+    --badge-green-font-color: #059669;
+
+    --badge-orange-bg: #f59e0b18;
+    --badge-orange-font-color: #d97706;
+
+    --badge-blue-bg: #3b82f618;
+    --badge-blue-font-color: #1d4ed8;
+
+    /* general sizes */
+
+    /* prefix "d" means "default" */
+    /* prefix "m" means "medium" */
+    --d-btn-padding: 0.375em 0.625em;
+    --button-border-radius: 3.60282e18px;
+
+    --d-font-size: 1rem;
+    --m-font-size: 0.825rem;
+}
+
 body.chatgpt {
     // prefix "fg" means "foreground"
     --background-color: #212121;
