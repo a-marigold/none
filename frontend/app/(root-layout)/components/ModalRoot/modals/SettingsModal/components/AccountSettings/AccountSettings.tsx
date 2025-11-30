@@ -2,39 +2,75 @@
 
 import { Controller, useForm } from 'react-hook-form';
 
-import { accountInputList } from './accountInputList';
+import { useAuthStore } from '@/store/AuthStore';
 
-import SettingInput, { type SettingInputProps } from '@/UI/SettingInput';
+import Image from 'next/image';
+
+import { accountInputList, type AccountInput } from './accountInputList';
+
+import SettingInput from '@/UI/SettingInput';
 import AccessButton from '@/UI/AccessButton';
 
 import accountStyles from './AccountSettings.module.scss';
 
 export default function AccountSettings() {
-    const { control, handleSubmit } = useForm();
+    const userName = useAuthStore((state) => state.user?.userName);
+    const fullName = useAuthStore((state) => state.user?.fullName);
+    const avatar = useAuthStore((state) => state.user?.avatar);
+
+    const { control, handleSubmit } = useForm<Record<AccountInput, string>>({
+        defaultValues: {
+            'user-name': userName,
+
+            'full-name': fullName,
+        },
+    });
 
     return (
         <div className={accountStyles['account-settings']}>
-            <div className={accountStyles['image-block']}></div>
+            <div className={accountStyles['image-block']}>
+                <Image
+                    src={avatar || '/globe.svg'}
+                    alt='Profile avatar'
+                    width={128}
+                    height={128}
+                />
 
-            <form className={accountStyles['account-form']}>
+                <div className={accountStyles['camera-icon-block']}>
+                    <svg width={18} height={18} color='var(--font-color)'>
+                        <use href='#camera-icon' />
+                    </svg>
+                </div>
+            </div>
+
+            <form
+                onSubmit={handleSubmit(() => alert(''))}
+                className={accountStyles['account-form']}
+            >
                 {accountInputList.map((inputProps) => (
-                    // <Controller control={control}  />
-                    <SettingInput key={inputProps.htmlId} {...inputProps} />
+                    <Controller
+                        name={inputProps.htmlId}
+                        control={control}
+                        render={(fieldControl) => (
+                            <SettingInput
+                                {...inputProps}
+                                key={inputProps.htmlId}
+                                value={fieldControl.field.value}
+                            />
+                        )}
+                    />
                 ))}
+
+                <p className={accountStyles['notice']}>
+                    Your profile helps users recognize you
+                </p>
+
+                <AccessButton
+                    title='Save changes'
+                    aria-label='Save your account changes'
+                    size='small'
+                />
             </form>
-
-            <p className={accountStyles['notice']}>
-                Your profile helps users recognize you
-            </p>
-
-            <AccessButton
-                title='Save changes'
-                aria-label='Save your account changes'
-                size='small'
-                onClick={() => {
-                    alert();
-                }}
-            />
         </div>
     );
 }

@@ -2,9 +2,11 @@ import type { SettingInputProps } from '@/UI/SettingInput';
 
 export type AccountInput = 'user-name' | 'full-name';
 
-export const accountInputList: SettingInputProps[] = [
+export const accountInputList: (SettingInputProps & {
+    htmlId: AccountInput;
+})[] = [
     {
-        htmlId: 'full-name-input',
+        htmlId: 'full-name',
 
         labelTitle: 'Full name',
 
@@ -16,7 +18,7 @@ export const accountInputList: SettingInputProps[] = [
     {
         labelTitle: 'User name',
 
-        htmlId: 'user-name-input',
+        htmlId: 'user-name',
 
         'aria-label': 'Input a new user name',
 
