@@ -41,3 +41,21 @@
 .account-form {
     width: 80%;
 }
+
+.input-group {
+    @include flex-column;
+    gap: 0.5rem;
+}
+
+.notice {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+
+    font-size: 0.75rem;
+    color: var(--secondary-font-color);
+}
+
+.access-button {
+    margin-top: 1rem;
+    width: 100%;
+}

@@ -47,19 +47,21 @@ export default function AccountSettings() {
                 onSubmit={handleSubmit(() => alert(''))}
                 className={accountStyles['account-form']}
             >
-                {accountInputList.map((inputProps) => (
-                    <Controller
-                        name={inputProps.htmlId}
-                        control={control}
-                        render={(fieldControl) => (
-                            <SettingInput
-                                {...inputProps}
-                                key={inputProps.htmlId}
-                                value={fieldControl.field.value}
-                            />
-                        )}
-                    />
-                ))}
+                <div className={accountStyles['input-group']}>
+                    {accountInputList.map((inputProps) => (
+                        <Controller
+                            name={inputProps.htmlId}
+                            control={control}
+                            render={(fieldControl) => (
+                                <SettingInput
+                                    {...inputProps}
+                                    key={inputProps.htmlId}
+                                    value={fieldControl.field.value}
+                                />
+                            )}
+                        />
+                    ))}
+                </div>
 
                 <p className={accountStyles['notice']}>
                     Your profile helps users recognize you
@@ -68,6 +70,7 @@ export default function AccountSettings() {
                 <AccessButton
                     title='Save changes'
                     aria-label='Save your account changes'
+                    className={accountStyles['access-button']}
                     size='small'
                 />
             </form>
