@@ -47,8 +47,92 @@ input:focus-visible {
     outline-offset: -1px;
 }
 
-// &&;
-:root {
+body.none-dark {
+    /* BACKGROUNDS */
+    --background-color: #000000;
+    --tretiary-background-color: #050505;
+    --foreground-color: #0b0b0b;
+    --dark-foreground-color: #000000;
+
+    /* TEXT */
+    --font-color: #ffffff;
+    --secondary-font-color: #b5b5b5;
+
+    /* HOVER /
+    --hover-bg-color: #111111;
+    --light-hover-bg-color: #1a1a1a;
+    --dim-hover-bg-color: #0e0e0e;
+
+    /* SCROLLBAR */
+    --scrollbar-hover-bg-color: #d0d0d0;
+
+    /* ACTIVE STATES /
+    --active-bg-color: #ffffff1a;
+    --active-btn-bg: #0f0f0f;
+    --active-btn-dim-bg: #161616;
+
+    /* ACCESS */
+    --access-bg-color: #ffffff;
+    --access-font-color: #0d0d0d;
+
+    /* BORDERS */
+    --border-color: #ffffff1a;
+    --secondary-border-color: #ffffff26;
+    --light-border-color: #ffffff0f;
+    --dim-secondary-border-color: #141414;
+    --item-border-color: #1b1b1b;
+
+    /* INPUTS */
+    --input-bg-color: #0d0d0d;
+    --input-box-shadow-color: #00000040;
+
+    /* ICONS */
+    --icon-color: #f5f5f5;
+
+    /* ERROR */
+    --error-color: #ff4d4f;
+
+    /* ACCENT */
+    --outline-color: #3d7eff;
+
+    /* MODAL WINDOWS */
+    --modal-bg-color: #050505;
+    --light-modal-bg: #0d0d0d;
+    --modal-fg-color: #000000;
+
+    --modal-backdrop-bg: #000000cc;
+    --modal-box-shadow-color: #00000080;
+
+    // CHST
+    --message-mine-bg-color: #0b0b0b;
+
+    --chat-max-width: 700px;
+    --chat-x-padding: 1em;
+
+    // badge colors (for ChatTextArea UI component)
+    --badge-purple-bg: #9f5cff20;
+    --badge-purple-font-color: #b388ff;
+
+    --badge-green-bg: #34d39920;
+    --badge-green-font-color: #34d399;
+
+    --badge-orange-bg: #f59e0b20;
+    --badge-orange-font-color: #f59e0b;
+
+    --badge-blue-bg: #3b82f620;
+    --badge-blue-font-color: #60a5fa;
+
+    // general sizes
+    // prefix "d" means "default"
+    // prefix "m" means "medium"
+    --d-btn-padding: 0.375em 0.625em;
+    --button-border-radius: 3.60282e18px;
+
+    --d-font-size: 1rem;
+    --m-font-size: 0.825rem;
+}
+
+body.chatgpt {
     // prefix "fg" means "foreground"
     --background-color: #212121;
     --tretiary-background-color: #2f2f2f;
@@ -77,13 +161,17 @@ input:focus-visible {
     --dim-secondary-border-color: #252525;
     --item-border-color: #2c2c2c;
 
+    /* INPUTS */
     --input-bg-color: #303030;
     --input-box-shadow-color: #0000001c;
 
+    /* ICONS */
     --icon-color: #f3f3f3;
 
+    /* ERROR */
     --error-color: #e02e2a;
 
+    /* ACCENT */
     --outline-color: #1a73e8;
 
     // MODAL WINDOWS
