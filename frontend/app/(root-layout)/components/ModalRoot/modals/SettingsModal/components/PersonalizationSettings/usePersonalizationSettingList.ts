@@ -8,14 +8,14 @@ import type { PrimaryButtonProps } from '@/UI/PrimaryButton';
 import { themeMap } from '@/constants/themeList';
 import type { ThemeName } from '@/types/Theme';
 
-export function usePersonalizationSettingList() {
+export function usePersonalizationSettingList(): SettingProps[] {
     const currentTheme = useSettingsStore((state) => state.currentTheme);
 
     const setCurrentTheme = useSettingsStore((state) => state.setCurrentTheme);
 
-    return useMemo<SettingProps[]>(
-        () => [
-            {
+    return [
+        useMemo(
+            () => ({
                 title: 'Color scheme',
                 description: 'Beta',
                 buttonOptions: {
@@ -31,8 +31,8 @@ export function usePersonalizationSettingList() {
                         },
                     })),
                 },
-            },
-        ],
-        []
-    );
+            }),
+            [currentTheme, setCurrentTheme]
+        ),
+    ];
 }
