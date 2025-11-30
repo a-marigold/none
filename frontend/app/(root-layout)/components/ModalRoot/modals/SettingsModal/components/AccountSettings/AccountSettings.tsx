@@ -18,11 +18,13 @@ export default function AccountSettings() {
     const fullName = useAuthStore((state) => state.user?.fullName);
     const avatar = useAuthStore((state) => state.user?.avatar);
 
-    const { control, handleSubmit } = useForm<Record<AccountInput, string>>({
+    const { control, handleSubmit, formState } = useForm<
+        Record<AccountInput, string>
+    >({
         defaultValues: {
-            'user-name': userName,
+            userName,
 
-            'full-name': fullName,
+            fullName,
         },
     });
 
@@ -50,13 +52,18 @@ export default function AccountSettings() {
                 <div className={accountStyles['input-group']}>
                     {accountInputList.map((inputProps) => (
                         <Controller
+                            key={inputProps.htmlId}
                             name={inputProps.htmlId}
                             control={control}
                             render={(fieldControl) => (
                                 <SettingInput
                                     {...inputProps}
-                                    key={inputProps.htmlId}
                                     value={fieldControl.field.value}
+                                    onChange={(event) => {
+                                        fieldControl.field.onChange(
+                                            event.target.value
+                                        );
+                                    }}
                                 />
                             )}
                         />
@@ -72,6 +79,7 @@ export default function AccountSettings() {
                     aria-label='Save your account changes'
                     className={accountStyles['access-button']}
                     size='small'
+                    disabled={formState.isSubmitting}
                 />
             </form>
         </div>
