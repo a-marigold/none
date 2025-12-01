@@ -16,9 +16,13 @@ import PrimaryButton from '@/UI/PrimaryButton';
 import LabelledElement from '@/UI/LabelledElement';
 
 const PersonalizationSettings = dynamic(
-    () => import('./components/PersonalizationSettings')
+    () => import('./components/PersonalizationSettings'),
+    { loading: LoadingBlock }
 );
-const AccountSettings = dynamic(() => import('./components/AccountSettings'));
+const AccountSettings = dynamic(() => import('./components/AccountSettings'), {
+    loading: LoadingBlock,
+});
+import LoadingBlock from './components/LoadingBlock';
 
 import settingStyles from './SettingsModal.module.scss';
 
@@ -51,7 +55,7 @@ const settingButtonList: {
 ];
 const settingComponentsMap: Record<SettingTab, ComponentType> = {
     Personalization: PersonalizationSettings,
-    Account: AccountSettings,
+    Account: LoadingBlock,
 };
 
 export default function SettingsModal({ closeMainModal }: BasicModalProps) {
