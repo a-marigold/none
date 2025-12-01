@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import type { ReactNode } from 'react';
+import type { ComponentType, ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 
 import { useHotkeyStore } from '@/store/HotkeyStore';
 
@@ -10,50 +11,59 @@ import type { BasicModalProps } from '@/types/ModalProps';
 import type { SettingTab } from './SettingsTypes';
 
 import ModalBackdrop from '@/UI/ModalBackdrop';
+
 import PrimaryButton from '@/UI/PrimaryButton';
 import LabelledElement from '@/UI/LabelledElement';
 
-import GeneralSettings from './components/PersonalizationSettings';
-import AccountSettings from './components/AccountSettings';
+const PersonalizationSettings = dynamic(
+    () => import('./components/PersonalizationSettings')
+);
+const AccountSettings = dynamic(() => import('./components/AccountSettings'));
 
 import settingStyles from './SettingsModal.module.scss';
 
 const settingButtonList: {
     name: SettingTab;
     ariaLabel: string;
+
     icon: ReactNode;
-    settingContent: ReactNode;
 }[] = [
     {
-        name: 'General',
+        name: 'Personalization',
         ariaLabel: 'Open the general settings',
+
         icon: (
             <svg width={20} height={20} color='var(--font-color)'>
                 <use href='#gear-icon' />
             </svg>
         ),
-        settingContent: <GeneralSettings />,
     },
     {
         name: 'Account',
         ariaLabel: 'Open the account settings',
+
         icon: (
             <svg width={20} height={20} color='var(--font-color)'>
                 <use href='#profile-icon' />
             </svg>
         ),
-        settingContent: <AccountSettings />,
     },
 ];
+const settingComponentsMap: Record<SettingTab, ComponentType> = {
+    Personalization: PersonalizationSettings,
+    Account: AccountSettings,
+};
 
 export default function SettingsModal({ closeMainModal }: BasicModalProps) {
-    const [currentTab, setCurrentTab] = useState<SettingTab>('General');
+    const [currentTab, setCurrentTab] = useState<SettingTab>('Personalization');
 
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
 
     const closeMainModalHotkey = hotkeys.find(
         (hotkey) => hotkey.name === 'closeMainModal'
     );
+
+    const CurrentSettingComponent = settingComponentsMap[currentTab];
 
     return (
         <ModalBackdrop onClose={closeMainModal} backdropType='blur'>
@@ -111,11 +121,7 @@ export default function SettingsModal({ closeMainModal }: BasicModalProps) {
                         </p>
                     </div>
 
-                    {
-                        settingButtonList.find(
-                            (setting) => setting.name === currentTab
-                        )?.settingContent
-                    }
+                    <CurrentSettingComponent />
                 </div>
             </div>
         </ModalBackdrop>
