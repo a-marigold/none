@@ -1,0 +1,74 @@
+// @use '@/styles/mixins.scss' as *;
+
+// .labelled-wrapper.full {
+//     width: 100%;
+// }
+// .labelled-wrapper.content {
+//     width: max-content;
+// }
+
+// .label {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+
+//     @include flex-y-center;
+//     gap: 0.75em;
+
+//     height: 12px;
+//     background-color: var(--dark-foreground-color);
+
+//     border-radius: 6px;
+
+//     padding: 0.75em 0.5em;
+//     box-sizing: border-box;
+
+//     font-size: 0.8rem;
+//     letter-spacing: -0.75px;
+//     white-space: nowrap;
+
+//     z-index: 1000;
+// }
+
+// .title {
+//     color: var(--font-color);
+// }
+// .subtitle {
+//     color: var(--secondary-font-color);
+//     font-family: var(--font-geist-sans);
+// }
+
+@use '@/styles/mixins.scss' as *;
+
+.label {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    @include flex-y-center;
+
+    gap: 0.75em;
+
+    height: 12px;
+    background-color: var(--dark-foreground-color);
+
+    border-radius: 6px;
+
+    padding: 0.75em 0.5em;
+    box-sizing: border-box;
+
+    font-size: 0.8rem;
+    letter-spacing: -0.75px;
+    white-space: nowrap;
+
+    z-index: 1000;
+}
+
+.title {
+    color: var(--font-color);
+}
+.subtitle {
+    color: var(--secondary-font-color);
+    font-family: var(--font-geist-sans);
+    white-space: nowrap;
+}
