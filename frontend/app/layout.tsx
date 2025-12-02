@@ -7,7 +7,7 @@ import StreamRoot from './(root-layout)/components/StreamRoot';
 import AuthRoot from './(root-layout)/components/AuthRoot';
 import HotkeyRunner from '@root-components/HotkeyRunner';
 import ThemeRoot from './(root-layout)/components/ThemeRoot/ThemeRoot';
-
+import ToolTipRoot from './(root-layout)/components/ToolTipRoot';
 import SvgSprites from '@/UI/SvgSprites';
 
 import './globals.scss';
@@ -74,11 +74,14 @@ export default async function RootLayout({
 
                     <ThemeRoot />
 
+                    <ToolTipRoot />
+
                     <StreamRoot />
 
                     <HotkeyRunner />
 
                     <SvgSprites />
+
                     {children}
                 </Provider>
             </body>
