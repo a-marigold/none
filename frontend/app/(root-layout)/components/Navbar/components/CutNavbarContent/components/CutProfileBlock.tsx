@@ -1,12 +1,12 @@
 'use client';
 
-import Image from 'next/image';
+import { useToolTip } from '@/hooks/useToolTip';
 
 import { useModalStore } from '@/store/ModalStore/useModalStore';
 
-import ProfileModal from '@modals/ProfileModal';
+import Image from 'next/image';
 
-import LabelledElement from '@/UI/LabelledElement';
+import ProfileModal from '@modals/ProfileModal';
 
 import cutnavStyles from '../CutNavbarContent.module.scss';
 
@@ -15,25 +15,33 @@ export default function CutProfileBlock() {
 
     const closeMainModal = useModalStore((state) => state.closeMainModal);
 
+    const toolTip = useToolTip();
+
     return (
         <div className={cutnavStyles['profile-block']}>
-            <LabelledElement title='Open profile' position='right'>
-                <button
-                    className={`${cutnavStyles['nav-button']} ${cutnavStyles['profile-button']}`}
-                    aria-label='Open profile'
-                    onClick={(event) =>
-                        openMainModal(
-                            <ProfileModal
-                                relativeElement={event.currentTarget}
-                                posX='left'
-                                closeMainModal={closeMainModal}
-                            />
-                        )
-                    }
-                >
-                    <Image src={'/globe.svg'} width={24} height={24} alt='' />
-                </button>
-            </LabelledElement>
+            <button
+                className={`${cutnavStyles['nav-button']} ${cutnavStyles['profile-button']}`}
+                aria-label='Open profile'
+                onMouseEnter={(event) => {
+                    toolTip.show({
+                        title: 'Open profile',
+                        relativeElement: event.currentTarget,
+                        position: 'right',
+                    });
+                }}
+                onMouseLeave={toolTip.hide}
+                onClick={(event) => {
+                    openMainModal(
+                        <ProfileModal
+                            relativeElement={event.currentTarget}
+                            posX='left'
+                            closeMainModal={closeMainModal}
+                        />
+                    );
+                }}
+            >
+                <Image src={'/globe.svg'} width={24} height={24} alt='' />
+            </button>
         </div>
     );
 }

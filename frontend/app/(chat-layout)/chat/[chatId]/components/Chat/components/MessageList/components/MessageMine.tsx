@@ -2,11 +2,11 @@
 
 import { useRef } from 'react';
 
+import { useToolTip } from '@/hooks/useToolTip';
+
 import type { MessagePropsType, ToolButtonType } from './MessageTypes';
 
 import { toolButtonHandler } from './toolButtonHandler';
-
-import LabelledElement from '@/UI/LabelledElement';
 
 import messageStyles from './Message.module.scss';
 
@@ -36,6 +36,8 @@ export const toolButtonlist: ToolButtonType[] = [
 export function MessageMine({ children }: MessagePropsType) {
     const messageRef = useRef<HTMLDivElement>(null);
 
+    const toolTip = useToolTip();
+
     return (
         <div
             className={`${messageStyles['message-block']} ${messageStyles['mine']}`}
@@ -46,24 +48,28 @@ export function MessageMine({ children }: MessagePropsType) {
 
             <div className={messageStyles['tool-buttons-block']}>
                 {toolButtonlist.map((button, index) => (
-                    <LabelledElement
+                    <button
                         key={index}
-                        title={button.ariaLabel}
-                        position='bottom'
+                        className={messageStyles['tool-button']}
+                        aria-label={button.ariaLabel}
+                        onMouseEnter={(event) => {
+                            toolTip.show({
+                                title: button.ariaLabel,
+
+                                relativeElement: event.currentTarget,
+                                position: 'bottom',
+                            });
+                        }}
+                        onMouseLeave={toolTip.hide}
+                        onClick={() => {
+                            toolButtonHandler(
+                                button.handler,
+                                messageRef.current
+                            );
+                        }}
                     >
-                        <button
-                            className={messageStyles['tool-button']}
-                            aria-label={button.ariaLabel}
-                            onClick={() => {
-                                toolButtonHandler(
-                                    button.handler,
-                                    messageRef.current
-                                );
-                            }}
-                        >
-                            {button.icon}
-                        </button>
-                    </LabelledElement>
+                        {button.icon}
+                    </button>
                 ))}
             </div>
         </div>

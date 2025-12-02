@@ -89,7 +89,7 @@ import { calculateToolTipPosition } from './calculateToolTipPosition';
 
 import type { LabelPositionType } from './calculateToolTipPosition';
 
-import elementStyles from './LabelledElement.module.scss';
+import elementStyles from './ToolTip.module.scss';
 
 export interface ToolTipProps {
     title: string;
@@ -117,7 +117,11 @@ export default function ToolTip({
     }, [position, title, subtitle]);
 
     return (
-        <div ref={toolTipRef} role='tooltip' className={elementStyles['label']}>
+        <div
+            ref={toolTipRef}
+            role='tooltip'
+            className={elementStyles['tooltip']}
+        >
             <span className={elementStyles['title']}> {title} </span>
 
             {subtitle && (

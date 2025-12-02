@@ -4,6 +4,8 @@ import { useState } from 'react';
 import type { ComponentType, ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 
+import { useToolTip } from '@/hooks/useToolTip';
+
 import { useHotkeyStore } from '@/store/HotkeyStore';
 
 import type { BasicModalProps } from '@/types/ModalProps';
@@ -13,7 +15,6 @@ import type { SettingTab } from './SettingsTypes';
 import ModalBackdrop from '@/UI/ModalBackdrop';
 
 import PrimaryButton from '@/UI/PrimaryButton';
-import LabelledElement from '@/UI/LabelledElement';
 
 const PersonalizationSettings = dynamic(
     () => import('./components/PersonalizationSettings'),
@@ -55,7 +56,7 @@ const settingButtonList: {
 ];
 const settingComponentsMap: Record<SettingTab, ComponentType> = {
     Personalization: PersonalizationSettings,
-    Account: LoadingBlock,
+    Account: AccountSettings,
 };
 
 export default function SettingsModal({ closeMainModal }: BasicModalProps) {
@@ -65,9 +66,11 @@ export default function SettingsModal({ closeMainModal }: BasicModalProps) {
 
     const closeMainModalHotkey = hotkeys.find(
         (hotkey) => hotkey.name === 'closeMainModal'
-    );
+    )?.key;
 
     const CurrentSettingComponent = settingComponentsMap[currentTab];
+
+    const toolTip = useToolTip();
 
     return (
         <ModalBackdrop onClose={closeMainModal} backdropType='blur'>
@@ -78,25 +81,25 @@ export default function SettingsModal({ closeMainModal }: BasicModalProps) {
                 onClick={(event) => event.stopPropagation()}
             >
                 <div className={settingStyles['navbar']}>
-                    <LabelledElement
-                        title='Close the settings window'
-                        position='right'
-                        subtitle={closeMainModalHotkey?.key}
+                    <button
+                        className={settingStyles['close-button']}
+                        aria-label={`Close the settings window ${closeMainModalHotkey}`}
+                        onMouseEnter={(event) => {
+                            toolTip.show({
+                                title: 'Close the settings window',
+                                subtitle: closeMainModalHotkey,
+
+                                relativeElement: event.currentTarget,
+                                position: 'right',
+                            });
+                        }}
+                        onMouseLeave={toolTip.hide}
+                        onClick={closeMainModal}
                     >
-                        <button
-                            className={settingStyles['close-button']}
-                            aria-label={`Close the settings window ${closeMainModalHotkey?.key}`}
-                            onClick={closeMainModal}
-                        >
-                            <svg
-                                width={20}
-                                height={20}
-                                color='var(--font-color)'
-                            >
-                                <use href='#cross-icon' />
-                            </svg>
-                        </button>
-                    </LabelledElement>
+                        <svg width={20} height={20} color='var(--font-color)'>
+                            <use href='#cross-icon' />
+                        </svg>
+                    </button>
 
                     <div className={settingStyles['setting-list']}>
                         {settingButtonList.map((setting) => (

@@ -4,16 +4,21 @@ import { useToolTipStore } from '@/store/ToolTipStore';
 
 import { ToolTipProps } from '@/UI/ToolTip';
 
-export function useToolTip(props: ToolTipProps) {
+// TODO: add docs
+/**
+ *
+ * @returns
+ */
+export function useToolTip() {
     const setProps = useToolTipStore((state) => state.setProps);
 
-    const onMouseEnter = () => {
+    const show = (props: ToolTipProps) => {
         setProps(props);
     };
 
-    const onMouseLeave = () => {
+    const hide = () => {
         setProps(null);
     };
 
-    return { onMouseEnter, onMouseLeave };
+    return { show, hide };
 }

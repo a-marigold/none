@@ -1,5 +1,7 @@
 'use clinet';
 
+import { useToolTip } from '@/hooks/useToolTip';
+
 import { useHotkeyStore } from '@/store/HotkeyStore';
 
 import type { BasicModalProps } from '@/types/ModalProps';
@@ -7,7 +9,6 @@ import type { BasicModalProps } from '@/types/ModalProps';
 import ModalBackdrop from '@/UI/ModalBackdrop';
 
 import LargeLink from '@/UI/LargeLink/LargeLink';
-import LabelledElement from '@/UI/LabelledElement';
 
 import searchStyles from './SearchModal.module.scss';
 
@@ -16,6 +17,8 @@ export default function SearchModal({ closeMainModal }: BasicModalProps) {
     const closeMainModalHotkey = hotkeys.find(
         (hotkey) => hotkey.name === 'closeMainModal'
     )?.key;
+
+    const toolTip = useToolTip();
 
     return (
         <ModalBackdrop onClose={closeMainModal} backdropType='empty'>
@@ -32,25 +35,29 @@ export default function SearchModal({ closeMainModal }: BasicModalProps) {
                         className={searchStyles['search-input']}
                     />
 
-                    <LabelledElement
-                        title='Close the search window'
-                        subtitle={closeMainModalHotkey}
-                        position='left'
+                    <button
+                        className={searchStyles['close-button']}
+                        onMouseEnter={(event) => {
+                            toolTip.show({
+                                title: `Close the search window`,
+                                subtitle: closeMainModalHotkey,
+
+                                relativeElement: event.currentTarget,
+                                position: 'left',
+                            });
+                        }}
+                        onMouseLeave={toolTip.hide}
+                        onClick={closeMainModal}
+                        aria-label={`Close the search window ${closeMainModalHotkey}`}
                     >
-                        <button
-                            className={searchStyles['close-button']}
-                            onClick={closeMainModal}
-                            aria-label={`Close the search window ${closeMainModalHotkey}`}
+                        <svg
+                            className={searchStyles['cross-icon']}
+                            width={20}
+                            height={20}
                         >
-                            <svg
-                                className={searchStyles['cross-icon']}
-                                width={20}
-                                height={20}
-                            >
-                                <use href='#cross-icon' />
-                            </svg>
-                        </button>
-                    </LabelledElement>
+                            <use href='#cross-icon' />
+                        </svg>
+                    </button>
                 </div>
 
                 <div className={searchStyles['chat-box']}>

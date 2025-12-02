@@ -1,5 +1,7 @@
 'use client';
 
+import { useToolTip } from '@/hooks/useToolTip';
+
 import { useSettingsStore } from '@/store/SettingsStore';
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -7,13 +9,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CutNavButtons from './components/CutNavButtons';
 import CutProfileBlock from './components/CutProfileBlock';
 
-import LabelledElement from '@/UI/LabelledElement';
-
 import navStyles from '../../Navbar.module.scss';
 import cutnavStyles from './CutNavbarContent.module.scss';
 
 export default function CutNavbarContent() {
     const setShowNavbar = useSettingsStore((state) => state.setShowNavbar);
+
+    const toolTip = useToolTip();
 
     return (
         <AnimatePresence>
@@ -25,34 +27,38 @@ export default function CutNavbarContent() {
                 className={navStyles['navbar-content']}
             >
                 <div className={cutnavStyles['head']}>
-                    <LabelledElement
-                        title='Open navigation panel'
-                        position='right'
-                    >
-                        <button
-                            className={`${navStyles['sidebar-button']} ${cutnavStyles['sidebar-button']}`}
-                            onClick={() => setShowNavbar(true)}
-                            aria-label='Open navigation panel'
-                        >
-                            <svg
-                                width={20}
-                                height={20}
-                                color='var(--font-color)'
-                                className={cutnavStyles['sidebar-toggle-icon']}
-                            >
-                                <use href='#sidebar-toggle-icon' />
-                            </svg>
+                    <button
+                        className={`${navStyles['sidebar-button']} ${cutnavStyles['sidebar-button']}`}
+                        onMouseEnter={(event) => {
+                            toolTip.show({
+                                title: 'Open navigation panel',
 
-                            <svg
-                                width={17}
-                                height={16}
-                                color='var(--font-color)'
-                                className={cutnavStyles['none-letter-icon']}
-                            >
-                                <use href='#none-letter-icon' />
-                            </svg>
-                        </button>
-                    </LabelledElement>
+                                relativeElement: event.currentTarget,
+                                position: 'right',
+                            });
+                        }}
+                        onMouseLeave={toolTip.hide}
+                        onClick={() => setShowNavbar(true)}
+                        aria-label='Open navigation panel'
+                    >
+                        <svg
+                            width={20}
+                            height={20}
+                            color='var(--font-color)'
+                            className={cutnavStyles['sidebar-toggle-icon']}
+                        >
+                            <use href='#sidebar-toggle-icon' />
+                        </svg>
+
+                        <svg
+                            width={17}
+                            height={16}
+                            color='var(--font-color)'
+                            className={cutnavStyles['none-letter-icon']}
+                        >
+                            <use href='#none-letter-icon' />
+                        </svg>
+                    </button>
 
                     <CutNavButtons />
                 </div>

@@ -2,6 +2,8 @@
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
+import { useToolTip } from '@/hooks/useToolTip';
+
 import { useSettingsStore } from '@/store/SettingsStore';
 
 import Link from 'next/link';
@@ -10,9 +12,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import NavButtons from './components/NavButtons';
 import ChatList from './components/ChatList';
-import ProfileBlock from './components/ProfileBlock';
 
-import LabelledElement from '@/UI/LabelledElement';
+import ProfileBlock from './components/ProfileBlock';
 
 import navStyles from '../../Navbar.module.scss';
 import fullnavStyles from './FullNavbarContent.module.scss';
@@ -21,6 +22,8 @@ export default function FullNavbarContent() {
     const setShowNavbar = useSettingsStore((state) => state.setShowNavbar);
 
     const maxWidthMatches = useMediaQuery('max-width: 600px');
+
+    const toolTip = useToolTip();
 
     return (
         <AnimatePresence>
@@ -46,34 +49,38 @@ export default function FullNavbarContent() {
                             </svg>
                         </Link>
 
-                        <LabelledElement
-                            title='Close navigation panel'
-                            position='right'
+                        <button
+                            className={navStyles['sidebar-button']}
+                            onMouseEnter={(event) => {
+                                toolTip.show({
+                                    title: 'Close navigation panel',
+
+                                    relativeElement: event.currentTarget,
+                                    position: 'right',
+                                });
+                            }}
+                            onMouseLeave={toolTip.hide}
+                            onClick={() => setShowNavbar(false)}
+                            aria-label='Close navigation panel'
                         >
-                            <button
-                                className={navStyles['sidebar-button']}
-                                onClick={() => setShowNavbar(false)}
-                                aria-label='Close navigation panel'
-                            >
-                                {maxWidthMatches ? (
-                                    <svg
-                                        width={20}
-                                        height={20}
-                                        color='var(--secondary-font-color)'
-                                    >
-                                        <use href='#cross-icon' />
-                                    </svg>
-                                ) : (
-                                    <svg
-                                        width={20}
-                                        height={20}
-                                        color='var(--secondary-font-color)'
-                                    >
-                                        <use href='#sidebar-toggle-icon' />
-                                    </svg>
-                                )}
-                            </button>
-                        </LabelledElement>
+                            {maxWidthMatches ? (
+                                <svg
+                                    width={20}
+                                    height={20}
+                                    color='var(--secondary-font-color)'
+                                >
+                                    <use href='#cross-icon' />
+                                </svg>
+                            ) : (
+                                <svg
+                                    width={20}
+                                    height={20}
+                                    color='var(--secondary-font-color)'
+                                >
+                                    <use href='#sidebar-toggle-icon' />
+                                </svg>
+                            )}
+                        </button>
                     </div>
 
                     <NavButtons />

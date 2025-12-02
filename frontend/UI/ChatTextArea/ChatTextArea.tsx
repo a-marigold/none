@@ -3,11 +3,11 @@
 import { useState, useRef } from 'react';
 import type { TextareaHTMLAttributes, RefObject } from 'react';
 
+import { useToolTip } from '@/hooks/useToolTip';
+
 import { useRegisterHotkey } from '@/hooks/useRegisterHotkey';
 
 import { resizeTextarea } from '@/utils/ResizeTextarea';
-
-import LabelledElement from '@/UI/LabelledElement';
 
 import textStyles from './ChatTextArea.module.scss';
 
@@ -66,6 +66,8 @@ export default function ChatTextArea({
 
     const isEmpty = !state.trim();
 
+    const toolTip = useToolTip();
+
     return (
         <div
             ref={containerRef}
@@ -115,7 +117,10 @@ export default function ChatTextArea({
                 )}
 
                 <div className={textStyles['buttons-group']}>
-                    {/* <LabelledElement
+                    {/* 
+                        Here is deprecated LabelledElement, now need to use useToolTip hook! 
+
+                    <LabelledElement
                         title='Enable the microphone'
                         position='top'
                     >
@@ -133,24 +138,28 @@ export default function ChatTextArea({
                         </button>
                     </LabelledElement> */}
 
-                    <LabelledElement
-                        title={
-                            isEmpty ? 'The message is empty' : 'Send message'
-                        }
-                        position='top'
+                    <button
+                        className={textStyles['send-button']}
+                        color='var(--dark-foreground-color)'
+                        disabled={isEmpty}
+                        aria-label='Send message'
+                        onMouseEnter={(event) => {
+                            toolTip.show({
+                                title: isEmpty
+                                    ? 'The message is empty'
+                                    : 'Send message',
+
+                                relativeElement: event.currentTarget,
+                                position: 'top',
+                            });
+                        }}
+                        onMouseLeave={toolTip.hide}
+                        onClick={sendFunction}
                     >
-                        <button
-                            className={textStyles['send-button']}
-                            color='var(--dark-foreground-color)'
-                            disabled={isEmpty}
-                            aria-label='Send message'
-                            onClick={sendFunction}
-                        >
-                            <svg width={20} height={20}>
-                                <use href='#send-arrow-icon' />
-                            </svg>
-                        </button>
-                    </LabelledElement>
+                        <svg width={20} height={20}>
+                            <use href='#send-arrow-icon' />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
