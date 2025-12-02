@@ -42,6 +42,9 @@
         background-color: var(--active-btn-bg);
     }
 }
+.profile-image {
+    border-radius: 50%;
+}
 .name {
     color: var(--font-color);
     font-size: var(--m-font-size);

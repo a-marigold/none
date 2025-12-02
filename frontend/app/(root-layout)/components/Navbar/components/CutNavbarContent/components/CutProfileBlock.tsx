@@ -3,6 +3,7 @@
 import { useToolTip } from '@/hooks/useToolTip';
 
 import { useModalStore } from '@/store/ModalStore/useModalStore';
+import { useAuthStore } from '@/store/AuthStore';
 
 import Image from 'next/image';
 
@@ -12,8 +13,9 @@ import cutnavStyles from '../CutNavbarContent.module.scss';
 
 export default function CutProfileBlock() {
     const openMainModal = useModalStore((state) => state.openMainModal);
-
     const closeMainModal = useModalStore((state) => state.closeMainModal);
+
+    const avatar = useAuthStore((state) => state.user?.avatar);
 
     const toolTip = useToolTip();
 
@@ -40,7 +42,13 @@ export default function CutProfileBlock() {
                     );
                 }}
             >
-                <Image src={'/globe.svg'} width={24} height={24} alt='' />
+                <Image
+                    src={avatar || '/globe.svg'}
+                    width={24}
+                    height={24}
+                    alt=''
+                    className={cutnavStyles['profile-image']}
+                />
             </button>
         </div>
     );
