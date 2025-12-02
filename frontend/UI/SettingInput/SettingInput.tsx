@@ -20,7 +20,7 @@ export default function SettingInput({
     ...attributes
 }: SettingInputProps) {
     return (
-        <div className={`${inputStyles['input-block']} ${className || ''}`}>
+        <div className={`${inputStyles['input-block']} ${className ?? ''}`}>
             <label htmlFor={htmlId} className={inputStyles['title']}>
                 {labelTitle}
             </label>

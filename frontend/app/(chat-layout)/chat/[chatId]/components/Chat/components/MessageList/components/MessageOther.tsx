@@ -61,7 +61,7 @@ export function MessageOther({ children }: MessagePropsType) {
                         key={index}
                         className={messageStyles['tool-button']}
                         aria-label={button.ariaLabel}
-                        onMouseEnter={(event) => {
+                        onPointerEnter={(event) => {
                             toolTip.show({
                                 title: button.ariaLabel,
 
@@ -69,7 +69,7 @@ export function MessageOther({ children }: MessagePropsType) {
                                 position: 'bottom',
                             });
                         }}
-                        onMouseLeave={toolTip.hide}
+                        onPointerLeave={toolTip.hide}
                         onClick={() => {
                             toolButtonHandler(
                                 button.handler,

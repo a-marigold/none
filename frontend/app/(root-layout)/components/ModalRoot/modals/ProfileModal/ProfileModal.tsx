@@ -48,7 +48,7 @@ export default function ProfileModal({
                         title={userName || ''}
                         aria-label='Copy your profile ID'
                         role='menuitem'
-                        onMouseEnter={(event) => {
+                        onPointerEnter={(event) => {
                             toolTip.show({
                                 title: nameCopyFlag
                                     ? 'Copied!'
@@ -58,7 +58,7 @@ export default function ProfileModal({
                                 position: 'top',
                             });
                         }}
-                        onMouseLeave={toolTip.hide}
+                        onPointerLeave={toolTip.hide}
                         onClick={() => {
                             navigator.clipboard.writeText(userName || '');
                             if (!nameCopyFlag) {

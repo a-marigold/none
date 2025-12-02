@@ -35,7 +35,7 @@ export default function CutNavButtons() {
                 prefetch
                 className={cutnavStyles['nav-button']}
                 aria-label={`Open new chat ${openNewChatHotkey}`}
-                onMouseEnter={(event) => {
+                onPointerEnter={(event) => {
                     toolTip.show({
                         title: 'Open new chat',
                         subtitle: openNewChatHotkey,
@@ -44,7 +44,7 @@ export default function CutNavButtons() {
                         position: 'right',
                     });
                 }}
-                onMouseLeave={toolTip.hide}
+                onPointerLeave={toolTip.hide}
             >
                 <svg width={20} height={20} color='var(--font-color)'>
                     <use href='#chat-icon' />
@@ -54,7 +54,7 @@ export default function CutNavButtons() {
             <button
                 className={cutnavStyles['nav-button']}
                 aria-label={`Search ${searchHotkey}`}
-                onMouseEnter={(event) => {
+                onPointerEnter={(event) => {
                     toolTip.show({
                         title: 'Search',
                         subtitle: searchHotkey,
@@ -63,7 +63,7 @@ export default function CutNavButtons() {
                         position: 'right',
                     });
                 }}
-                onMouseLeave={toolTip.hide}
+                onPointerLeave={toolTip.hide}
                 onClick={() =>
                     openMainModal(
                         <SearchModal closeMainModal={closeMainModal} />

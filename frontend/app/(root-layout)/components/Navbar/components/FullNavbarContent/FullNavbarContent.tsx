@@ -51,7 +51,7 @@ export default function FullNavbarContent() {
 
                         <button
                             className={navStyles['sidebar-button']}
-                            onMouseEnter={(event) => {
+                            onPointerEnter={(event) => {
                                 toolTip.show({
                                     title: 'Close navigation panel',
 
@@ -59,7 +59,7 @@ export default function FullNavbarContent() {
                                     position: 'right',
                                 });
                             }}
-                            onMouseLeave={toolTip.hide}
+                            onPointerLeave={toolTip.hide}
                             onClick={() => setShowNavbar(false)}
                             aria-label='Close navigation panel'
                         >

@@ -22,14 +22,14 @@ export default function CutProfileBlock() {
             <button
                 className={`${cutnavStyles['nav-button']} ${cutnavStyles['profile-button']}`}
                 aria-label='Open profile'
-                onMouseEnter={(event) => {
+                onPointerEnter={(event) => {
                     toolTip.show({
                         title: 'Open profile',
                         relativeElement: event.currentTarget,
                         position: 'right',
                     });
                 }}
-                onMouseLeave={toolTip.hide}
+                onPointerLeave={toolTip.hide}
                 onClick={(event) => {
                     openMainModal(
                         <ProfileModal

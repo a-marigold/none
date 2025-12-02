@@ -143,7 +143,7 @@ export default function ChatTextArea({
                         color='var(--dark-foreground-color)'
                         disabled={isEmpty}
                         aria-label='Send message'
-                        onMouseEnter={(event) => {
+                        onPointerEnter={(event) => {
                             toolTip.show({
                                 title: isEmpty
                                     ? 'The message is empty'
@@ -153,7 +153,7 @@ export default function ChatTextArea({
                                 position: 'top',
                             });
                         }}
-                        onMouseLeave={toolTip.hide}
+                        onPointerLeave={toolTip.hide}
                         onClick={sendFunction}
                     >
                         <svg width={20} height={20}>

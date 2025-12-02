@@ -84,7 +84,7 @@ export default function SettingsModal({ closeMainModal }: BasicModalProps) {
                     <button
                         className={settingStyles['close-button']}
                         aria-label={`Close the settings window ${closeMainModalHotkey}`}
-                        onMouseEnter={(event) => {
+                        onPointerEnter={(event) => {
                             toolTip.show({
                                 title: 'Close the settings window',
                                 subtitle: closeMainModalHotkey,
@@ -93,7 +93,7 @@ export default function SettingsModal({ closeMainModal }: BasicModalProps) {
                                 position: 'right',
                             });
                         }}
-                        onMouseLeave={toolTip.hide}
+                        onPointerLeave={toolTip.hide}
                         onClick={closeMainModal}
                     >
                         <svg width={20} height={20} color='var(--font-color)'>

@@ -37,7 +37,7 @@ export default function SearchModal({ closeMainModal }: BasicModalProps) {
 
                     <button
                         className={searchStyles['close-button']}
-                        onMouseEnter={(event) => {
+                        onPointerEnter={(event) => {
                             toolTip.show({
                                 title: `Close the search window`,
                                 subtitle: closeMainModalHotkey,
@@ -46,7 +46,7 @@ export default function SearchModal({ closeMainModal }: BasicModalProps) {
                                 position: 'left',
                             });
                         }}
-                        onMouseLeave={toolTip.hide}
+                        onPointerLeave={toolTip.hide}
                         onClick={closeMainModal}
                         aria-label={`Close the search window ${closeMainModalHotkey}`}
                     >

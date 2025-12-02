@@ -4,11 +4,11 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useAuthStore } from '@/store/AuthStore';
 
-import Image from 'next/image';
-
 import { accountInputList, type AccountInput } from './accountInputList';
 
+import ImageInput from '@/UI/ImageInput';
 import SettingInput from '@/UI/SettingInput';
+
 import AccessButton from '@/UI/AccessButton';
 
 import accountStyles from './AccountSettings.module.scss';
@@ -17,6 +17,8 @@ export default function AccountSettings() {
     const userName = useAuthStore((state) => state.user?.userName);
     const fullName = useAuthStore((state) => state.user?.fullName);
     const avatar = useAuthStore((state) => state.user?.avatar);
+
+    const setUser = useAuthStore((state) => state.setUser);
 
     const { control, handleSubmit, formState } = useForm<
         Record<AccountInput, string>
@@ -30,20 +32,18 @@ export default function AccountSettings() {
 
     return (
         <div className={accountStyles['account-settings']}>
-            <div className={accountStyles['image-block']}>
-                <Image
-                    src={avatar || '/globe.svg'}
-                    alt='Profile avatar'
-                    width={128}
-                    height={128}
-                />
-
-                <div className={accountStyles['camera-icon-block']}>
-                    <svg width={18} height={18} color='var(--font-color)'>
-                        <use href='#camera-icon' />
-                    </svg>
-                </div>
-            </div>
+            <ImageInput
+                src={avatar || '/globe.svg'}
+                alt='Your profile avatar'
+                size={128}
+                onChange={(event) => {
+                    if (event.target.files) {
+                        setUser({
+                            avatar: URL.createObjectURL(event.target.files[0]),
+                        });
+                    }
+                }}
+            />
 
             <form
                 onSubmit={handleSubmit(() => alert(''))}

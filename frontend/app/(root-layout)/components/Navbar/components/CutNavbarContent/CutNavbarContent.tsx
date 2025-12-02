@@ -29,7 +29,7 @@ export default function CutNavbarContent() {
                 <div className={cutnavStyles['head']}>
                     <button
                         className={`${navStyles['sidebar-button']} ${cutnavStyles['sidebar-button']}`}
-                        onMouseEnter={(event) => {
+                        onPointerEnter={(event) => {
                             toolTip.show({
                                 title: 'Open navigation panel',
 
@@ -37,7 +37,7 @@ export default function CutNavbarContent() {
                                 position: 'right',
                             });
                         }}
-                        onMouseLeave={toolTip.hide}
+                        onPointerLeave={toolTip.hide}
                         onClick={() => setShowNavbar(true)}
                         aria-label='Open navigation panel'
                     >

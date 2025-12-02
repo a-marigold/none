@@ -3,12 +3,13 @@ import type { InputHTMLAttributes } from 'react';
 import inputStyles from './ImageInput.module.scss';
 
 interface ImageInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    size?: number;
+    src: string;
     alt: string;
-
-    className: string;
+    size?: number;
 }
 export default function ImageInput({
+    src,
+
     size = 128,
 
     alt,
@@ -20,7 +21,7 @@ export default function ImageInput({
     return (
         <label className={`${inputStyles['image-block']} ${className ?? ''}`}>
             <img
-                src={'/globe.svg'}
+                src={src}
                 className={inputStyles['image']}
                 alt={alt}
                 width={size}

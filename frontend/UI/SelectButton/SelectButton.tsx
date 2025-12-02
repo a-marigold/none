@@ -16,7 +16,7 @@ export default function SelectButton({
     return (
         <button
             {...attributes}
-            className={`${buttonStyles['select-button']} ${className || ''}`}
+            className={`${buttonStyles['select-button']} ${className ?? ''}`}
         >
             <span className={buttonStyles['title']}>{title}</span>
 
