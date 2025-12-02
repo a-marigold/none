@@ -1,0 +1,33 @@
+@use '@/styles/mixins.scss' as *;
+
+.image-block {
+    position: relative;
+
+    @include flex-center;
+
+    cursor: pointer;
+}
+
+.image {
+    border-radius: 50%;
+}
+
+.camera-icon-block {
+    position: absolute;
+    right: 0.25em;
+    bottom: 0.25em;
+
+    @include flex-center;
+
+    width: 28px;
+    height: 28px;
+
+    background-color: var(--background-color);
+
+    border: 1px var(--border-color) solid;
+    border-radius: 50%;
+}
+
+.file-input {
+    display: none;
+}
