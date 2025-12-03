@@ -7,6 +7,7 @@ export interface SettingInputProps
     htmlId: string;
 
     labelTitle: string;
+    isValid: boolean;
 
     'aria-label': string;
 }
@@ -14,13 +15,17 @@ export interface SettingInputProps
 export default function SettingInput({
     htmlId,
     labelTitle,
+    isValid,
 
     className,
 
     ...attributes
 }: SettingInputProps) {
     return (
-        <div className={`${inputStyles['input-block']} ${className ?? ''}`}>
+        <div
+            className={`${inputStyles['input-block']} ${className ?? ''}`}
+            aria-invalid={!isValid}
+        >
             <label htmlFor={htmlId} className={inputStyles['title']}>
                 {labelTitle}
             </label>

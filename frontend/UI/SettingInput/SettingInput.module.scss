@@ -15,8 +15,15 @@
 
     box-sizing: border-box;
 
-    &:focus-visible {
-        outline: 1px var(--font-color) solid;
+    --block-outline-color: var(--font-color);
+
+    &:focus-within {
+        outline: 1px var(--block-outline-color) solid;
+    }
+    &[aria-invalid='true'] {
+        border: 1px var(--error-color) solid;
+
+        --block-outline-color: var(--error-color);
     }
 }
 
