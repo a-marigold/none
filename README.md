@@ -1,4 +1,4 @@
-# None — An experimental messenger
+# None
 
 ![None Banner](assets/banner.png)
 
