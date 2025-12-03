@@ -65,7 +65,7 @@ export default function AccountSettings() {
             setUser({ avatar: updateUser.avatar });
         } catch (error) {
             if (error instanceof ApiError) {
-                alert(error.message); // TODO: temporarily
+                alert(error.message); // TODO: temporary situation
             }
         }
     }
