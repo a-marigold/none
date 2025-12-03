@@ -5,31 +5,30 @@
 The project explores new runtime capabilities.
 
 Every part of the system is designed to be replaceable and understandable. (At least, i hope that is the case)
-
 ## Key differnces
 
 -   **Client**
--   
+
     Although there is react in the project, it focused on speed ant light weight but use react and next js.
     
     Next js App Router.
     
     React Compiler.
 
--   **WebSocket**  
+-   **WebSocket**
+
     Used for searching and chat
 
--   **Architecture**  
-    Features, components, and state logic are separated.
-
 -   **Local launch**
+
     See the [Installation guide](docs/installation.md)
 
 -   **Focus on light weight**
+
     Memory usage is within 40-120mb on tab.
 
 -   **Experimental features**
--    
+
     Bun-based server
     
     React compiler
