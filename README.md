@@ -1,49 +1,19 @@
-# None — An experimental messenger
+## Getting Started
 
-![None Banner](assets/banner.png)
+First, run the development server:
 
-The project explores new runtime capabilities.
+```bash
+npm run dev
 
-Every part of the system is designed to be replaceable and understandable. (At least, i hope that is the case)
+# or
+yarn dev
 
-## Key differnces
+# or
+pnpm dev
 
--   **Client**
+# or
 
-    Although there is react in the project, it focused on speed ant light weight but use react and next js.
+bun dev
+```
 
-    Next js App Router.
-
-    React Compiler.
-
--   **WebSocket**  
-    Used for searching and chat
-
--   **Architecture**  
-    Features, components, and state logic are separated.
-
--   **Local launch**
-    See the [Installation guide](docs/installation.md)
-
--   **Focus on light weight**
-    Memory usage is within 40-120mb on tab.
-
--   **Experimental features**  
-    Bun-based server
-    React compiler
-
-## Documentation
-
--   Project structure: `docs/project-structure.md`
--   Installation guide: `docs/installation.md`
--   Contribution guide: `CONTRIBUTING.md`
-
-## Roadmap
-
--   [x] Core UI and chat layout
--   [ ] Fix messages handling on server
-
--   [ ] Chat list and message list virtualization
--   [ ] Group chats
-
--   [ ] AI in messenger (just a joke)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
