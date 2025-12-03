@@ -4,14 +4,13 @@
 
 The project explores new runtime capabilities.
 
-Try it locally and explore the internals — the architecture is intentionally minimal, transparent, and easy to reason about.
-
 Every part of the system is designed to be replaceable and understandable. (At least, i hope that is the case)
 
 ## Key differnces
 
 -   **Client**
-    Focused on speed ant light weight but use react and next js.
+
+    Although there is react in the project, it focused on speed ant light weight but use react and next js.
 
     Next js App Router.
 
