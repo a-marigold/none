@@ -29,6 +29,7 @@ Every part of the system is designed to be replaceable and understandable. (At l
 
 -   **Experimental features**  
     Bun-based server
+    
     React compiler
 
 ## Documentation
