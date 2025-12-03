@@ -10,7 +10,10 @@ import {
 import fastifyJwt from '@fastify/jwt';
 import fastifyCors from '@fastify/cors';
 import fastifyCookie from '@fastify/cookie';
+
 import fastifyWebsocket from '@fastify/websocket';
+
+import fastifyMultipart from '@fastify/multipart';
 import redisPlugin from './plugins/redis';
 import prismaPlugin from './plugins/prisma';
 import authPlugin from './plugins/auth';
@@ -40,6 +43,8 @@ export function buildApp() {
             signed: false,
         },
     });
+
+    app.register(fastifyMultipart);
     app.register(fastifyWebsocket);
 
     app.register(prismaPlugin);
