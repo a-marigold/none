@@ -1,8 +1,13 @@
 'use client';
 
 import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useAuthStore } from '@/store/AuthStore';
+
+import { ApiError, SafeUserSchema } from '@none/shared';
+
+import { partlyUpdateAccount } from '@/lib/api/AuthApiClient';
 
 import { accountInputList, type AccountInput } from './accountInputList';
 
@@ -13,22 +18,44 @@ import AccessButton from '@/UI/AccessButton';
 
 import accountStyles from './AccountSettings.module.scss';
 
+type AccountFormFields = Record<AccountInput, string>;
+
 export default function AccountSettings() {
     const userName = useAuthStore((state) => state.user?.userName);
     const fullName = useAuthStore((state) => state.user?.fullName);
+
     const avatar = useAuthStore((state) => state.user?.avatar);
 
     const setUser = useAuthStore((state) => state.setUser);
 
-    const { control, handleSubmit, formState } = useForm<
-        Record<AccountInput, string>
-    >({
-        defaultValues: {
-            userName,
+    const { control, handleSubmit, formState, setError } =
+        useForm<AccountFormFields>({
+            resolver: zodResolver(
+                SafeUserSchema.pick({
+                    userName: true,
 
-            fullName,
-        },
-    });
+                    fullName: true,
+                })
+            ),
+
+            defaultValues: {
+                userName,
+
+                fullName,
+            },
+        });
+
+    async function submit(data: AccountFormFields) {
+        try {
+            const updateUser = await partlyUpdateAccount(data);
+
+            setUser(updateUser);
+        } catch (error) {
+            if (error instanceof ApiError) {
+                setError('root', { message: error.message });
+            }
+        }
+    }
 
     return (
         <div className={accountStyles['account-settings']}>
@@ -36,17 +63,11 @@ export default function AccountSettings() {
                 src={avatar || '/globe.svg'}
                 alt='Your profile avatar'
                 size={128}
-                onChange={(event) => {
-                    if (event.target.files) {
-                        setUser({
-                            avatar: URL.createObjectURL(event.target.files[0]),
-                        });
-                    }
-                }}
+                onChange={(event) => {}}
             />
 
             <form
-                onSubmit={handleSubmit(() => alert(''))}
+                onSubmit={handleSubmit(submit)}
                 className={accountStyles['account-form']}
             >
                 <div className={accountStyles['input-group']}>
@@ -58,6 +79,10 @@ export default function AccountSettings() {
                             render={(fieldControl) => (
                                 <SettingInput
                                     {...inputProps}
+                                    isValid={
+                                        !fieldControl.fieldState.error ||
+                                        !fieldControl.formState.errors.root
+                                    }
                                     value={fieldControl.field.value}
                                     onChange={(event) => {
                                         fieldControl.field.onChange(

@@ -13,6 +13,7 @@ export const accountInputList: (SettingInputProps & {
         'aria-label': 'Input a new user name',
 
         autoComplete: 'off',
+        isValid: true,
     },
     {
         htmlId: 'fullName',
@@ -22,5 +23,6 @@ export const accountInputList: (SettingInputProps & {
         'aria-label': 'Input a new full name',
 
         autoComplete: 'off',
+        isValid: true,
     },
 ];

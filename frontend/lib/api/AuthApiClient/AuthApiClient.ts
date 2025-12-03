@@ -34,7 +34,7 @@ export async function register(userData: RegisterData) {
     await handleApiError(response);
 }
 
-export async function clientGetUserData() {
+export async function clientGetUserData(): Promise<SafeUser> {
     const response = await fetch(`${apiOrigin}/auth/me`, {
         method: 'GET',
 
@@ -68,31 +68,44 @@ export async function loginWithUserName(userName: string, password: string) {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
+
         body: prepareUser,
     });
 
     await handleApiError(response);
 }
 
+type UpdateUserData =
+    | Pick<SafeUser, 'userName' | 'fullName'>
+    | Pick<SafeUser, 'userName'>
+    | Pick<SafeUser, 'fullName'>;
 export async function partlyUpdateAccount(
-    userData:
-        | Pick<SafeUser, 'userName' | 'fullName'>
-        | Pick<SafeUser, 'userName'>
-        | Pick<SafeUser, 'fullName'>
-) {
-    const prepareData = JSON.stringify(userData);
+    userData: Pick<SafeUser, 'userName' | 'fullName'>
+): Promise<SafeUser>;
+export async function partlyUpdateAccount(
+    userData: Pick<SafeUser, 'userName'>
+): Promise<SafeUser>;
+export async function partlyUpdateAccount(
+    userData: Pick<SafeUser, 'fullName'>
+): Promise<SafeUser>;
+export async function partlyUpdateAccount(
+    userData: UpdateUserData
+): Promise<SafeUser> {
+    const formData = new FormData();
 
-    const response = await fetch(`${apiOrigin}/auth/update`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+    formData.append('userData', JSON.stringify(userData));
+
+    const response = await fetch(`${apiOrigin}/user/update`, {
+        method: 'PATCH',
+
         credentials: 'include',
 
-        body: prepareData,
+        body: formData,
     });
 
     await handleApiError(response);
 
-    return await response.json();
+    const data: SafeUser = await response.json();
+
+    return data;
 }
