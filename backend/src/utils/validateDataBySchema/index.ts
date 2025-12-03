@@ -1,0 +1,1 @@
+export { validateDataBySchema } from './validateDataBySchema';
