@@ -7,7 +7,7 @@ import { useAuthStore } from '@/store/AuthStore';
 
 import { ApiError, SafeUserSchema } from '@none/shared';
 
-import { partlyUpdateAccount } from '@/lib/api/AuthApiClient';
+import { partlyUpdateAccount, updateUserAvatar } from '@/lib/api/AuthApiClient';
 
 import { accountInputList, type AccountInput } from './accountInputList';
 
@@ -57,13 +57,29 @@ export default function AccountSettings() {
         }
     }
 
+    async function handleUpdateUserAvatar(avatar: File) {
+        try {
+            const updateUser = await updateUserAvatar(avatar);
+
+            setUser({ avatar: updateUser.avatar });
+        } catch (error) {
+            if (error instanceof ApiError) {
+                alert(error.message); // TODO: temporarily
+            }
+        }
+    }
+
     return (
         <div className={accountStyles['account-settings']}>
             <ImageInput
                 src={avatar || '/globe.svg'}
                 alt='Your profile avatar'
                 size={128}
-                onChange={(event) => {}}
+                onChange={(event) => {
+                    if (event.target.files) {
+                        handleUpdateUserAvatar(event.target.files[0]);
+                    }
+                }}
             />
 
             <form
