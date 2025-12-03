@@ -109,3 +109,21 @@ export async function partlyUpdateAccount(
 
     return data;
 }
+
+export async function updateUserAvatar(avatar: File): Promise<SafeUser> {
+    const formData = new FormData();
+
+    formData.append('avatar', avatar);
+
+    const response = await fetch(`${apiOrigin}/user/update`, {
+        method: 'PATCH',
+        credentials: 'include',
+        body: formData,
+    });
+
+    await handleApiError(response);
+
+    const data: SafeUser = await response.json();
+
+    return data;
+}
