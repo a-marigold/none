@@ -8,18 +8,22 @@ import { UpdateUserSchema } from '@none/shared';
 import type { SafeUser, UpdateUser } from '@none/shared';
 
 import { preparePrismaData } from '@/utils/preparePrismaData';
-
 import { validateDataBySchema } from '@/utils/validateDataBySchema';
+import { checkFileSize } from '@/utils/checkFileFunctions';
 
-export async function getUserDataFromParts(
+export async function validateUserDataFromParts(
     parts: FastifyRequest['parts']
-): Promise<(Partial<UpdateUser> & { avatarFile?: MultipartFile }) | never> {
+): Promise<Partial<UpdateUser> & { avatarFile?: MultipartFile }> {
     let avatarFile: MultipartFile | undefined = undefined;
 
     let userData: UpdateUser | undefined = undefined;
 
     for await (const part of parts()) {
         if (part.type === 'file') {
+            if ((await checkFileSize(part)) > 2001) {
+                throw new ApiError('Image size should be max 2mb', 16);
+            }
+
             avatarFile = part;
         } else if (part.type === 'field' && part.fieldname === 'userData') {
             if (!(typeof part.value === 'string')) {
