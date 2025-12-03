@@ -9,6 +9,7 @@ Every part of the system is designed to be replaceable and understandable. (At l
 ## Key differnces
 
 -   **Client**
+-   
     Although there is react in the project, it focused on speed ant light weight but use react and next js.
     
     Next js App Router.
@@ -27,7 +28,8 @@ Every part of the system is designed to be replaceable and understandable. (At l
 -   **Focus on light weight**
     Memory usage is within 40-120mb on tab.
 
--   **Experimental features**  
+-   **Experimental features**
+-    
     Bun-based server
     
     React compiler
