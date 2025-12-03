@@ -52,7 +52,7 @@ export function useSendFunction() {
                 alert(error); // TODO: temporarily
             }
         } else if (!authorized) {
-            // TODO: logic for unauthorized users
+            // TODO: add logic for unauthorized users
         }
     };
 }

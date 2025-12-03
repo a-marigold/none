@@ -5,12 +5,12 @@
     "": {
       "name": "backend",
       "dependencies": {
+        "@none/shared": "../shared/none-shared-2.3.0.tgz",
         "@fastify/cookie": "^11.0.2",
         "@fastify/cors": "^11.1.0",
         "@fastify/jwt": "10.0.0",
         "@fastify/multipart": "^9.3.0",
         "@fastify/websocket": "^11.2.0",
-        "@none/shared": "../shared/none-shared-2.3.0.tgz",
         "@prisma/adapter-pg": "^7.0.0",
         "@prisma/client": "^7.0.0",
         "cloudinary": "^2.8.0",

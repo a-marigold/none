@@ -76,7 +76,7 @@ export default function AccountSettings() {
                 alt='Your profile avatar'
                 size={128}
                 onChange={(event) => {
-                    if (event.target.files) {
+                    if (event.target.files?.length) {
                         handleUpdateUserAvatar(event.target.files[0]);
                     }
                 }}

@@ -1,7 +1,45 @@
+import type { FastifyRequest } from 'fastify';
 import type { PrismaClient } from '@/generated/prisma/client/client';
-import type { SafeUser } from '@none/shared';
+import type { MultipartFile } from '@fastify/multipart';
+
+import { ApiError } from '@none/shared';
+
+import { UpdateUserSchema } from '@none/shared';
+import type { SafeUser, UpdateUser } from '@none/shared';
 
 import { preparePrismaData } from '@/utils/preparePrismaData';
+
+import { validateDataBySchema } from '@/utils/validateDataBySchema';
+
+export async function getUserDataFromParts(
+    parts: FastifyRequest['parts']
+): Promise<(Partial<UpdateUser> & { avatarFile?: MultipartFile }) | never> {
+    let avatarFile: MultipartFile | undefined = undefined;
+
+    let userData: UpdateUser | undefined = undefined;
+
+    for await (const part of parts()) {
+        if (part.type === 'file') {
+            avatarFile = part;
+        } else if (part.type === 'field' && part.fieldname === 'userData') {
+            if (!(typeof part.value === 'string')) {
+                throw new ApiError('Invalid content struct', 409);
+            }
+
+            if (!validateDataBySchema(part.value, UpdateUserSchema)) {
+                throw new ApiError('Invalid user data', 409);
+            }
+
+            userData = part.value;
+        }
+    }
+
+    return {
+        userName: userData?.userName,
+        fullName: userData?.fullName,
+        avatarFile,
+    };
+}
 
 export async function updateUserByUserName(
     prisma: PrismaClient,
