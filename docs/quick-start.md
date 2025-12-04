@@ -35,7 +35,6 @@ import someThing from './component/Counter';
 ### Naming Rules
 
 -   Although React Compiler used in the project, some code parts use manual memoization. It doesn't matter.
--   React components
 -   The `Root` suffix in a react component name means that this component used in any layout, often in root layout.tsx (that is in root of `app` folder). For example, `ModalRoot.tsx`, `ThemeRoot.tsx`.
 -   Only CSS modules for styles. Sometimes, public classes for element with `public` suffix, for example:
 
@@ -49,10 +48,10 @@ import someThing from './component/Counter';
 
 ```bash
 /MyComponent
-├─ components/ # CI/CD pipelines with github actions
-│  ├─ NestedComponent1/
-│  └─ NestedComponent2/
-├─ MyComponent.tsx # CI/CD pipelines with github actions
+├─ components/
+│  ├─ NestedComponent1/ # And there again the component structure
+│  └─ NestedComponent2/ # And there again the component structure
+├─ MyComponent.tsx
 ├─ MyComponent.module.scss
 └─ index.ts # Must have
 ```
