@@ -8,7 +8,7 @@ import { useHotkeys } from '@/hooks/useHotkeys';
 
 import { useHotkeyConfig } from './useHotkeyConfig';
 
-export default function HotkeyRunner() {
+export default function HotkeyRoot() {
     const registerHotkey = useHotkeyStore((state) => state.registerHotkey);
 
     const unregisterHotkey = useHotkeyStore((state) => state.unregisterHotkey);

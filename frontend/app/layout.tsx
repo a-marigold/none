@@ -5,7 +5,7 @@ import Provider from './provider';
 
 import StreamRoot from './(root-layout)/components/StreamRoot';
 import AuthRoot from './(root-layout)/components/AuthRoot';
-import HotkeyRunner from '@root-components/HotkeyRunner';
+import HotkeyRoot from '@/app/(root-layout)/components/HotkeyRoot';
 import ThemeRoot from './(root-layout)/components/ThemeRoot/ThemeRoot';
 import ToolTipRoot from './(root-layout)/components/ToolTipRoot';
 import SvgSprites from '@/UI/SvgSprites';
@@ -77,8 +77,7 @@ export default async function RootLayout({
                     <ToolTipRoot />
 
                     <StreamRoot />
-
-                    <HotkeyRunner />
+                    <HotkeyRoot />
 
                     <SvgSprites />
 

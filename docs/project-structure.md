@@ -1,7 +1,6 @@
 # Project Structure
 
-This document outlines the high-level structure of the **None** messenger project.  
-Both the client (Next.js) and the server (Bun) are organized for clarity, modularity, and scalability.
+This document outlines the high-level structure of the **None** messenger project.
 
 ---
 
@@ -28,6 +27,7 @@ Both the client (Next.js) and the server (Bun) are organized for clarity, modula
 │ ├─ hooks/ # Custom React hooks
 │ ├─ lib/ # Logic like API clients, stream emitters and the like
 │ ├─ store/ # Client storage like zustand (the project uses zustand)
+│ ├─ UI/ # Pure UI components
 │ ├─ public/ # Default folder with static files like images, icons, fonts
 │ ├─ styles/ # Reusable CSS and SCSS like mixins
 │ └─ shared/ # Reusable logic, types, constants

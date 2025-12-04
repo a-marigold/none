@@ -1,11 +1,11 @@
 # Contributing to None
 
-Here are notes for quick start in project.
+Here are notes to quick start in project.
 
 ## Structure
 
-Read [the full project structure](docs/project-structure.md)
+Read [The full Project structure](docs/project-structure.md)
 
-## Quick start. Understanding of conventions, naming.
+## Quick start. Understanding of conventions, naming, code structure.
 
-Read [project differnces](docs/quick-start.md) to understand the architecture, code and naming
+Read [The Project differences](docs/quick-start.md) to understand the architecture, code and naming
