@@ -36,6 +36,7 @@ The project explores new runtime capabilities.
 
 -   Contribution guide: `CONTRIBUTING.md`
 -   Installation guide: `docs/installation.md`
+-   Quick start: `docs/quick-start.md`
 -   Project structure: `docs/project-structure.md`
 
 ## Roadmap

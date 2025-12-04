@@ -19,13 +19,21 @@ A high-level overview of the coding conventions, naming rules, and structural pr
 -   There must not be imports like
 
 ```typescript
-import someThing from './component/Counter/Counter.tsx';
+// Wrong module on Client
+import Counter from './component/Counter/Counter.tsx';
+
+// Wrong module on Server
+import { userRoutes } from './routes/user/userRoutes.ts';
 ```
 
 There must be
 
 ```typescript
-import someThing from './component/Counter';
+// Good and standard module on Client
+import Counter from './component/Counter';
+
+// Good and standart module on Server
+import { userRoutes } from './routes/user';
 ```
 
 ---
@@ -35,6 +43,7 @@ import someThing from './component/Counter';
 ### Naming Rules
 
 -   Although React Compiler used in the project, some code parts use manual memoization. It doesn't matter.
+-   React components must have a name and default export (hardly ever there can be named export)
 -   The `Root` suffix in a react component name means that this component used in any layout, often in root layout.tsx (that is in root of `app` folder). For example, `ModalRoot.tsx`, `ThemeRoot.tsx`.
 -   Only CSS modules for styles. Sometimes, public classes for element with `public` suffix, for example:
 
