@@ -6,6 +6,7 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/a-marigold/none
+
 cd none
 ```
 
@@ -25,9 +26,7 @@ pnpm dev
 <details>
 	<summary>One string in powershell</summary>
 
-    ```bash
     cd frontend; pnpm install; pnpm dev
-    ```
 
 </details>
 
@@ -47,9 +46,7 @@ bun run dev
 <details>
 	<summary>One string in powershell</summary>
 
-    ```bash
     cd backend; bun install; bun run dev
-    ```
 
 </details>
 
@@ -83,7 +80,7 @@ CRON_SECRET='...'
 # JWT secret
 JWT_SECRET='...'
 
-# Port for docker (random value)
+# Port for docker (any value)
 PORT='...'
 
 # Optional flags
