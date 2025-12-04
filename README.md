@@ -2,7 +2,6 @@
 
 ![None Banner](assets/banner.png)
 
-
 The project explores new runtime capabilities.
 
 ## Key differnces
@@ -32,11 +31,15 @@ The project explores new runtime capabilities.
     Bun-based server
 
     React compiler
+
 ## Documentation
--   Project structure: `docs/project-structure.md`
--   Installation guide: `docs/installation.md`
+
 -   Contribution guide: `CONTRIBUTING.md`
+-   Installation guide: `docs/installation.md`
+-   Project structure: `docs/project-structure.md`
+
 ## Roadmap
+
 -   [x] Core UI and chat layout
 -   [ ] Fix messages handling on server
 -   [ ] Chat list and message list virtualization
