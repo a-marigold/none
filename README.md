@@ -5,7 +5,6 @@
 
 The project explores new runtime capabilities.
 
-Every part of the system is designed to be replaceable and understandable. (At least, i hope that is the case)
 ## Key differnces
 
 -   **Client**
