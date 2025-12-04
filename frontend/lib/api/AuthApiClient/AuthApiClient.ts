@@ -95,7 +95,7 @@ export async function partlyUpdateAccount(
 
     formData.append('userData', JSON.stringify(userData));
 
-    const response = await fetch(`${apiOrigin}/user/update`, {
+    const response = await fetch(`${apiOrigin}/user`, {
         method: 'PATCH',
 
         credentials: 'include',
@@ -115,7 +115,7 @@ export async function updateUserAvatar(avatar: File): Promise<SafeUser> {
 
     formData.append('avatar', avatar);
 
-    const response = await fetch(`${apiOrigin}/user/update`, {
+    const response = await fetch(`${apiOrigin}/user`, {
         method: 'PATCH',
         credentials: 'include',
         body: formData,
