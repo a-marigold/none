@@ -63,6 +63,7 @@ export default function CreateAccountForm() {
                     setError('userName', {
                         message: 'Unexcepted server error. Try again',
                     });
+
                     setError('password', {
                         message: 'Unexcepted server error. Try again',
                     });
@@ -72,6 +73,7 @@ export default function CreateAccountForm() {
     }
 
     const closeMainModal = useModalStore((state) => state.closeMainModal);
+
     useEffect(() => {
         router.prefetch('/authorization/about-you');
 

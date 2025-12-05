@@ -1,1 +1,1 @@
-export const homePhrases = ['Who do you want to chat with?', 'Ready to chat.'];
+export const HOME_PHRASE = 'Ready to chat.';

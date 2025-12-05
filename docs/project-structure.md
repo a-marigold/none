@@ -8,6 +8,7 @@ This document outlines the high-level structure of the **None** messenger projec
 
 ```bash
 
+
 /
 ├─ .github/workflows # CI/CD pipelines with github actions
 ├─ backend/ # Server: Fastify, bun

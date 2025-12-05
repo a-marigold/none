@@ -1,14 +1,11 @@
-import { getRandomArrayElement } from '@/utils/GetRandomArrayElement';
-import { homePhrases } from '@/constants/homePhrases';
+import { HOME_PHRASE } from '@/constants/homePhrases';
 
 import questionStyles from './QuestionBlock.module.scss';
 
 export default function QuestionBlock() {
-    const phrase = getRandomArrayElement(homePhrases);
-
     return (
         <div className={questionStyles['question-block']}>
-            <h1 className={questionStyles['title']}>{phrase}</h1>
+            <h1 className={questionStyles['title']}> {HOME_PHRASE} </h1>
         </div>
     );
 }
