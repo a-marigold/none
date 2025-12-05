@@ -5,7 +5,7 @@ import { create } from 'zustand';
 import type { Hotkey } from '@/types/Hotkey';
 
 interface HotkeyStore {
-    hotkeys: Hotkey[];
+    hotkeys: Map<Hotkey['name'], Hotkey>;
 
     registerHotkey: (
         name: Hotkey['name'],
@@ -18,16 +18,24 @@ interface HotkeyStore {
     unregisterHotkey: (name: Hotkey['name']) => void;
 }
 export const useHotkeyStore = create<HotkeyStore>()((set) => ({
-    hotkeys: [],
+    hotkeys: new Map(),
+
     registerHotkey: (name, key, callback) =>
-        set((state) => ({
-            hotkeys: [
-                ...state.hotkeys,
-                { name: name, key: key, callback: callback },
-            ],
-        })),
+        set((state) => {
+            const newHotkeys = new Map(state.hotkeys);
+            newHotkeys.set(name, { name, key, callback });
+
+            return {
+                hotkeys: newHotkeys,
+            };
+        }),
     unregisterHotkey: (name) =>
-        set((state) => ({
-            hotkeys: state.hotkeys.filter((hotkey) => hotkey.name !== name),
-        })),
+        set((state) => {
+            const newHotkeys = new Map(state.hotkeys);
+            newHotkeys.delete(name);
+
+            return {
+                hotkeys: newHotkeys,
+            };
+        }),
 }));

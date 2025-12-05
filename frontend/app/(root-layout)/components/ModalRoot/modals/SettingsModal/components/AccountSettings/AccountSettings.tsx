@@ -23,6 +23,7 @@ type AccountFormFields = Record<AccountInput, string>;
 
 export default function AccountSettings() {
     const userName = useAuthStore((state) => state.user?.userName);
+
     const fullName = useAuthStore((state) => state.user?.fullName);
 
     const avatar = useAuthStore((state) => state.user?.avatar);
