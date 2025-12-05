@@ -8,6 +8,8 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { useSettingsStore } from '@/store/SettingsStore';
 
+import { mediaBreakpoints } from '@/constants/mediaBreakpoints';
+
 import FullNavbarContent from './components/FullNavbarContent';
 import CutNavbarContent from './components/CutNavbarContent';
 
@@ -16,7 +18,9 @@ import navStyles from './Navbar.module.scss';
 export default function Navbar() {
     const showNavbar = useSettingsStore((state) => state.showNavbar);
     const setShowNavbar = useSettingsStore((state) => state.setShowNavbar);
-    const maxWidthMatches = useMediaQuery('max-width: 600px');
+    const maxWidthMatches = useMediaQuery(
+        `max-width: ${mediaBreakpoints.small}px`
+    );
 
     useEffect(() => {
         document.documentElement.classList.toggle(

@@ -1,4 +1,5 @@
 @use '@/styles/mixins.scss' as *;
+@use '@/styles/_variables.scss' as *;
 
 .header {
     display: flex;
@@ -32,7 +33,7 @@
     display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: map-get($media-breakpoints, small)) {
     .open-sidebar-button {
         display: flex;
     }

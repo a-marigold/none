@@ -6,9 +6,11 @@ import { useToolTip } from '@/hooks/useToolTip';
 
 import { useSettingsStore } from '@/store/SettingsStore';
 
-import Link from 'next/link';
+import { mediaBreakpoints } from '@/constants/mediaBreakpoints';
 
 import { AnimatePresence, motion } from 'framer-motion';
+
+import Link from 'next/link';
 
 import NavButtons from './components/NavButtons';
 import ChatList from './components/ChatList';
@@ -21,7 +23,9 @@ import fullnavStyles from './FullNavbarContent.module.scss';
 export default function FullNavbarContent() {
     const setShowNavbar = useSettingsStore((state) => state.setShowNavbar);
 
-    const maxWidthMatches = useMediaQuery('max-width: 600px');
+    const maxWidthMatches = useMediaQuery(
+        `max-width: ${mediaBreakpoints.small}px`
+    );
 
     const toolTip = useToolTip();
 

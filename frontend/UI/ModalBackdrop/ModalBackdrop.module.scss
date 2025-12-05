@@ -1,4 +1,5 @@
 @use '@/styles/mixins.scss' as *;
+@use '@/styles/_variables.scss' as *;
 
 .modal-backdrop {
     position: fixed;
@@ -23,7 +24,7 @@
     }
 }
 
-@media (max-width: 460px) {
+@media (max-width: map-get($media-breakpoints, small)) {
     .modal-backdrop {
         padding: 0;
     }
