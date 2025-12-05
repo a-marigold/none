@@ -9,12 +9,12 @@ import { useState, useEffect } from 'react';
  *
  * @example
  * ```tsx
- *   const isMobile = useMediaQuery('max-width: 1600px');
+ *   const isDesktop = useMediaQuery('max-width: 1600px');
  *
  *   return (
- *     <div>
- *       {isMobile ? 'Mobile view' : 'Desktop view'}
- *     </div>
+ *      <div>
+ *          {isDesktop ? 'Desktop view' : 'Mobile view'}
+ *      </div>
  *   );
  * }
  * ```
