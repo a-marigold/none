@@ -64,3 +64,9 @@ import { userRoutes } from './routes/user';
 ├─ MyComponent.module.scss
 └─ index.ts # Must have
 ```
+
+### Modules and tools that you should know
+
+-   `./styles/_variables.scss` in the root of frontend contains scss variables, for example, _mediaBreakpoints_.
+
+-   `./styles/mixins.scss` in the root of frontend contains reusable scss mixings.
