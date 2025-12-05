@@ -16,18 +16,16 @@ export default function NavButtons() {
     const openMainModal = useModalStore((state) => state.openMainModal);
 
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
-    const openNewChatHotkey = hotkeys.find(
-        (hotkey) => hotkey.name === 'openNewChat'
-    );
+    const openNewChatHotkey = hotkeys.get('openNewChat')?.key;
 
-    const searchHotkey = hotkeys.find((hotkey) => hotkey.name === 'search');
+    const searchHotkey = hotkeys.get('search')?.key;
 
     return (
         <div className={navStyles['nav-buttons-block']}>
             <PrimaryLink
                 href='/'
                 title='New chat'
-                subtitle={openNewChatHotkey?.key || 'Ctrl + Alt + N'}
+                subtitle={openNewChatHotkey || 'Ctrl + Alt + N'}
                 aria-label='Open new chat'
                 prefetch
                 isActive={false}
@@ -40,7 +38,7 @@ export default function NavButtons() {
 
             <PrimaryButton
                 title='Search'
-                subtitle={searchHotkey?.key || 'Ctrl + Shift + K'}
+                subtitle={searchHotkey || 'Ctrl + Shift + K'}
                 aria-label='Search chats'
                 icon={
                     <svg width={20} height={20} color='var(--font-color)'>

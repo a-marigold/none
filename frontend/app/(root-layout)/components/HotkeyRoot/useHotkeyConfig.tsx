@@ -9,7 +9,7 @@ import type { Hotkey } from '@/types/Hotkey';
 import SearchModal from '@modals/SearchModal';
 import SettingsModal from '@modals/SettingsModal';
 
-export function useHotkeyConfig() {
+export function useHotkeyConfig(): Hotkey[] {
     const openMainModal = useModalStore((state) => state.openMainModal);
     const closeMainModal = useModalStore((state) => state.closeMainModal);
 

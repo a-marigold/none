@@ -18,13 +18,13 @@ export default function HotkeyRoot() {
     const config = useHotkeyConfig();
 
     useEffect(() => {
-        config.forEach(({ name, key, callback }) => {
-            registerHotkey(name, key, callback);
+        config.forEach((hotkey) => {
+            registerHotkey(hotkey.name, hotkey.key, hotkey.callback);
         });
 
         return () => {
-            config.forEach(({ name }) => {
-                unregisterHotkey(name);
+            config.forEach((hotkey) => {
+                unregisterHotkey(hotkey.name);
             });
         };
     }, [config]);

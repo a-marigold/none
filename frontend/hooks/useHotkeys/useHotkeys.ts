@@ -36,8 +36,10 @@ function hotkeyMatches(key: string, event: KeyboardEvent) {
 
 /**
  * The function that activate hotkeys and they listeners. Used in Root.
+ *
+ * @returns {void}
  */
-export function useHotkeys() {
+export function useHotkeys(): void {
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
     const hotkeysRef = useRef<typeof hotkeys>(hotkeys);
 
@@ -60,10 +62,4 @@ export function useHotkeys() {
             document.removeEventListener('keydown', listenHotkeys);
         };
     }, []);
-}
-
-export function useHotkeyOperations() {
-    const hotkeys = useHotkeyStore((state) => state.hotkeys);
-
-    const registerHotkey = useHotkeyStore((state) => state.registerHotkey);
 }

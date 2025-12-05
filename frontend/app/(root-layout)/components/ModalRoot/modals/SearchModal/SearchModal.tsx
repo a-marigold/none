@@ -14,9 +14,7 @@ import searchStyles from './SearchModal.module.scss';
 
 export default function SearchModal({ closeMainModal }: BasicModalProps) {
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
-    const closeMainModalHotkey = hotkeys.find(
-        (hotkey) => hotkey.name === 'closeMainModal'
-    )?.key;
+    const closeMainModalHotkey = hotkeys.get('closeMainModal')?.key;
 
     const toolTip = useToolTip();
 
