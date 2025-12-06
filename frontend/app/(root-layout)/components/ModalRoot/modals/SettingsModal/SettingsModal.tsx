@@ -108,7 +108,10 @@ export default function SettingsModal({ closeMainModal }: BasicModalProps) {
                             });
                         }}
                         onPointerLeave={toolTip.hide}
-                        onClick={closeMainModal}
+                        onClick={() => {
+                            closeMainModal();
+                            toolTip.hide();
+                        }}
                     >
                         <svg width={20} height={20} color='var(--font-color)'>
                             <use href='#cross-icon' />

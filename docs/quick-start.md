@@ -16,11 +16,7 @@ A high-level overview of the coding conventions, naming rules, and structural pr
 
 -   Many of nested folders with React components or another entity that exports anything must have an index.ts file for exports.
 
--   There must not be imports like
-
-### General names
-
--   `Auth` means everything about `User` in frontend
+-   There must not be imports like:
 
 ```typescript
 // Wrong module on Client
@@ -30,7 +26,7 @@ import Counter from './component/Counter/Counter.tsx';
 import { userRoutes } from './routes/user/userRoutes.ts';
 ```
 
-There must be
+There must be:
 
 ```typescript
 // Good and standard module on Client
@@ -39,6 +35,10 @@ import Counter from './component/Counter';
 // Good and standart module on Server
 import { userRoutes } from './routes/user';
 ```
+
+### General names
+
+-   `Auth` means everything about `User` in frontend
 
 ---
 
@@ -49,11 +49,6 @@ import { userRoutes } from './routes/user';
 -   Although React Compiler used in the project, some code parts use manual memoization. It doesn't matter.
 -   React components must have a name and default export (hardly ever there can be named export)
 -   The `Root` suffix in a react component name means that this component used in any layout, often in root layout.tsx (that is in root of `app` folder). For example, `ModalRoot.tsx`, `ThemeRoot.tsx`.
--   Only CSS modules for styles. Sometimes, public classes for element with `public` suffix, for example:
-
-```tsx
-<div className={`${componentStyles['my-div']} my-div-public`}>Text</div>
-```
 
 -   If a component folder has more than **two** components inside, the nested components must be in a `components` folder.
 
@@ -71,6 +66,18 @@ import { userRoutes } from './routes/user';
 
 ### Modules and tools that you should know
 
+-   Only CSS modules for styles. Sometimes, public classes for element with `public` suffix, for example:
+
+```tsx
+<div className={`${componentStyles['my-div']} my-div-public`}>Text</div>
+```
+
+-   General CSS variables in `globals.scss`.
+
 -   `./styles/_variables.scss` in the root of frontend contains scss variables, for example, _mediaBreakpoints_.
 
 -   `./styles/mixins.scss` in the root of frontend contains reusable scss mixings.
+
+```
+
+```

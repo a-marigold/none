@@ -64,7 +64,10 @@ export default function FullNavbarContent() {
                                 });
                             }}
                             onPointerLeave={toolTip.hide}
-                            onClick={() => setShowNavbar(false)}
+                            onClick={() => {
+                                setShowNavbar(false);
+                                toolTip.hide();
+                            }}
                             aria-label='Close navigation panel'
                         >
                             {maxWidthMatches ? (

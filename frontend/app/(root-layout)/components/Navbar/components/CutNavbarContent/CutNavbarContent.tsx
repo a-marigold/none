@@ -38,7 +38,10 @@ export default function CutNavbarContent() {
                             });
                         }}
                         onPointerLeave={toolTip.hide}
-                        onClick={() => setShowNavbar(true)}
+                        onClick={() => {
+                            setShowNavbar(true);
+                            toolTip.hide();
+                        }}
                         aria-label='Open navigation panel'
                     >
                         <svg
