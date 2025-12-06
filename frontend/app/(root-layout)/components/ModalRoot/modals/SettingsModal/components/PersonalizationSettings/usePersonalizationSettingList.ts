@@ -26,6 +26,9 @@ export function usePersonalizationSettingList(): SettingProps[] {
                     ).map<PrimaryButtonProps>((theme) => ({
                         title: theme,
                         'aria-label': `Change theme to ${theme}`,
+
+                        isActive: theme === currentTheme,
+
                         onClick: () => {
                             setCurrentTheme(theme as ThemeName);
                         },

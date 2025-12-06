@@ -6,15 +6,17 @@ export interface PrimaryButtonProps
     extends ButtonHTMLAttributes<HTMLButtonElement> {
     title: string;
     subtitle?: string;
-
     'aria-label': string;
+
+    isActive?: boolean;
 
     icon?: ReactNode;
 }
 export default function PrimaryButton({
     title,
-
     subtitle,
+
+    isActive = false,
 
     icon,
 
@@ -25,7 +27,9 @@ export default function PrimaryButton({
     return (
         <button
             {...attributes}
-            className={`${buttonStyles['primary-button']} ${className ?? ''}`}
+            className={`${buttonStyles['primary-button']} ${className ?? ''} ${
+                isActive ? buttonStyles['active'] : ''
+            }`}
         >
             <span className={buttonStyles['title-block']}>
                 {icon}

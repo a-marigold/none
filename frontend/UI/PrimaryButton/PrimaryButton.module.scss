@@ -28,7 +28,8 @@
         }
     }
 
-    &:active {
+    &:active,
+    &.active {
         background-color: var(--active-btn-bg);
     }
     &:disabled {
