@@ -19,15 +19,18 @@
  *
  * ```
  */
-export function cleanString(symbol: string, string: string) {
-    const words = string.split(' ').filter(Boolean);
+
+export function cleanString(symbol: string, string: string): string {
+    const words = string.split(' ');
 
     if (words[0].startsWith(symbol)) {
-        words[0] = '';
-        return words.filter(Boolean).join('');
+        return words.slice(1).filter(Boolean).join(' ');
     } else if (words[words.length - 1].startsWith(symbol)) {
-        words[words.length - 1] = '';
-        return words.filter(Boolean).join('');
+        return words
+            .slice(0, words.length - 1)
+            .filter(Boolean)
+            .join(' ');
     }
+
     return string;
 }
