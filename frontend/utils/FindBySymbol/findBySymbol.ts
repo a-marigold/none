@@ -5,6 +5,8 @@
  *
  * @returns First or last word with symbol found in string. Finds word that starts with symbol.
  *
+ * **Can return _undefined_**
+ *
  * @example
  * ```typescript
  * findBySymbol('$aword Lorem ipsum dolor $lastword', '$') // Output: `@aword`
@@ -16,7 +18,7 @@ export function findBySymbol(
     string: string,
     symbol: string,
     minWordLength: number = 0
-) {
+): string | undefined {
     const firstWord = string.split(' ').filter(Boolean)[0];
 
     const lastWord = string.split(' ').filter(Boolean).at(-1);
