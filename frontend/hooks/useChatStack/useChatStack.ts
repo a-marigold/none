@@ -1,16 +1,18 @@
 // TODO: Add external chat length (in settings)
 
 import { useCallback } from 'react';
+import { useSettingsStore } from '@/store/SettingsStore';
 
 import { useChatStore } from '@/store/ChatStore';
 
 import type { Message } from '@none/shared';
 
 export function useChatStack() {
+    const chatStackLength = useSettingsStore((state) => state.chatStackLength);
+
     const chatStack = useChatStore((state) => state.chatStack);
 
     const addChatToStack = useChatStore((state) => state.addChatToStack);
-
     const deleteChatFromStack = useChatStore(
         (state) => state.deleteChatFromStack
     );
@@ -33,7 +35,7 @@ export function useChatStack() {
         (chatPublicId: string, chatMessages: Message[]) => {
             if (has(chatPublicId)) return;
 
-            if (chatStack.length === 3) {
+            if (chatStack.length >= chatStackLength) {
                 _deleteFirstChat();
             }
 
@@ -44,8 +46,10 @@ export function useChatStack() {
             has,
             addChatToStack,
             setChatMessages,
+
             _deleteFirstChat,
             chatStack.length,
+            chatStackLength,
         ]
     );
 
