@@ -21,13 +21,14 @@
  */
 
 export function cleanString(symbol: string, string: string): string {
-    const words = string.split(' ');
+    const words = string.trim().split(' ');
 
     if (words[0].startsWith(symbol)) {
         return words.slice(1).filter(Boolean).join(' ');
     } else if (words[words.length - 1].startsWith(symbol)) {
         return words
             .slice(0, words.length - 1)
+
             .filter(Boolean)
             .join(' ');
     }
