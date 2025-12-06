@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ['main', 'feature/settings']
+    branches: ['main', 'feature/testing']
 
 jobs:
   frontendCI:
@@ -30,6 +30,9 @@ jobs:
       working-directory: ./frontend
       run: npm run lint
 
+    - name: Run tests
+      working-directory: ./frontend
+      run: npm run test
     - name: Build
 
       working-directory: ./frontend

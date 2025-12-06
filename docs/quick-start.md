@@ -20,6 +20,7 @@ A high-level overview of the coding conventions, naming rules, and structural pr
 
 ```typescript
 // Wrong module on Client
+
 import Counter from './component/Counter/Counter.tsx';
 
 // Wrong module on Server
@@ -47,7 +48,9 @@ import { userRoutes } from './routes/user';
 ### Naming Rules
 
 -   Although React Compiler used in the project, some code parts use manual memoization. It doesn't matter.
+
 -   React components must have a name and default export (hardly ever there can be named export)
+
 -   The `Root` suffix in a react component name means that this component used in any layout, often in root layout.tsx (that is in root of `app` folder). For example, `ModalRoot.tsx`, `ThemeRoot.tsx`.
 
 -   If a component folder has more than **two** components inside, the nested components must be in a `components` folder.
