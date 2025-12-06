@@ -13,7 +13,6 @@ export default function ControlSettings() {
     return (
         <div className={controlStyles['control-settings']}>
             <HotkeyList />
-
             <SettingsList settingList={controlSettingList} />
         </div>
     );

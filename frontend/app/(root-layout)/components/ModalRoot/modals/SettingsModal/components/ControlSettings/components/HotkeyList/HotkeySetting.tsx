@@ -18,11 +18,12 @@ export default function HotkeySetting({
     return (
         <li className={hotkeyStyles['hotkey-setting']}>
             <span className={hotkeyStyles['setting-title']}>{title}</span>
-
             <input
                 type='text'
+                placeholder='Input a shortcut'
                 className={hotkeyStyles['setting-input']}
                 defaultValue={hotkeyKey}
+                aria-label={`Input a hotkeys for ${title}`}
                 onBlur={onBlur}
             />
         </li>

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import type { InputHTMLAttributes } from 'react';
 
 import inputStyles from './ImageInput.module.scss';
@@ -20,14 +22,13 @@ export default function ImageInput({
 }: ImageInputProps) {
     return (
         <label className={`${inputStyles['image-block']} ${className ?? ''}`}>
-            <img
+            <Image
                 src={src}
                 className={inputStyles['image']}
                 alt={alt}
                 width={size}
                 height={size}
             />
-
             <div className={inputStyles['camera-icon-block']}>
                 <svg width={18} height={18} color='var(--icon-color)'>
                     <use href='#camera-icon' />

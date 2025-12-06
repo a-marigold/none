@@ -3,6 +3,8 @@ import { Geist, Inter } from 'next/font/google';
 
 import Provider from './provider';
 
+import { themeMap } from '@/constants/themeList';
+
 import StreamRoot from './(root-layout)/components/StreamRoot';
 import AuthRoot from './(root-layout)/components/AuthRoot';
 import HotkeyRoot from '@/app/(root-layout)/components/HotkeyRoot';
@@ -63,12 +65,14 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const initialTheme = themeMap['None Dark'];
+
     return (
         <html
             lang='en'
             className={`${geistSans.variable} ${interVariable.variable}`}
         >
-            <body>
+            <body className={initialTheme}>
                 <Provider>
                     <AuthRoot />
 
