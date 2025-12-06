@@ -38,6 +38,8 @@ export default function ProfileModal({
 
     const toolTip = useToolTip();
 
+    const nameToolTipTitle = nameCopyFlag ? 'Copied!' : 'Copy your username';
+
     return (
         <DropDownModal
             {...dropDownProps}
@@ -46,24 +48,29 @@ export default function ProfileModal({
                 <>
                     <PrimaryButton
                         title={userName || ''}
-                        aria-label='Copy your profile ID'
+                        aria-label='Copy your usernames'
                         role='menuitem'
                         onPointerEnter={(event) => {
                             toolTip.show({
-                                title: nameCopyFlag
-                                    ? 'Copied!'
-                                    : 'Copy your user name',
+                                title: nameToolTipTitle,
 
                                 relativeElement: event.currentTarget,
                                 position: 'top',
                             });
                         }}
                         onPointerLeave={toolTip.hide}
-                        onClick={() => {
+                        onClick={(event) => {
                             navigator.clipboard.writeText(userName || '');
                             if (!nameCopyFlag) {
                                 setNameCopyFlag(true);
                             }
+
+                            toolTip.show({
+                                title: 'Copied!',
+
+                                relativeElement: event.currentTarget,
+                                position: 'top',
+                            });
                         }}
                         icon={
                             <svg
