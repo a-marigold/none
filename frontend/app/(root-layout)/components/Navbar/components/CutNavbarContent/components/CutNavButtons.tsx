@@ -18,9 +18,9 @@ export default function CutNavButtons() {
 
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
 
-    const openNewChatHotkey = hotkeys.get('openNewChat')?.key;
+    const openNewChatHotkey = hotkeys.get('Open New Chat')?.key;
 
-    const searchHotkey = hotkeys.get('search')?.key;
+    const searchHotkey = hotkeys.get('Search')?.key;
 
     const toolTip = useToolTip();
 

@@ -80,7 +80,7 @@ export default function SettingsModal({ closeMainModal }: BasicModalProps) {
 
     const hotkeys = useHotkeyStore((state) => state.hotkeys);
 
-    const closeMainModalHotkey = hotkeys.get('closeMainModal')?.key;
+    const closeMainModalHotkey = hotkeys.get('Close Main Modal')?.key;
 
     const CurrentSettingComponent = settingComponentsMap[currentTab];
 

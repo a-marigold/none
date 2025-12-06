@@ -17,14 +17,14 @@ export function useHotkeyConfig(): Hotkey[] {
 
     const config: Hotkey[] = [
         {
-            name: 'search',
+            name: 'Search',
             key: 'Ctrl + Shift + K',
             callback: () => {
                 openMainModal(<SearchModal closeMainModal={closeMainModal} />);
             },
         },
         {
-            name: 'settings',
+            name: 'Settings',
             key: 'Ctrl + Shift + S',
             callback: () => {
                 openMainModal(
@@ -33,14 +33,14 @@ export function useHotkeyConfig(): Hotkey[] {
             },
         },
         {
-            name: 'openNewChat',
+            name: 'Open New Chat',
             key: 'Ctrl + Alt + N',
             callback: () => {
                 router.replace('/');
             },
         },
         {
-            name: 'closeMainModal',
+            name: 'Close Main Modal',
             key: 'Escape',
             callback: closeMainModal,
         },

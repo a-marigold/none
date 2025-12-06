@@ -49,7 +49,7 @@ export default function ChatTextArea({
     const [isBounded, setIsBounded] = useState(false);
 
     useRegisterHotkey({
-        name: 'sendMessage',
+        name: 'Send Message',
         key: 'Enter',
         callback: (event) => {
             if (!textAreaRef.current) return;

@@ -1,9 +1,9 @@
 type HotkeyName =
-    | 'search'
-    | 'settings'
-    | 'closeMainModal'
-    | 'openNewChat'
-    | 'sendMessage';
+    | 'Search'
+    | 'Settings'
+    | 'Close Main Modal'
+    | 'Open New Chat'
+    | 'Send Message';
 
 export type Hotkey = {
     name: HotkeyName;
