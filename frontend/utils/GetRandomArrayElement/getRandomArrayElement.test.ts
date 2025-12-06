@@ -20,7 +20,7 @@ describe('getRandomArrayElement', () => {
 
         expect(getRandomArrayElement(testArray)).toBe(16);
     });
-    it('should return nothing if an array is empty', () => {
+    it('should return undefined if an array is empty', () => {
         vi.spyOn(Math, 'random').mockReturnValue(0.6);
 
         expect(getRandomArrayElement([])).toBeUndefined();
