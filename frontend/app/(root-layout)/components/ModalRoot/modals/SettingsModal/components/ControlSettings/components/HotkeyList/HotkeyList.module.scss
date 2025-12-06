@@ -1,0 +1,36 @@
+@use '@/styles/mixins.scss' as *;
+
+.hotkey-list {
+    margin: 0;
+
+    @include flex-column;
+
+    padding: 0;
+}
+
+.hotkey-setting {
+    @include flex-y-center;
+    justify-content: space-between;
+    gap: 1.5em;
+
+    width: 100%;
+    min-height: 2.5em;
+}
+
+.setting-title {
+    font-size: var(--m-font-size);
+}
+.setting-input {
+    background-color: transparent;
+
+    border: none;
+    border-radius: 0;
+
+    outline: none;
+
+    padding: 0;
+
+    color: var(--icon-color);
+    font-size: var(--m-font-size);
+    text-align: right;
+}

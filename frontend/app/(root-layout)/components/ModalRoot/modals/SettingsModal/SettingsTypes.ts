@@ -1,1 +1,1 @@
-export type SettingTab = 'Personalization' | 'Account';
+export type SettingTab = 'Personalization' | 'Account' | 'Controls';

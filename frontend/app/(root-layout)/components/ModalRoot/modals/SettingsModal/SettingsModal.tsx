@@ -16,6 +16,7 @@ import ModalBackdrop from '@/UI/ModalBackdrop';
 
 import PrimaryButton from '@/UI/PrimaryButton';
 
+// Lazy tabs import
 const PersonalizationSettings = dynamic(
     () => import('./components/PersonalizationSettings'),
     { loading: LoadingBlock }
@@ -23,6 +24,10 @@ const PersonalizationSettings = dynamic(
 const AccountSettings = dynamic(() => import('./components/AccountSettings'), {
     loading: LoadingBlock,
 });
+const ControlSettings = dynamic(() => import('./components/ControlSettings'), {
+    loading: LoadingBlock,
+});
+
 import LoadingBlock from './components/LoadingBlock';
 
 import settingStyles from './SettingsModal.module.scss';
@@ -53,10 +58,21 @@ const settingButtonList: {
             </svg>
         ),
     },
+    {
+        name: 'Controls',
+        ariaLabel: 'Open the settings of controls',
+
+        icon: (
+            <svg width={20} height={20} color='var(--font-color)'>
+                <use href='#control-icon' />
+            </svg>
+        ),
+    },
 ];
 const settingComponentsMap: Record<SettingTab, ComponentType> = {
     Personalization: PersonalizationSettings,
     Account: AccountSettings,
+    Controls: ControlSettings,
 };
 
 export default function SettingsModal({ closeMainModal }: BasicModalProps) {
