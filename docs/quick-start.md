@@ -18,6 +18,10 @@ A high-level overview of the coding conventions, naming rules, and structural pr
 
 -   There must not be imports like
 
+### General names
+
+-   `Auth` means everything about `User` in frontend
+
 ```typescript
 // Wrong module on Client
 import Counter from './component/Counter/Counter.tsx';

@@ -13,11 +13,11 @@
 
 &nbsp;
 
-### How to update shared and
+### How to update shared
 
--   Edit only src folder.
+-   Edit only `src` folder.
 
--   If you have added a new file in src, just import this in `index.ts` that is in src root.
+-   If you have added a new file in `src`, you just import this in `index.ts` that is in src root.
 
 -   Run the `pnpm build` in `shared`. (it runs `tsc && pnpm pack`).
 -   If you want to work with the backend folder, run this in root: `cd backend` and `bun upshared`.
