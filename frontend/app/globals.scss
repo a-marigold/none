@@ -59,15 +59,15 @@ body.none-dark {
     --font-color: #ffffff;
     --secondary-font-color: #b5b5b5;
 
-    /* HOVER /
+    /* HOVER */
     --hover-bg-color: #111111;
     --light-hover-bg-color: #1a1a1a;
     --dim-hover-bg-color: #0e0e0e;
 
     /* SCROLLBAR */
-    --scrollbar-hover-bg-color: #d0d0d0;
+    --scrollbar-hover-bg-color: #ffffff; /* белый */
 
-    /* ACTIVE STATES /
+    /* ACTIVE STATES */
     --active-bg-color: #ffffff1a;
     --active-btn-bg: #0f0f0f;
     --active-btn-dim-bg: #161616;
@@ -88,13 +88,13 @@ body.none-dark {
     --input-box-shadow-color: #00000040;
 
     /* ICONS */
-    --icon-color: #f5f5f5;
+    --icon-color: #ffffff; /* белые */
 
     /* ERROR */
-    --error-color: #ff4d4f;
+    --error-color: #ffffff; /* белый, акцент */
 
     /* ACCENT */
-    --outline-color: #3d7eff;
+    --outline-color: #ffffff; /* белый */
 
     /* MODAL WINDOWS */
     --modal-bg-color: #050505;
@@ -111,17 +111,17 @@ body.none-dark {
     --chat-x-padding: 1em;
 
     // badge colors (for ChatTextArea UI component)
-    --badge-purple-bg: #9f5cff20;
-    --badge-purple-font-color: #b388ff;
+    --badge-purple-bg: #ffffff20; /* светлый белый */
+    --badge-purple-font-color: #ffffff; /* белый */
 
-    --badge-green-bg: #34d39920;
-    --badge-green-font-color: #34d399;
+    --badge-green-bg: #ffffff20;
+    --badge-green-font-color: #ffffff;
 
-    --badge-orange-bg: #f59e0b20;
-    --badge-orange-font-color: #f59e0b;
+    --badge-orange-bg: #ffffff20;
+    --badge-orange-font-color: #ffffff;
 
-    --badge-blue-bg: #3b82f620;
-    --badge-blue-font-color: #60a5fa;
+    --badge-blue-bg: #ffffff20;
+    --badge-blue-font-color: #ffffff;
 
     // general sizes
     // prefix "d" means "default"
