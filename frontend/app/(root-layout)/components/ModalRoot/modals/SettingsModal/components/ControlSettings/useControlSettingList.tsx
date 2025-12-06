@@ -13,50 +13,28 @@ export function useControlSettingList(): SettingProps[] {
         (state) => state.setChatStackLength
     );
 
-    // return useMemo<SettingProps[]>(
-    //     () => [
-    //         {
-    //             title: 'Chat stack length',
-    //             description: 'The maximum length of stack where messages are',
+    return useMemo<SettingProps[]>(
+        () => [
+            {
+                title: 'Chat stack length',
+                description: 'The maximum length of stack where messages are',
 
-    //             buttonOptions: {
-    //                 title: chatStackLength.toString(),
-    //                 'aria-label': 'Change the chat stack length',
-    //                 childrenPropList: [3, 4, 5, 6].map<PrimaryButtonProps>(
-    //                     (length) => ({
-    //                         title: length.toString(),
-    //                         'aria-label': `Set the chat stack length on ${length}`,
+                buttonOptions: {
+                    title: chatStackLength.toString(),
+                    'aria-label': 'Change the chat stack length',
+                    childrenPropList: [3, 4, 5, 6].map<PrimaryButtonProps>(
+                        (length) => ({
+                            title: length.toString(),
+                            'aria-label': `Set the chat stack length on ${length}`,
 
-    //                         isActive: length === chatStackLength,
+                            isActive: length === chatStackLength,
 
-    //                         onClick: () => setChatStackLength(length),
-    //                     })
-    //                 ),
-    //             },
-    //         },
-    //     ],
-    //     [chatStackLength, setChatStackLength]
-    // );
-
-    return [
-        {
-            title: 'Chat stack length',
-            description: 'The maximum length of stack where messages are',
-
-            buttonOptions: {
-                title: chatStackLength.toString(),
-                'aria-label': 'Change the chat stack length',
-                childrenPropList: [3, 4, 5, 6].map<PrimaryButtonProps>(
-                    (length) => ({
-                        title: length.toString(),
-                        'aria-label': `Set the chat stack length on ${length}`,
-
-                        isActive: length === chatStackLength,
-
-                        onClick: () => setChatStackLength(length),
-                    })
-                ),
+                            onClick: () => setChatStackLength(length),
+                        })
+                    ),
+                },
             },
-        },
-    ];
+        ],
+        [chatStackLength, setChatStackLength]
+    );
 }
