@@ -13,9 +13,9 @@ export function usePersonalizationSettingList(): SettingProps[] {
 
     const setCurrentTheme = useSettingsStore((state) => state.setCurrentTheme);
 
-    return [
-        useMemo(
-            () => ({
+    return useMemo(
+        () => [
+            {
                 title: 'Color scheme',
                 description: 'Beta',
                 buttonOptions: {
@@ -31,8 +31,8 @@ export function usePersonalizationSettingList(): SettingProps[] {
                         },
                     })),
                 },
-            }),
-            [currentTheme, setCurrentTheme]
-        ),
-    ];
+            },
+        ],
+        [currentTheme, setCurrentTheme]
+    );
 }
