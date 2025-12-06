@@ -156,7 +156,11 @@ export default function ChatTextArea({
                         onPointerLeave={toolTip.hide}
                         onClick={sendFunction}
                     >
-                        <svg width={20} height={20}>
+                        <svg
+                            width={20}
+                            height={20}
+                            color='var(--send-arrow-color)'
+                        >
                             <use href='#send-arrow-icon' />
                         </svg>
                     </button>
