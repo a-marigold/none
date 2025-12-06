@@ -15,8 +15,11 @@ interface HotkeyStore {
         callback: Hotkey['callback']
     ) => void;
 
+    updateHotkeyKey: (name: Hotkey['name'], key: Hotkey['key']) => void;
+
     unregisterHotkey: (name: Hotkey['name']) => void;
 }
+
 export const useHotkeyStore = create<HotkeyStore>()((set) => ({
     hotkeys: new Map(),
 
@@ -29,6 +32,20 @@ export const useHotkeyStore = create<HotkeyStore>()((set) => ({
                 hotkeys: newHotkeys,
             };
         }),
+
+    updateHotkeyKey: (name, key) =>
+        set((state) => {
+            const getHotkey = state.hotkeys.get(name);
+
+            const newHotkeys = new Map(state.hotkeys);
+
+            if (getHotkey) {
+                newHotkeys.set(name, { ...getHotkey, key });
+            }
+
+            return { hotkeys: newHotkeys };
+        }),
+
     unregisterHotkey: (name) =>
         set((state) => {
             const newHotkeys = new Map(state.hotkeys);

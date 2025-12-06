@@ -10,6 +10,7 @@ import HotkeySetting from './HotkeySetting';
 
 export default function HotkeyList() {
     const hotkey = useHotkeyStore((state) => state.hotkeys);
+    const updateHotkeyKey = useHotkeyStore((state) => state.updateHotkeyKey);
 
     const hotkeyList: Hotkey[] = [];
     hotkey.forEach((hotkey) => {
@@ -18,19 +19,16 @@ export default function HotkeyList() {
 
     return (
         <ul className={hotkeyStyles['hotkey-list']}>
-            {hotkeyList.map((hotkey) => {
-                console.log(hotkey.key);
-
-                return (
-                    <HotkeySetting
-                        key={hotkey.name}
-                        title={hotkey.name}
-                        hotkeyKey={hotkey.key}
-                        onFocus={() => {}}
-                        onBlur={() => {}}
-                    />
-                );
-            })}
+            {hotkeyList.map((hotkey) => (
+                <HotkeySetting
+                    key={hotkey.name}
+                    title={hotkey.name}
+                    hotkeyKey={hotkey.key}
+                    onBlur={(event) => {
+                        updateHotkeyKey(hotkey.name, event.target.value);
+                    }}
+                />
+            ))}
         </ul>
     );
 }
