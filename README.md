@@ -1,8 +1,10 @@
 # None
 
-![None Banner](assets/banner.png)
+<p align='center'>
+    <img src='assets/banner.png'/>
+</p>
 
-The project explores new runtime capabilities.
+## Stack
 
 ## Key differnces
 
