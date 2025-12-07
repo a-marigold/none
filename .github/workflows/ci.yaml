@@ -67,5 +67,5 @@ jobs:
 
       - name: Run tests
         working-directory: ./backend
-        run: bun run testcon
+        run: bun run test --concurrent
   
