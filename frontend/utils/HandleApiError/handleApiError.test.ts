@@ -13,7 +13,6 @@ describe('handleApiError', () => {
 
         await expect(handleError).resolves.toBeUndefined();
     });
-
     it('should throw an error if the response is not ok', async () => {
         const testResponse = {
             ok: false,

@@ -13,7 +13,6 @@ export function lockElementScroll(element: HTMLElement) {
     }px`;
     element.style.overflow = 'hidden';
 }
-
 /**
  * Used with `lockElementScroll'. Resets paddingRight and overlow of an element to css values
  *
