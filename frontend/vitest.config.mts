@@ -7,9 +7,12 @@ import path from 'path';
 export default defineConfig({
     plugins: [tsconfigPaths(), react()],
     test: {
+        globals: true,
         environment: 'jsdom',
         alias: {
             '@none/shared': path.resolve(__dirname, '../shared/src'),
         },
+
+        setupFiles: './vitest.setup.ts',
     },
 });

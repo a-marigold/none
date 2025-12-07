@@ -25,10 +25,11 @@ export default function AuthModal({ closeMainModal }: BasicModalProps) {
     const [isPending, startTransition] = useTransition();
 
     return (
-        <ModalBackdrop>
+        <ModalBackdrop dataTestid='auth-modal-backdrop'>
             <div
                 role='dialog'
                 aria-modal='true'
+                data-testid='auth-modal'
                 className={`${authStyles['auth-modal']} ${
                     isPending ? authStyles['pending'] : ''
                 }`}

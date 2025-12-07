@@ -16,6 +16,8 @@ const authButtonList: {
     size: AccessButtonProps['size'];
 
     ariaLabel: string;
+
+    'data-testid': string;
 }[] = [
     {
         title: 'Login',
@@ -23,6 +25,8 @@ const authButtonList: {
         size: 'small',
 
         ariaLabel: 'Login or register',
+
+        'data-testid': 'login-button',
     },
     {
         title: 'Register for free',
@@ -31,6 +35,8 @@ const authButtonList: {
         size: 'small',
 
         ariaLabel: 'Login or register',
+
+        'data-testid': 'register-button',
     },
 ];
 
@@ -47,6 +53,7 @@ export default function AuthButtons() {
                     variant={button.variant}
                     size={button.size}
                     aria-label={button.ariaLabel}
+                    data-testid={button['data-testid']}
                     onClick={() =>
                         openMainModal(
                             <AuthModal closeMainModal={closeMainModal} />
